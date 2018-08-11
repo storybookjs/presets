@@ -1,0 +1,26 @@
+{
+  "name": "storybook-typescript-preset",
+  "version": "1.0.0",
+  "description": "Typescript preset for Storybook",
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "storybook": "start-storybook -p 8008"
+  },
+  "devDependencies": {
+    "@storybook/react": "^4.0.0-alpha.16",
+    "@types/node": "^10.5.7",
+    "@types/react": "^16.4.8",
+    "@types/storybook__react": "^3.0.9",
+    "@types/webpack": "^4.4.9",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "ts-loader": "^4.4.2",
+    "ts-node": "^7.0.0",
+    "typescript": "^3.0.1"
+  },
+  "peerDependencies": {
+    "ts-loader": "*",
+    "@types/webpack": "*"
+  }
+}
