@@ -1,4 +1,4 @@
-import { Configuration } from 'webpack'
+import { Configuration } from 'webpack';
 
 interface Options {
   tsLoader?: object;

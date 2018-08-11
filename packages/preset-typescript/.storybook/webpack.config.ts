@@ -1,6 +1,6 @@
-import { Configuration } from 'webpack'
-const tsPreset = require('../');
+import { Configuration } from 'webpack';
+const presetTypescript = require('../');
 
 module.exports = (config: Configuration) => {
-  return tsPreset(config);
+  return presetTypescript(config);
 };
