@@ -2,8 +2,15 @@
   "name": "@storybook/preset-typescript",
   "version": "1.0.0",
   "description": "Typescript preset for Storybook",
-  "license": "ISC",
+  "license": "MIT",
   "main": "index.js",
+  "bugs": {
+    "url": "https://github.com/storybooks/presets/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storybooks/presets.git"
+  },
   "scripts": {
     "storybook": "start-storybook -p 8008"
   },
