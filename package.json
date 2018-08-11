@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "name": "@storybook/root",
+  "version": "1.0.0",
+  "description": "Storybook Presets Repo",
+  "license": "ISC",
+  "workspaces": [
+    "packages/*"
+  ]
+}

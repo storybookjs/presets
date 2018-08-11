@@ -1,5 +1,5 @@
 {
-  "name": "storybook-typescript-preset",
+  "name": "@storybook/preset-typescript",
   "version": "1.0.0",
   "description": "Typescript preset for Storybook",
   "license": "ISC",
