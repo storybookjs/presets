@@ -1,0 +1,18 @@
+$border-color: #ccb223;
+$bg-color: #ff81f9;
+$bg-color-hover: #ca74cc;
+$bg-color-active: #ff36d8;
+
+.container {
+  border: 1px solid $border-color;
+  background-color: $bg-color;
+  padding: 20px;
+
+  &:hover {
+    background-color: $bg-color-hover;
+  }
+
+  &:active {
+    background-color: $bg-color-active;
+  }
+}
