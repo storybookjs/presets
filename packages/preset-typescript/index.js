@@ -1,5 +1,6 @@
-function extend(webpackConfig = {}) {
+function extend(webpackConfig = {}, options = {}) {
   const { module = {}, resolve = {} } = webpackConfig;
+  const { tsLoader } = options;
 
   return {
     ...webpackConfig,
@@ -11,6 +12,7 @@ function extend(webpackConfig = {}) {
           test: /\.tsx?$/,
           use: [{
             loader: require.resolve('ts-loader'),
+            options: tsLoader,
           }]
         }
       ]

@@ -1,3 +1,9 @@
 import { Configuration } from 'webpack'
 
-export default function (config: Configuration): Configuration;
+interface Options {
+  tsLoader?: object;
+}
+
+declare function extend(config?: Configuration, options?: Options): Configuration;
+
+export = extend;
