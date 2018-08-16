@@ -24,4 +24,11 @@ function extendWebpack(webpackConfig = {}, options = {}) {
   };
 }
 
-module.exports = { extendWebpack };
+function extendPreview(preview = []) {
+  return [
+    ...preview,
+    require.resolve('./addons.js'),
+  ]
+}
+
+module.exports = { extendWebpack, extendPreview };
