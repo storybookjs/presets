@@ -1,4 +1,4 @@
-function extend(webpackConfig = {}, options = {}) {
+function extendWebpack(webpackConfig = {}, options = {}) {
   const { module = {} } = webpackConfig;
   const { loaderOptions, rule = {} } = options;
 
@@ -24,4 +24,4 @@ function extend(webpackConfig = {}, options = {}) {
   };
 }
 
-module.exports = extend;
+module.exports = { extendWebpack };

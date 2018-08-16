@@ -4,6 +4,8 @@ interface Options {
   loaderOptions?: object;
 }
 
-declare function extend(config?: Configuration, options?: Options): Configuration;
+declare interface PresetTypeScript {
+  extendWebpack: (config?: Configuration, options?: Options) => Configuration;
+}
 
-export = extend;
+export = PresetTypeScript;
