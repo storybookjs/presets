@@ -1,0 +1,25 @@
+{
+  "name": "@storybook/preset-local",
+  "version": "1.0.0",
+  "description": "Local config preset for Storybook",
+  "license": "MIT",
+  "main": "index.js",
+  "bugs": {
+    "url": "https://github.com/storybooks/presets/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storybooks/presets.git"
+  },
+  "scripts": {
+    "storybook": "start-storybook -p 8008"
+  },
+  "dependencies": {
+    "webpack-merge": "^4.1.4"
+  },
+  "devDependencies": {
+    "@storybook/react": "^4.0.0-alpha.16",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
+  }
+}
