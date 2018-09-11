@@ -3,5 +3,5 @@ import { storiesOf } from '@storybook/react';
 
 storiesOf('Example', module)
   .add('Default', () => {
-    return <div>Story</div>;
+    return <div>TypeScript Story</div>;
   });

@@ -8,7 +8,7 @@ interface Options {
 }
 
 declare interface PresetScss {
-  extendWebpack: (config?: Configuration, options?: Options) => Configuration;
+  webpack: (config?: Configuration, options?: Options) => Configuration;
 }
 
 export = PresetScss;

@@ -1,4 +1,4 @@
-function extendWebpack(webpackConfig = {}, options = {}) {
+function webpack(webpackConfig = {}, options = {}) {
   const { module = {} } = webpackConfig;
   const { loaderOptions, rule = {} } = options;
 
@@ -24,11 +24,11 @@ function extendWebpack(webpackConfig = {}, options = {}) {
   };
 }
 
-function extendPreview(preview = []) {
+function manager(entry = []) {
   return [
-    ...preview,
     require.resolve('./addons.js'),
+    ...entry,
   ]
 }
 
-module.exports = { extendWebpack, extendPreview };
+module.exports = { webpack, manager };

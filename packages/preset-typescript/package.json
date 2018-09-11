@@ -15,7 +15,9 @@
     "storybook": "start-storybook -p 8008"
   },
   "devDependencies": {
-    "@storybook/react": "^4.0.0-alpha.16",
+    "@babel/core": "^7.0.0",
+    "@storybook/react": "^4.0.0-alpha.21",
+    "babel-loader": "^8.0.2",
     "@types/node": "^10.5.7",
     "@types/react": "^16.4.8",
     "@types/storybook__react": "^3.0.9",

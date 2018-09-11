@@ -5,7 +5,7 @@ interface Options {
 }
 
 declare interface PresetTypeScript {
-  extendWebpack: (config?: Configuration, options?: Options) => Configuration;
+  webpack: (config?: Configuration, options?: Options) => Configuration;
 }
 
 export = PresetTypeScript;
