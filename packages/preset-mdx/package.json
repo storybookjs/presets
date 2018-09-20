@@ -1,0 +1,33 @@
+{
+  "name": "@storybook/preset-mdx",
+  "version": "1.0.0",
+  "description": "MDX preset for Storybook",
+  "license": "MIT",
+  "main": "index.js",
+  "bugs": {
+    "url": "https://github.com/storybooks/presets/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storybooks/presets.git"
+  },
+  "scripts": {
+    "storybook": "start-storybook -p 8008"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@mdx-js/loader": "^0.15.2",
+    "@mdx-js/mdx": "^0.15.2",
+    "@storybook/react": "^4.0.0-alpha.21",
+    "babel-loader": "^8.0.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
+  },
+  "peerDependencies": {
+    "@mdx-js/loader": "*",
+    "babel-loader": "^7 || ^8"
+  }
+}
