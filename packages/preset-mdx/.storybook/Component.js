@@ -7,10 +7,13 @@ const style = {
   padding: '20px'
 };
 
-function MyComponent() {
+function MyComponent(props) {
+  const { children = null } = props;
+
   return (
     <div style={style}>
       Here is a cool JSX
+      { children }
     </div>
   )
 }

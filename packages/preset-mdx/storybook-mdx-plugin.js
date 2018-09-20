@@ -1,7 +1,13 @@
 const path = require('path');
 const mdxToJsx = require('@mdx-js/mdx/mdx-hast-to-jsx');
 const { generateStories, generateJsx } = require('./templates');
-const { isInvalidNewLine, storybookImport } = require('./helpers');
+
+const {
+  isInvalidNewLine,
+  storybookImport,
+  createCodeNode,
+  createNewLineNode
+} = require('./helpers');
 
 function toStory(node, options) {
   if (node.type === 'root') {
@@ -88,6 +94,11 @@ function getRootParts(node, options) {
       }
 
       currentStory.children.push(childNode);
+
+      if (childNode.type === 'jsx') {
+        currentStory.children.push(createNewLineNode());
+        currentStory.children.push(createCodeNode(childNode.value));
+      }
     }
   }
 
