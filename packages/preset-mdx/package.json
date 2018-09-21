@@ -23,8 +23,10 @@
     "@mdx-js/mdx": "^0.15.2",
     "@storybook/react": "^4.0.0-alpha.21",
     "babel-loader": "^8.0.2",
+    "highlight.js": "^9.12.0",
     "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "remark-highlight.js": "^5.0.0"
   },
   "peerDependencies": {
     "@mdx-js/loader": "*",

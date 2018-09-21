@@ -6,6 +6,10 @@ function webpack(webpackConfig = {}, options = {}) {
 
   const combinedMdxLoaderOptions = {
     ...mdxLoaderOptions,
+    mdPlugins: [
+      sbMdxPlugin.md,
+      ...(mdxLoaderOptions.mdPlugins || []),
+    ],
     compilers: [
       ...(mdxLoaderOptions.compilers || []),
       sbMdxPlugin.compiler,

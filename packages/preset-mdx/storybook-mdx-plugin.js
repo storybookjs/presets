@@ -6,7 +6,6 @@ const {
   isInvalidNewLine,
   storybookImport,
   createCodeNode,
-  createNewLineNode
 } = require('./helpers');
 
 function toStory(node, options) {
@@ -94,11 +93,6 @@ function getRootParts(node, options) {
       }
 
       currentStory.children.push(childNode);
-
-      if (childNode.type === 'jsx') {
-        currentStory.children.push(createNewLineNode());
-        currentStory.children.push(createCodeNode(childNode.value));
-      }
     }
   }
 
@@ -109,10 +103,30 @@ function getRootParts(node, options) {
   };
 }
 
+function md(options = {}) {
+  return function (tree) {
+    const newTree = {
+      ...tree,
+      children: [],
+    };
+
+    for (const childNode of tree.children) {
+      newTree.children.push(childNode);
+
+      if (childNode.type === 'html') {
+        newTree.children.push(createCodeNode(childNode.value));
+      }
+    }
+
+    return newTree;
+  }
+}
+
 function compiler(options = {}) {
   this.Compiler = tree => toStory(tree, options)
 }
 
 module.exports = {
+  md,
   compiler,
 };
