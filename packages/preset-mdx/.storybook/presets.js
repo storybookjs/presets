@@ -4,6 +4,9 @@ module.exports = [
   {
     name: '@storybook/preset-mdx',
     options: {
+      mdxOptions: {
+        showStoryCode: true,
+      },
       mdxLoaderOptions: {
         mdPlugins: [highlight],
       }

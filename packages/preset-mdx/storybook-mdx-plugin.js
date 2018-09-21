@@ -44,7 +44,7 @@ function getRootParts(node, options) {
     children: [],
   };
 
-  // default story, in case there is not H1 and H2 in the mdx
+  // Default story, in case there is not H1 and H2 in the mdx
   stories.push(currentStory);
 
   for (const childNode of node.children) {
@@ -58,6 +58,7 @@ function getRootParts(node, options) {
       continue
     }
 
+    // Try to find story kind. Default is the mdx file name
     if (childNode.type === 'element' && childNode.tagName === 'h1') {
       currentStory = {
         ...defaultStory,
@@ -69,6 +70,7 @@ function getRootParts(node, options) {
       continue;
     }
 
+    // Try to find story name. Default is the "Default" =)
     if (childNode.type === 'element' && childNode.tagName === 'h2') {
       if (!currentStory.children.length) {
         currentStory.storyName = childNode.children[0].value;
@@ -104,7 +106,16 @@ function getRootParts(node, options) {
 }
 
 function md(options = {}) {
+  const {
+    showStoryCode = true,
+    storyLang = 'html'
+  }  = options;
+
   return function (tree) {
+    if (!showStoryCode) {
+      return tree;
+    }
+
     const newTree = {
       ...tree,
       children: [],
@@ -114,7 +125,7 @@ function md(options = {}) {
       newTree.children.push(childNode);
 
       if (childNode.type === 'html') {
-        newTree.children.push(createCodeNode(childNode.value));
+        newTree.children.push(createCodeNode(childNode.value, storyLang));
       }
     }
 

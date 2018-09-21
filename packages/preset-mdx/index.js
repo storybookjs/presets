@@ -2,12 +2,20 @@ const sbMdxPlugin = require('./storybook-mdx-plugin');
 
 function webpack(webpackConfig = {}, options = {}) {
   const { module = {} } = webpackConfig;
-  const { babelLoaderOptions, mdxLoaderOptions = {}, rule = {} } = options;
+  const {
+    babelLoaderOptions,
+    mdxOptions,
+    mdxLoaderOptions = {},
+    rule = {},
+  } = options;
 
   const combinedMdxLoaderOptions = {
     ...mdxLoaderOptions,
     mdPlugins: [
-      sbMdxPlugin.md,
+      [
+        sbMdxPlugin.md,
+        mdxOptions
+      ],
       ...(mdxLoaderOptions.mdPlugins || []),
     ],
     compilers: [

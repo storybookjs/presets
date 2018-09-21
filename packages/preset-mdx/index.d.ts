@@ -1,8 +1,14 @@
 import { Configuration, RuleSetCondition } from 'webpack';
 
+interface StorybookMdxOptions {
+  showStoryCode?: boolean,
+  storyLang?: string
+}
+
 interface Options {
   babelLoaderOptions?: object | false,
   mdxLoaderOptions?: object | false,
+  mdxOptions?: StorybookMdxOptions,
   rule?: RuleSetCondition,
 }
 
