@@ -6,9 +6,10 @@ const {
   isInvalidNewLine,
   storybookImport,
   createCodeNode,
+  getHeadingText,
 } = require('./helpers');
 
-function toStory(node, options) {
+function toStory(node, options, mdxOptions) {
   if (node.type === 'root') {
     const {
       importNodes,
@@ -20,7 +21,7 @@ function toStory(node, options) {
       storybookImport(),
       ...generateJsx(importNodes, options),
       ...generateJsx(exportNodes, options),
-      ...generateStories(stories, { ...options, skipExport: true }),
+      ...generateStories(stories, mdxOptions, { ...options, skipExport: true }),
     ].join('\n');
   }
 
@@ -62,24 +63,29 @@ function getRootParts(node, options) {
     if (childNode.type === 'element' && childNode.tagName === 'h1') {
       currentStory = {
         ...defaultStory,
-        storyKind: childNode.children[0].value,
+        storyKind: getHeadingText(childNode),
+        storyKindHeading: childNode,
         children: [],
       };
 
       stories.push(currentStory);
+
       continue;
     }
 
     // Try to find story name. Default is the "Default" =)
     if (childNode.type === 'element' && childNode.tagName === 'h2') {
       if (!currentStory.children.length) {
-        currentStory.storyName = childNode.children[0].value;
+        currentStory.storyName = getHeadingText(childNode);
+        currentStory.storyNameHeading = childNode;
       }
       else {
         currentStory = {
           ...defaultStory,
           storyKind: currentStory.storyKind,
-          storyName: childNode.children[0].value,
+          storyKindHeading: currentStory.storyKindHeading,
+          storyName: getHeadingText(childNode),
+          storyNameHeading: childNode,
           children: [],
         };
 
@@ -133,11 +139,13 @@ function md(options = {}) {
   }
 }
 
-function compiler(options = {}) {
-  this.Compiler = tree => toStory(tree, options)
+function createCompiler(mdxOptions) {
+  return function compiler(options = {}) {
+    this.Compiler = tree => toStory(tree, options, mdxOptions)
+  }
 }
 
 module.exports = {
   md,
-  compiler,
+  createCompiler,
 };

@@ -20,7 +20,7 @@ function webpack(webpackConfig = {}, options = {}) {
     ],
     compilers: [
       ...(mdxLoaderOptions.compilers || []),
-      sbMdxPlugin.compiler,
+      sbMdxPlugin.createCompiler(mdxOptions),
     ]
   };
 

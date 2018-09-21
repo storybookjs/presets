@@ -2,7 +2,8 @@ import { Configuration, RuleSetCondition } from 'webpack';
 
 interface StorybookMdxOptions {
   showStoryCode?: boolean,
-  storyLang?: string
+  includeStoryHeadings?: boolean,
+  storyLang?: string,
 }
 
 interface Options {

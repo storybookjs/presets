@@ -6,6 +6,7 @@ module.exports = [
     options: {
       mdxOptions: {
         showStoryCode: true,
+        includeStoryHeadings: true,
       },
       mdxLoaderOptions: {
         mdPlugins: [highlight],

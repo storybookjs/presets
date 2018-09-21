@@ -4,6 +4,10 @@ function isInvalidNewLine(childNode, currentStory) {
     !currentStory.children.length;
 }
 
+function getHeadingText(node) {
+  return node.children[0].value;
+}
+
 function storybookImport() {
   return `import { storiesOf } from '@storybook/react'`;
 }
@@ -20,4 +24,5 @@ module.exports = {
   isInvalidNewLine,
   storybookImport,
   createCodeNode,
+  getHeadingText,
 };

@@ -1,17 +1,31 @@
 const mdxToJsx = require('@mdx-js/mdx/mdx-hast-to-jsx.js');
 
-function generateStories(stories, options) {
-  const groupedStories = stories.reduce((acc, obj) => {
-    const { storyKind, children } = obj;
+function groupStories(stories, mdxOptions) {
+  const { includeStoryHeadings = false } = mdxOptions;
 
-    if(!children.length) {
+  return stories.reduce((acc, obj) => {
+    const { storyKind, children, storyKindHeading, storyNameHeading } = obj;
+
+    if (!children.length) {
       return acc;
+    }
+
+    if (includeStoryHeadings && storyNameHeading) {
+      children.unshift(storyNameHeading);
+    }
+
+    if (includeStoryHeadings && storyKindHeading) {
+      children.unshift(storyKindHeading);
     }
 
     acc[storyKind] = acc[storyKind] || [];
     acc[storyKind].push(obj);
     return acc;
   }, {});
+}
+
+function generateStories(stories, mdxOptions, options) {
+  const groupedStories = groupStories(stories, mdxOptions);
 
   return Object
     .keys(groupedStories)
