@@ -1,4 +1,3 @@
-const path = require('path');
 const mdxToJsx = require('@mdx-js/mdx/mdx-hast-to-jsx');
 const { generateStories, generateJsx } = require('./templates');
 
@@ -7,6 +6,8 @@ const {
   storybookImport,
   createCodeNode,
   getHeadingText,
+  getDefaultStoryKind,
+  getDefaultStoryName,
 } = require('./helpers');
 
 function toStory(node, options, mdxOptions) {
@@ -15,7 +16,7 @@ function toStory(node, options, mdxOptions) {
       importNodes,
       exportNodes,
       stories
-    } = getRootParts(node, options);
+    } = getRootParts(node, mdxOptions, options);
 
     return [
       storybookImport(),
@@ -28,15 +29,14 @@ function toStory(node, options, mdxOptions) {
   return mdxToJsx.toJSX(node, {}, options);
 }
 
-function getRootParts(node, options) {
-  const { filepath } = options;
+function getRootParts(node, mdxOptions, options) {
   const importNodes = [];
   const exportNodes = [];
   const stories = [];
 
   const defaultStory = {
-    storyKind: path.basename(filepath),
-    storyName: 'Default',
+    storyKind: getDefaultStoryKind(mdxOptions, options),
+    storyName: getDefaultStoryName(mdxOptions, options),
     type: 'root',
   };
 

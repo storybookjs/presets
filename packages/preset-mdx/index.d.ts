@@ -1,9 +1,19 @@
 import { Configuration, RuleSetCondition } from 'webpack';
 
+interface DefaultStoryNameOptions {
+  filepath: string,
+}
+
+interface DefaultStoryNameFn {
+  (options: DefaultStoryNameOptions): string,
+}
+
 interface StorybookMdxOptions {
   showStoryCode?: boolean,
   includeStoryHeadings?: boolean,
   storyLang?: string,
+  defaultStoryKind?: DefaultStoryNameFn,
+  defaultStoryName?: DefaultStoryNameFn | string,
 }
 
 interface Options {

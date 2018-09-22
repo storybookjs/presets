@@ -1,3 +1,5 @@
+const path = require('path');
+
 function isInvalidNewLine(childNode, currentStory) {
   return childNode.type === 'text' &&
     childNode.value === '\n' &&
@@ -20,9 +22,37 @@ function createCodeNode(code, language = 'js') {
   };
 }
 
+function getDefaultStoryKind(mdxOptions = {}, options = {}) {
+  const { filepath } = options;
+  const { defaultStoryKind } = mdxOptions;
+
+  if (typeof defaultStoryKind === 'function') {
+    return defaultStoryKind({ filepath });
+  }
+
+  return path.basename(filepath);
+}
+
+function getDefaultStoryName(mdxOptions = {}, options = {}) {
+  const { filepath } = options;
+  const { defaultStoryName } = mdxOptions;
+
+  if (typeof defaultStoryName === 'function') {
+    return defaultStoryName({ filepath });
+  }
+
+  if (typeof defaultStoryName === 'string') {
+    return defaultStoryName;
+  }
+
+  return 'Default';
+}
+
 module.exports = {
   isInvalidNewLine,
   storybookImport,
   createCodeNode,
   getHeadingText,
+  getDefaultStoryKind,
+  getDefaultStoryName,
 };
