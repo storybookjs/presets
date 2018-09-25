@@ -1,8 +1,11 @@
 import React from 'react';
-import { configure } from '@storybook/react';
+import { configure, addDecorator } from '@storybook/react';
+import { withActions } from '@storybook/addon-actions';
 
 import '@storybook/preset-mdx/markdown.css';
 import 'highlight.js/styles/github.css';
+
+addDecorator(withActions());
 
 function loadStories() {
   require('./index.mdx');

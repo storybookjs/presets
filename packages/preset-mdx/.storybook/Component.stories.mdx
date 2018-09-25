@@ -1,12 +1,14 @@
-import MyComponent from './Component';
-
 <!-- storyKind = Component -->
+
+import { action } from '@storybook/addon-actions';
+import { linkTo } from '@storybook/addon-links';
+import MyComponent from './Component';
 
 # Component
 
 Here we import a React component
 
-<MyComponent/>
+<MyComponent onClick={action('onClick')} />
 
 <!-- storyName = Component with children -->
 
@@ -14,6 +16,10 @@ Here we import a React component
 
 Same component with children
 
-<MyComponent>
+<MyComponent onClick={action('onClick')}>
   <div style={{backgroundColor: '#122200', padding: '20px'}}>Foo</div>
 </MyComponent>
+
+<button type="button" onClick={linkTo('Component', 'Default')}>
+  Link to default story
+</button>
