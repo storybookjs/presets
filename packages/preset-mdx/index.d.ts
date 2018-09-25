@@ -12,6 +12,7 @@ interface StorybookMdxOptions {
   showStoryCode?: boolean,
   includeStoryHeadings?: boolean,
   storyLang?: string,
+  storybookApi?: 'annotations' | 'headings',
   defaultStoryKind?: DefaultStoryNameFn,
   defaultStoryName?: DefaultStoryNameFn | string,
 }

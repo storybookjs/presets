@@ -1,4 +1,6 @@
-const sbMdxPlugin = require('./storybook-mdx-plugin');
+const sbCreateCompiler = require('./storybook-mdx-compiler-plugin');
+const sbCodeExamplePlugin = require('./storybook-code-example-md-plugin');
+const sbMdxSyntaxPlugin = require('./storybook-syntax-md-plugin');
 
 function webpack(webpackConfig = {}, options = {}) {
   const { module = {} } = webpackConfig;
@@ -9,20 +11,7 @@ function webpack(webpackConfig = {}, options = {}) {
     rule = {},
   } = options;
 
-  const combinedMdxLoaderOptions = {
-    ...mdxLoaderOptions,
-    mdPlugins: [
-      [
-        sbMdxPlugin.md,
-        mdxOptions
-      ],
-      ...(mdxLoaderOptions.mdPlugins || []),
-    ],
-    compilers: [
-      ...(mdxLoaderOptions.compilers || []),
-      sbMdxPlugin.createCompiler(mdxOptions),
-    ]
-  };
+  const combinedMdxLoaderOptions = combineMdxLoaderOptions(mdxLoaderOptions, mdxOptions);
 
   return {
     ...webpackConfig,
@@ -52,6 +41,27 @@ function wrapLoader(loader, options) {
     loader,
     options,
   }];
+}
+
+function combineMdxLoaderOptions(mdxLoaderOptions, mdxOptions) {
+  return {
+    ...mdxLoaderOptions,
+    mdPlugins: [
+      [
+        sbMdxSyntaxPlugin,
+        mdxOptions
+      ],
+      [
+        sbCodeExamplePlugin,
+        mdxOptions
+      ],
+      ...(mdxLoaderOptions.mdPlugins || []),
+    ],
+    compilers: [
+      ...(mdxLoaderOptions.compilers || []),
+      sbCreateCompiler(mdxOptions),
+    ]
+  };
 }
 
 module.exports = { webpack };

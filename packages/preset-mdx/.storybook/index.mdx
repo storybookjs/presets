@@ -1,7 +1,17 @@
+<!-- storyKind = Welcome -->
+<!-- storyName = Intro -->
+
 # Welcome
 
 ## Intro
 
+### "heading" API
+
 * When we use `#` in mdx, it will be used as Storybook namespace (like in `storiesOf('Heading 1')`)
 * When we use `##` in mdx, it will be used as Storybook sub directory (like in `storiesOf('Heading 1').add('Heading 2')` )
 * When we do not use `##` the default will be "Default"
+
+### "annotations" API
+
+* `<!-- storyKind = Story Kind -->` will be used as a Storybook namespace
+* `<!-- storyName = Story Name -->` will be used as a Storybook sub directory

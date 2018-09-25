@@ -48,10 +48,46 @@ function getDefaultStoryName(mdxOptions = {}, options = {}) {
   return 'Default';
 }
 
+function isStorybookAnnotation({ value }) {
+  if (!value) {
+    return false;
+  }
+
+  return value.match(/^<!--\s*(storyKind|storyName)\s*=.*\s*-->$/)
+}
+
+function createAnnotationNode(node) {
+  const [annotationKey, annotationValue] = node.value
+    .replace(/(<!--|-->)/g, '')
+    .trim()
+    .split('=')
+    .map(part => part.trim());
+
+  return {
+    type: 'element',
+    children: [
+      {
+        type: 'text',
+        value: node.value,
+      }
+    ],
+    value: node.value,
+    data: {
+      hName: 'storybook',
+      hProperties: {
+        annotationKey,
+        annotationValue,
+      }
+    }
+  }
+}
+
 module.exports = {
   isInvalidNewLine,
+  isStorybookAnnotation,
   storybookImport,
   createCodeNode,
+  createAnnotationNode,
   getHeadingText,
   getDefaultStoryKind,
   getDefaultStoryName,

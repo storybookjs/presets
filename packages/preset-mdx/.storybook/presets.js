@@ -6,7 +6,9 @@ module.exports = [
     options: {
       mdxOptions: {
         showStoryCode: true,
-        includeStoryHeadings: true,
+        storybookApi: 'annotations',
+        // includeStoryHeadings: true,
+        // storybookApi: 'headings',
       },
       mdxLoaderOptions: {
         mdPlugins: [highlight],
