@@ -1,4 +1,5 @@
 const highlight = require('remark-highlight.js');
+const gridTables = require('remark-grid-tables');
 
 module.exports = [
   {
@@ -11,7 +12,7 @@ module.exports = [
         // storybookApi: 'headings',
       },
       mdxLoaderOptions: {
-        mdPlugins: [highlight],
+        mdPlugins: [highlight, gridTables],
       }
     }
   }

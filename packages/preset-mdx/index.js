@@ -1,6 +1,7 @@
 const sbCreateCompiler = require('./storybook-mdx-compiler-plugin');
 const sbCodeExamplePlugin = require('./storybook-code-example-md-plugin');
 const sbMdxSyntaxPlugin = require('./storybook-syntax-md-plugin');
+const sbClassNamesPlugin = require('./storybook-classnames-hast-plugin');
 
 function webpack(webpackConfig = {}, options = {}) {
   const { module = {} } = webpackConfig;
@@ -57,6 +58,10 @@ function combineMdxLoaderOptions(mdxLoaderOptions, mdxOptions) {
       ],
       ...(mdxLoaderOptions.mdPlugins || []),
     ],
+    hastPlugins: [
+      ...(mdxLoaderOptions.hastPlugins || []),
+      sbClassNamesPlugin,
+    ],
     compilers: [
       ...(mdxLoaderOptions.compilers || []),
       sbCreateCompiler(mdxOptions),
@@ -65,3 +70,4 @@ function combineMdxLoaderOptions(mdxLoaderOptions, mdxOptions) {
 }
 
 module.exports = { webpack };
+

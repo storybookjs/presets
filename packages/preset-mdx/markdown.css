@@ -1,0 +1,206 @@
+/* this theme is based on github.com markdown styling */
+
+[class^="storybook-mdx-"] {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.storybook-mdx-task-list-item {
+  list-style-type: none
+}
+
+.storybook-mdx-task-list-item + .storybook-mdx-task-list-item {
+  margin-top: 3px
+}
+
+.storybook-mdx-task-list-item .storybook-mdx-input[type='checkbox'] {
+  margin: 0 0.2em 0.25em -1.6em;
+  vertical-align: middle
+}
+
+.storybook-mdx-a {
+  color: #0366d6;
+  text-decoration: none;
+  font-size: inherit;
+}
+
+.storybook-mdx-a:hover {
+  text-decoration: underline
+}
+
+.storybook-mdx-mdx-blockquote,
+.storybook-mdx-ul,
+.storybook-mdx-ol,
+.storybook-mdx-dl,
+.storybook-mdx-table,
+.storybook-mdx-pre {
+  margin-top: 0;
+  margin-bottom: 16px
+}
+
+.storybook-mdx-hr {
+  height: 0.25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: #e1e4e8;
+  border: 0
+}
+
+.storybook-mdx-blockquote {
+  padding: 0 1em;
+  color: #6a737d;
+  border-left: 0.25em solid #dfe2e5
+}
+
+.storybook-mdx-blockquote > :first-child {
+  margin-top: 0
+}
+
+.storybook-mdx-blockquote > :last-child {
+  margin-bottom: 0
+}
+
+.storybook-mdx-h1,
+.storybook-mdx-h2,
+.storybook-mdx-h3,
+.storybook-mdx-h4,
+.storybook-mdx-h5,
+.storybook-mdx-h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25
+}
+
+.storybook-mdx-inlineCode {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(27, 31, 35, 0.05);
+  border-radius: 3px
+}
+
+.storybook-mdx-h1 tt,
+.storybook-mdx-h1 code,
+.storybook-mdx-h2 tt,
+.storybook-mdx-h2 code,
+.storybook-mdx-h3 tt,
+.storybook-mdx-h3 code,
+.storybook-mdx-h4 tt,
+.storybook-mdx-h4 code,
+.storybook-mdx-h5 tt,
+.storybook-mdx-h5 code,
+.storybook-mdx-h6 tt,
+.storybook-mdx-h6 code {
+  font-size: inherit
+}
+
+.storybook-mdx-h1 {
+  padding-bottom: 0.3em;
+  font-size: 2em;
+  border-bottom: 1px solid #eaecef
+}
+
+.storybook-mdx-h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.5em;
+  border-bottom: 1px solid #eaecef
+}
+
+.storybook-mdx-h3 {
+  font-size: 1.25em
+}
+
+.storybook-mdx-h4 {
+  font-size: 1em
+}
+
+.storybook-mdx-h5 {
+  font-size: 0.875em
+}
+
+.storybook-mdx-h6 {
+  font-size: 0.85em;
+  color: #6a737d
+}
+
+.storybook-mdx-ul,
+.storybook-mdx-ol {
+  padding-left: 2em
+}
+
+.storybook-mdx-ul.no-list,
+.storybook-mdx-ol.no-list {
+  padding: 0;
+  list-style-type: none
+}
+
+.storybook-mdx-ul ul,
+.storybook-mdx-ul ol,
+.storybook-mdx-ol ol,
+.storybook-mdx-ol ul {
+  margin-top: 0;
+  margin-bottom: 0
+}
+
+.storybook-mdx-li {
+  word-wrap: break-all
+}
+
+.storybook-mdx-li > p {
+  margin-top: 16px
+}
+
+.storybook-mdx-li + li {
+  margin-top: 0.25em
+}
+
+.storybook-mdx-dl {
+  padding: 0
+}
+
+.storybook-mdx-dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 600
+}
+
+.storybook-mdx-dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px
+}
+
+.storybook-mdx-table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  display: block;
+  width: 100%;
+  overflow: auto
+}
+
+.storybook-mdx-table th {
+  font-weight: 600
+}
+
+.storybook-mdx-table th,
+.storybook-mdx-table td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5
+}
+
+.storybook-mdx-table tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1
+}
+
+.storybook-mdx-table tr:nth-child(2n) {
+  background-color: #f6f8fa
+}
+
+.storybook-mdx-table img {
+  background-color: transparent
+}

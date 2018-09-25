@@ -1,6 +1,7 @@
 import React from 'react';
 import { configure } from '@storybook/react';
 
+import '@storybook/preset-mdx/markdown.css';
 import 'highlight.js/styles/github.css';
 
 function loadStories() {
