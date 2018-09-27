@@ -11,15 +11,13 @@ function applyClassName(node) {
 
   if (!properties.className) {
     properties.className = [storybookTagClassName];
-  }
-  else if (typeof properties.className === 'string') {
-    properties.className += ' ' + storybookTagClassName;
-  }
-  else if (Array.isArray(properties.className)) {
+  } else if (typeof properties.className === 'string') {
+    properties.className += ` ${storybookTagClassName}`;
+  } else if (Array.isArray(properties.className)) {
     properties.className = [
       ...properties.className,
       ...properties.className.map(createClassName),
-      storybookTagClassName
+      storybookTagClassName,
     ];
   }
 }
@@ -49,9 +47,9 @@ function visit(nodes) {
 }
 
 function hast() {
-  return function (tree) {
+  return tree => {
     visit(tree.children);
-  }
+  };
 }
 
 module.exports = hast;

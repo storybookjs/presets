@@ -8,17 +8,13 @@ function toStory(node, options, mdxOptions) {
     return mdxToJsx.toJSX(node, {}, options);
   }
 
-  const {
-    importNodes,
-    exportNodes,
-    stories
-  } = extractRootNodeParts(node, mdxOptions, options);
+  const { importNodes, exportNodes, stories } = extractRootNodeParts(node, mdxOptions, options);
 
   return [
     storybookImport(),
     ...generateJsx(importNodes, options),
     ...generateJsx(exportNodes, options),
-    ...generateStories(stories, mdxOptions, {...options, skipExport: true}),
+    ...generateStories(stories, mdxOptions, { ...options, skipExport: true }),
   ].join('\n');
 }
 

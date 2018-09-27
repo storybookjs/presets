@@ -24,30 +24,27 @@ function groupStories(stories, mdxOptions) {
   }, {});
 }
 
-function generateStories(stories, mdxOptions, options) {
-  const groupedStories = groupStories(stories, mdxOptions);
-
-  return Object
-    .keys(groupedStories)
-    .map(storyKind =>
-      `storiesOf('${storyKind}', module)
-        ${groupedStories[storyKind].map(story => generateStory(story, options)).join('\n')};`);
-}
-
 function generateStory(story, options) {
   const { storyName } = story;
 
-  return (
-    `.add('${storyName}', () => {
+  return `.add('${storyName}', () => {
       const components = [];
       return (${mdxToJsx.toJSX(story, {}, options)});
-    })`
+    })`;
+}
+
+function generateStories(stories, mdxOptions, options) {
+  const groupedStories = groupStories(stories, mdxOptions);
+
+  return Object.keys(groupedStories).map(
+    storyKind =>
+      `storiesOf('${storyKind}', module)
+        ${groupedStories[storyKind].map(story => generateStory(story, options)).join('\n')};`
   );
 }
 
 function generateJsx(nodes, options) {
-  return nodes
-    .map(childNode => mdxToJsx.toJSX(childNode, {}, options));
+  return nodes.map(childNode => mdxToJsx.toJSX(childNode, {}, options));
 }
 
 module.exports = {

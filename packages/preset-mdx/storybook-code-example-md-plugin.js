@@ -1,12 +1,9 @@
 const { createCodeNode } = require('./helpers');
 
 function md(options = {}) {
-  const {
-    showStoryCode = true,
-    storyLang = 'html'
-  }  = options;
+  const { showStoryCode = true, storyLang = 'html' } = options;
 
-  return function (tree) {
+  return tree => {
     if (!showStoryCode) {
       return tree;
     }
@@ -27,7 +24,7 @@ function md(options = {}) {
     }
 
     return newTree;
-  }
+  };
 }
 
 module.exports = md;

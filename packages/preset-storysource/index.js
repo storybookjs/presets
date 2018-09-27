@@ -16,19 +16,16 @@ function webpack(webpackConfig = {}, options = {}) {
             {
               loader: require.resolve('@storybook/addon-storysource/loader'),
               options: loaderOptions,
-            }
-          ]
-        }
-      ]
-    }
+            },
+          ],
+        },
+      ],
+    },
   };
 }
 
 function manager(entry = []) {
-  return [
-    require.resolve('./addons.js'),
-    ...entry,
-  ]
+  return [require.resolve('./addons.js'), ...entry];
 }
 
 module.exports = { webpack, manager };

@@ -1,7 +1,4 @@
-const {
-  isStorybookAnnotation,
-  createAnnotationNode,
-} = require('./helpers');
+const { isStorybookAnnotation, createAnnotationNode } = require('./helpers');
 
 const tokenizeStorybookSyntax = (eat, value) => {
   const index = value.indexOf('\n');
@@ -11,8 +8,10 @@ const tokenizeStorybookSyntax = (eat, value) => {
   };
 
   if (isStorybookAnnotation(node)) {
-    return eat(node.value)(createAnnotationNode(node))
+    return eat(node.value)(createAnnotationNode(node));
   }
+
+  return undefined;
 };
 
 function applyStorybookSyntax(parser) {
@@ -25,8 +24,9 @@ function applyStorybookSyntax(parser) {
 function md(options = {}) {
   const { storybookApi = 'annotations' } = options;
 
-  if (storybookApi !== 'annotations')
+  if (storybookApi !== 'annotations') {
     return;
+  }
 
   applyStorybookSyntax(this.Parser);
 }

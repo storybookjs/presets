@@ -1,3 +1,16 @@
+function wrapLoader(loader, options) {
+  if (options === false) {
+    return [];
+  }
+
+  return [
+    {
+      loader,
+      options,
+    },
+  ];
+}
+
 function webpack(webpackConfig = {}, options = {}) {
   const { module = {} } = webpackConfig;
   const { styleLoaderOptions, cssLoaderOptions, sassLoaderOptions, rule = {} } = options;
@@ -15,22 +28,11 @@ function webpack(webpackConfig = {}, options = {}) {
             ...wrapLoader('style-loader', styleLoaderOptions),
             ...wrapLoader('css-loader', cssLoaderOptions),
             ...wrapLoader('sass-loader', sassLoaderOptions),
-          ]
-        }
-      ]
-    }
+          ],
+        },
+      ],
+    },
   };
-}
-
-function wrapLoader(loader, options) {
-  if (options === false) {
-    return [];
-  }
-
-  return [{
-    loader,
-    options,
-  }];
 }
 
 module.exports = { webpack };

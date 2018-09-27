@@ -1,9 +1,7 @@
 const path = require('path');
 
 function isInvalidNewLine(childNode, currentStory) {
-  return childNode.type === 'text' &&
-    childNode.value === '\n' &&
-    !currentStory.children.length;
+  return childNode.type === 'text' && childNode.value === '\n' && !currentStory.children.length;
 }
 
 function getHeadingText(node) {
@@ -53,7 +51,7 @@ function isStorybookAnnotation({ value }) {
     return false;
   }
 
-  return value.match(/^<!--\s*(storyKind|storyName)\s*=.*\s*-->$/)
+  return value.match(/^<!--\s*(storyKind|storyName)\s*=.*\s*-->$/);
 }
 
 function createAnnotationNode(node) {
@@ -69,7 +67,7 @@ function createAnnotationNode(node) {
       {
         type: 'text',
         value: node.value,
-      }
+      },
     ],
     value: node.value,
     data: {
@@ -77,9 +75,9 @@ function createAnnotationNode(node) {
       hProperties: {
         annotationKey,
         annotationValue,
-      }
-    }
-  }
+      },
+    },
+  };
 }
 
 module.exports = {

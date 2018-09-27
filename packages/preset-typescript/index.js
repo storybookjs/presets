@@ -10,21 +10,19 @@ function webpack(webpackConfig = {}, options = {}) {
         ...(module.rules || []),
         {
           test: /\.tsx?$/,
-          use: [{
-            loader: require.resolve('ts-loader'),
-            options: loaderOptions,
-          }]
-        }
-      ]
+          use: [
+            {
+              loader: require.resolve('ts-loader'),
+              options: loaderOptions,
+            },
+          ],
+        },
+      ],
     },
     resolve: {
       ...resolve,
-      extensions: [
-        ...(resolve.extensions || []),
-        '.ts',
-        '.tsx',
-      ]
-    }
+      extensions: [...(resolve.extensions || []), '.ts', '.tsx'],
+    },
   };
 }
 

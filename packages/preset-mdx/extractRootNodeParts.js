@@ -6,13 +6,7 @@ const {
 } = require('./helpers');
 
 function handleHeadingsApi(options) {
-  const {
-    storybookApi,
-    defaultStory,
-    childNode,
-    currentStory,
-    stories,
-  } = options;
+  const { storybookApi, defaultStory, childNode, currentStory, stories } = options;
 
   if (storybookApi !== 'headings') {
     return false;
@@ -39,8 +33,7 @@ function handleHeadingsApi(options) {
     if (!currentStory.children.length) {
       newStory.storyName = getHeadingText(childNode);
       newStory.storyNameHeading = childNode;
-    }
-    else {
+    } else {
       newStory = {
         ...defaultStory,
         storyKind: currentStory.storyKind,
@@ -60,20 +53,14 @@ function handleHeadingsApi(options) {
 }
 
 function handleAnnotationsApi(options) {
-  const {
-    storybookApi,
-    defaultStory,
-    childNode,
-    currentStory,
-    stories,
-  } = options;
+  const { storybookApi, defaultStory, childNode, currentStory, stories } = options;
 
   if (storybookApi !== 'annotations') {
     return false;
   }
 
   if (childNode.tagName !== 'storybook') {
-    return false
+    return false;
   }
 
   const { annotationKey, annotationValue } = childNode.properties;
@@ -95,8 +82,7 @@ function handleAnnotationsApi(options) {
 
     if (!currentStory.children.length) {
       newStory.storyName = annotationValue;
-    }
-    else {
+    } else {
       newStory = {
         ...defaultStory,
         storyKind: currentStory.storyKind,
@@ -137,12 +123,12 @@ function extractRootNodeParts(node, mdxOptions, options) {
   for (const childNode of node.children) {
     if (childNode.type === 'import') {
       importNodes.push(childNode);
-      continue
+      continue;
     }
 
     if (childNode.type === 'export') {
       exportNodes.push(childNode);
-      continue
+      continue;
     }
 
     if (childNode.type === 'element') {
