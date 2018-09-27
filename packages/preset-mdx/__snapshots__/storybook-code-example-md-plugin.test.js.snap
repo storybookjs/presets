@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storybook-syntax-md-plugin does not transform comments to special syntax when storybookApi !== annotations 1`] = `
+exports[`storybook-code-example-md-plugin does not generate code examples when showStoryCode = false 1`] = `
 "export default ({ components, ...props }) => (
   <MDXTag name=\\"wrapper\\" components={components}>
     {/* storyKind = mdx syntax */}
@@ -446,19 +446,29 @@ function foo() {
 "
 `;
 
-exports[`storybook-syntax-md-plugin transforms comments to special syntax 1`] = `
+exports[`storybook-code-example-md-plugin generates code example 1`] = `
 "export default ({ components, ...props }) => (
   <MDXTag name=\\"wrapper\\" components={components}>
-    <MDXTag
-      name=\\"storybook\\"
-      components={components}
-      props={{ annotationKey: 'storyKind', annotationValue: 'mdx syntax' }}
-    >{\`<!-- storyKind = mdx syntax -->\`}</MDXTag>
-    <MDXTag
-      name=\\"storybook\\"
-      components={components}
-      props={{ annotationKey: 'storyName', annotationValue: 'heading' }}
-    >{\`<!-- storyName = heading -->\`}</MDXTag>
+    {/* storyKind = mdx syntax */}
+    <MDXTag name=\\"pre\\" components={components}>
+      <MDXTag
+        name=\\"code\\"
+        components={components}
+        parentName=\\"pre\\"
+        props={{ className: 'language-html' }}
+      >{\`<!-- storyKind = mdx syntax -->
+\`}</MDXTag>
+    </MDXTag>
+    {/* storyName = heading */}
+    <MDXTag name=\\"pre\\" components={components}>
+      <MDXTag
+        name=\\"code\\"
+        components={components}
+        parentName=\\"pre\\"
+        props={{ className: 'language-html' }}
+      >{\`<!-- storyName = heading -->
+\`}</MDXTag>
+    </MDXTag>
     <MDXTag name=\\"h1\\" components={components}>{\`Heading 1\`}</MDXTag>
     <MDXTag name=\\"h2\\" components={components}>{\`Heading 2\`}</MDXTag>
     <MDXTag name=\\"h3\\" components={components}>{\`Heading 3\`}</MDXTag>
@@ -535,11 +545,16 @@ exports[`storybook-syntax-md-plugin transforms comments to special syntax 1`] = 
         props={{ href: 'https://storybook.js.org/' }}
       >{\`Link 4\`}</MDXTag>
     </MDXTag>
-    <MDXTag
-      name=\\"storybook\\"
-      components={components}
-      props={{ annotationKey: 'storyName', annotationValue: 'lists' }}
-    >{\`<!-- storyName = lists -->\`}</MDXTag>
+    {/* storyName = lists */}
+    <MDXTag name=\\"pre\\" components={components}>
+      <MDXTag
+        name=\\"code\\"
+        components={components}
+        parentName=\\"pre\\"
+        props={{ className: 'language-html' }}
+      >{\`<!-- storyName = lists -->
+\`}</MDXTag>
+    </MDXTag>
     <MDXTag name=\\"ul\\" components={components}>
       <MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">{\`List Item 1\`}</MDXTag>
       <MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">{\`List Item 2\`}</MDXTag>
@@ -628,11 +643,16 @@ exports[`storybook-syntax-md-plugin transforms comments to special syntax 1`] = 
         >{\`Check Item 4 with link\`}</MDXTag>
       </MDXTag>
     </MDXTag>
-    <MDXTag
-      name=\\"storybook\\"
-      components={components}
-      props={{ annotationKey: 'storyName', annotationValue: 'quotes' }}
-    >{\`<!-- storyName = quotes -->\`}</MDXTag>
+    {/* storyName = quotes */}
+    <MDXTag name=\\"pre\\" components={components}>
+      <MDXTag
+        name=\\"code\\"
+        components={components}
+        parentName=\\"pre\\"
+        props={{ className: 'language-html' }}
+      >{\`<!-- storyName = quotes -->
+\`}</MDXTag>
+    </MDXTag>
     <MDXTag name=\\"blockquote\\" components={components}>
       <MDXTag name=\\"p\\" components={components} parentName=\\"blockquote\\">{\`Note note note\`}</MDXTag>
       <MDXTag name=\\"p\\" components={components} parentName=\\"blockquote\\">{\`Here here\`}</MDXTag>
@@ -649,11 +669,16 @@ exports[`storybook-syntax-md-plugin transforms comments to special syntax 1`] = 
         >{\`link\`}</MDXTag>
       </MDXTag>
     </MDXTag>
-    <MDXTag
-      name=\\"storybook\\"
-      components={components}
-      props={{ annotationKey: 'storyName', annotationValue: 'text emphasizing' }}
-    >{\`<!-- storyName = text emphasizing -->\`}</MDXTag>
+    {/* storyName = text emphasizing */}
+    <MDXTag name=\\"pre\\" components={components}>
+      <MDXTag
+        name=\\"code\\"
+        components={components}
+        parentName=\\"pre\\"
+        props={{ className: 'language-html' }}
+      >{\`<!-- storyName = text emphasizing -->
+\`}</MDXTag>
+    </MDXTag>
     <MDXTag name=\\"p\\" components={components}>
       <MDXTag name=\\"del\\" components={components} parentName=\\"p\\">{\`Qwerty\`}</MDXTag>
     </MDXTag>
@@ -684,11 +709,16 @@ exports[`storybook-syntax-md-plugin transforms comments to special syntax 1`] = 
         >{\`Inline code with as a link\`}</MDXTag>
       </MDXTag>
     </MDXTag>
-    <MDXTag
-      name=\\"storybook\\"
-      components={components}
-      props={{ annotationKey: 'storyName', annotationValue: 'links' }}
-    >{\`<!-- storyName = links -->\`}</MDXTag>
+    {/* storyName = links */}
+    <MDXTag name=\\"pre\\" components={components}>
+      <MDXTag
+        name=\\"code\\"
+        components={components}
+        parentName=\\"pre\\"
+        props={{ className: 'language-html' }}
+      >{\`<!-- storyName = links -->
+\`}</MDXTag>
+    </MDXTag>
     <MDXTag name=\\"p\\" components={components}>
       <MDXTag
         name=\\"a\\"
@@ -697,11 +727,16 @@ exports[`storybook-syntax-md-plugin transforms comments to special syntax 1`] = 
         props={{ href: 'https://storybook.js.org/' }}
       >{\`Storybook\`}</MDXTag>
     </MDXTag>
-    <MDXTag
-      name=\\"storybook\\"
-      components={components}
-      props={{ annotationKey: 'storyName', annotationValue: 'code' }}
-    >{\`<!-- storyName = code -->\`}</MDXTag>
+    {/* storyName = code */}
+    <MDXTag name=\\"pre\\" components={components}>
+      <MDXTag
+        name=\\"code\\"
+        components={components}
+        parentName=\\"pre\\"
+        props={{ className: 'language-html' }}
+      >{\`<!-- storyName = code -->
+\`}</MDXTag>
+    </MDXTag>
     <MDXTag name=\\"h3\\" components={components}>{\`js\`}</MDXTag>
     <MDXTag name=\\"pre\\" components={components}>
       <MDXTag
@@ -751,11 +786,25 @@ function foo() {
     </MDXTag>
     <MDXTag name=\\"h3\\" components={components}>{\`jsx\`}</MDXTag>
     <button>This is JSX</button>
-    <MDXTag
-      name=\\"storybook\\"
-      components={components}
-      props={{ annotationKey: 'storyName', annotationValue: 'table' }}
-    >{\`<!-- storyName = table -->\`}</MDXTag>
+    <MDXTag name=\\"pre\\" components={components}>
+      <MDXTag
+        name=\\"code\\"
+        components={components}
+        parentName=\\"pre\\"
+        props={{ className: 'language-html' }}
+      >{\`<button>This is JSX</button>
+\`}</MDXTag>
+    </MDXTag>
+    {/* storyName = table */}
+    <MDXTag name=\\"pre\\" components={components}>
+      <MDXTag
+        name=\\"code\\"
+        components={components}
+        parentName=\\"pre\\"
+        props={{ className: 'language-html' }}
+      >{\`<!-- storyName = table -->
+\`}</MDXTag>
+    </MDXTag>
     <MDXTag name=\\"p\\" components={components}>{\`Default md table:\`}</MDXTag>
     <MDXTag name=\\"table\\" components={components}>
       <MDXTag name=\\"thead\\" components={components} parentName=\\"table\\">

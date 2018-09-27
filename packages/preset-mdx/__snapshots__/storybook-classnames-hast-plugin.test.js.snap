@@ -411,6 +411,12 @@ function foo() {
 }
 \`}</MDXTag>
     </MDXTag>
+    <MDXTag
+      name=\\"h3\\"
+      components={components}
+      props={{ className: 'storybook-mdx-h3' }}
+    >{\`jsx\`}</MDXTag>
+    <button>This is JSX</button>
     {/* storyName = table */}
     <MDXTag
       name=\\"p\\"
