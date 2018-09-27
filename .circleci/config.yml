@@ -12,26 +12,31 @@ jobs:
     steps:
       - checkout
       - restore_cache:
+          name: Restore core dependencies cache
           keys:
           - v1-dependencies-{{ checksum "yarn.lock" }}
-      - run: yarn install
+      - run:
+          name: Install dependencies
+          command: yarn install
       - save_cache:
+          name: Cache core dependencies
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - persist_to_workspace:
+          root: .
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "yarn.lock" }}
+            - packages
   lint:
     <<: *defaults
     steps:
       - checkout
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "yarn.lock" }}
-      - run: yarn install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "yarn.lock" }}
-      - run: yarn lint
+      - attach_workspace:
+          at: .
+      - run:
+          name: Lint
+          command: yarn lint
 workflows:
   version: 2
   build_test_deploy:
