@@ -17,6 +17,7 @@
     "repo-dirty-check": "node ./scripts/repo-dirty-check"
   },
   "devDependencies": {
+    "@angular/cli": "^6.2.3",
     "babel-eslint": "^10.0.1",
     "cross-env": "^5.2.0",
     "eslint": "^5.6.0",
