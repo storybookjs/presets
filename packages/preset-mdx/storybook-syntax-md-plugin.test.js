@@ -8,7 +8,7 @@ describe('storybook-syntax-md-plugin', () => {
     const content = await fs.readFile(path.resolve(__dirname, './.storybook/index.mdx'), 'utf8');
 
     const result = mdx.sync(content, {
-      mdPlugins: [plugin]
+      mdPlugins: [plugin],
     });
 
     expect(result).toMatchSnapshot();
