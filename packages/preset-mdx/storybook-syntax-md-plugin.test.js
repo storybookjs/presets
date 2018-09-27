@@ -1,7 +1,18 @@
 const path = require('path');
 const fs = require('fs-extra');
 const mdx = require('@mdx-js/mdx');
+const prettier = require('prettier');
 const plugin = require('./storybook-syntax-md-plugin');
+
+function format(code) {
+  return prettier.format(code, {
+    printWidth: 100,
+    tabWidth: 2,
+    bracketSpacing: true,
+    trailingComma: 'es5',
+    singleQuote: true,
+  });
+}
 
 describe('storybook-syntax-md-plugin', () => {
   it('transforms comments to special syntax', async () => {
@@ -11,6 +22,8 @@ describe('storybook-syntax-md-plugin', () => {
       mdPlugins: [plugin],
     });
 
-    expect(result).toMatchSnapshot();
+    const code = format(result);
+
+    expect(code).toMatchSnapshot();
   });
 });
