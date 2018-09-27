@@ -7,6 +7,18 @@ aliases:
       - image: circleci/node:8
 
 jobs:
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
   lint:
     <<: *defaults
     steps:
@@ -20,3 +32,11 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
       - run: yarn lint
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - build
+      - lint:
+          requires:
+            - build
