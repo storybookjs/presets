@@ -5,7 +5,11 @@ function isInvalidNewLine(childNode, currentStory) {
 }
 
 function getHeadingText(node) {
-  return node.children[0].value;
+  if (node.type === 'text') {
+    return node.value.trim();
+  }
+
+  return node.children.map(node => getHeadingText(node)).join(' ');
 }
 
 function storybookImport() {
