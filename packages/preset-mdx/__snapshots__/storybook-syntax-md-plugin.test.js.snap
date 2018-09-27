@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`storybook-syntax-md-plugin transforms comments to special syntax 1`] = `
+"
+
+export default ({components, ...props}) => <MDXTag name=\\"wrapper\\"  components={components}><MDXTag name=\\"storybook\\" components={components} props={{\\"annotationKey\\":\\"storyKind\\",\\"annotationValue\\":\\"Welcome\\"}}>{\`<!-- storyKind = Welcome -->\`}</MDXTag>
+<MDXTag name=\\"storybook\\" components={components} props={{\\"annotationKey\\":\\"storyName\\",\\"annotationValue\\":\\"Intro\\"}}>{\`<!-- storyName = Intro -->\`}</MDXTag>
+<MDXTag name=\\"h1\\" components={components}>{\`Welcome\`}</MDXTag>
+<MDXTag name=\\"h3\\" components={components}>{\`\\"heading\\" API\`}</MDXTag>
+<MDXTag name=\\"ul\\" components={components}>
+<MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">{\`When we use \`}<MDXTag name=\\"inlineCode\\" components={components} parentName=\\"li\\">{\`#\`}</MDXTag>{\` in mdx, it will be used as Storybook namespace (like in \`}<MDXTag name=\\"inlineCode\\" components={components} parentName=\\"li\\">{\`storiesOf('Heading 1')\`}</MDXTag>{\`)\`}</MDXTag>
+<MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">{\`When we use \`}<MDXTag name=\\"inlineCode\\" components={components} parentName=\\"li\\">{\`##\`}</MDXTag>{\` in mdx, it will be used as Storybook sub directory (like in \`}<MDXTag name=\\"inlineCode\\" components={components} parentName=\\"li\\">{\`storiesOf('Heading 1').add('Heading 2')\`}</MDXTag>{\` )\`}</MDXTag>
+<MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">{\`When we do not use \`}<MDXTag name=\\"inlineCode\\" components={components} parentName=\\"li\\">{\`##\`}</MDXTag>{\` the default will be \\"Default\\"\`}</MDXTag>
+</MDXTag>
+<MDXTag name=\\"h3\\" components={components}>{\`\\"annotations\\" API\`}</MDXTag>
+<MDXTag name=\\"ul\\" components={components}>
+<MDXTag name=\\"li\\" components={components} parentName=\\"ul\\"><MDXTag name=\\"inlineCode\\" components={components} parentName=\\"li\\">{\`<!-- storyKind = Story Kind -->\`}</MDXTag>{\` will be used as a Storybook namespace\`}</MDXTag>
+<MDXTag name=\\"li\\" components={components} parentName=\\"ul\\"><MDXTag name=\\"inlineCode\\" components={components} parentName=\\"li\\">{\`<!-- storyName = Story Name -->\`}</MDXTag>{\` will be used as a Storybook sub directory\`}</MDXTag>
+</MDXTag></MDXTag>"
+`;
