@@ -1,28 +1,50 @@
 version: 2
 
-jobs:
-  build:
+aliases:
+  - &defaults
+    working_directory: ~/repo
     docker:
       - image: circleci/node:8
 
-    working_directory: ~/repo
-
+jobs:
+  build:
+    <<: *defaults
     steps:
       - checkout
-
-      # Download and cache dependencies
       - restore_cache:
+          name: Restore core dependencies cache
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: yarn install
-
+          - v1-dependencies-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install dependencies
+          command: yarn install
+      - run:
+          name: Check that yarn.lock is not corrupted
+          command: yarn repo-dirty-check
       - save_cache:
+          name: Cache core dependencies
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - persist_to_workspace:
+          root: .
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
-      - run: yarn lint
-      
+            - packages
+  lint:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Lint
+          command: yarn lint
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - build
+      - lint:
+          requires:
+            - build

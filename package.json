@@ -13,21 +13,23 @@
   },
   "scripts": {
     "lint": "yarn lint:js .",
-    "lint:js": "cross-env NODE_ENV=production eslint --cache --cache-location=.cache/eslint --ext .js,.jsx,.json --report-unused-disable-directives"
+    "lint:js": "cross-env NODE_ENV=production eslint --cache --cache-location=.cache/eslint --ext .js,.jsx,.json --report-unused-disable-directives",
+    "repo-dirty-check": "node ./scripts/repo-dirty-check"
   },
   "devDependencies": {
-    "babel-eslint": "^9.0.0",
+    "babel-eslint": "^10.0.1",
     "cross-env": "^5.2.0",
-    "eslint": "^5.4.0",
-    "eslint-config-airbnb": "^17.0.0",
-    "eslint-config-prettier": "^3.0.1",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jest": "^21.22.0",
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.22.1",
     "eslint-plugin-json": "^1.2.1",
     "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-prettier": "^2.6.2",
-    "eslint-plugin-react": "^7.10.0",
-    "prettier": "^1.14.0"
+    "eslint-plugin-prettier": "^2.7.0",
+    "eslint-plugin-react": "^7.11.1",
+    "prettier": "^1.14.3",
+    "shelljs": "^0.8.2"
   },
   "workspaces": [
     "packages/*"
