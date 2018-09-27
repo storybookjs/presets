@@ -17,7 +17,7 @@ function format(code) {
 
 describe('storybook-syntax-md-plugin', () => {
   it('transforms comments to special syntax', async () => {
-    const content = await fs.readFile(path.resolve(__dirname, './.storybook/index.mdx'), 'utf8');
+    const content = await fs.readFile(path.resolve(__dirname, './test.mdx'), 'utf8');
 
     const result = mdx.sync(content, {
       mdPlugins: [plugin],
@@ -29,7 +29,7 @@ describe('storybook-syntax-md-plugin', () => {
   });
 
   it('does not transform comments to special syntax when storybookApi !== annotations', async () => {
-    const content = await fs.readFile(path.resolve(__dirname, './.storybook/index.mdx'), 'utf8');
+    const content = await fs.readFile(path.resolve(__dirname, './test.mdx'), 'utf8');
 
     const result = mdx.sync(content, {
       mdPlugins: [[plugin, { storybookApi: 'foo' }]],

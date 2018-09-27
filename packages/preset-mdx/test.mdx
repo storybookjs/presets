@@ -1,0 +1,128 @@
+<!-- storyKind = mdx syntax -->
+<!-- storyName = heading -->
+
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+
+#### Heading 4
+
+##### Heading 5
+
+###### Heading 6
+
+---
+
+# [Heading 1 With Link](https://storybook.js.org/)
+
+## [Heading 2 With Link](https://storybook.js.org/)
+
+### [Heading 3 With Link](https://storybook.js.org/)
+
+#### [Heading 4 With Link](https://storybook.js.org/)
+
+---
+
+# Not link and [Link 1](https://storybook.js.org/)
+
+## Not link and [Link 2](https://storybook.js.org/)
+
+### Not link and [Link 3](https://storybook.js.org/)
+
+#### Not link and [Link 4](https://storybook.js.org/)
+
+<!-- storyName = lists -->
+
+* List Item 1
+* List Item 2
+* _List Item 3 italic_
+
+---
+
+1. List Item 1
+2. List Item 2
+3. [List Item 3 with link](https://storybook.js.org/)
+
+***
+
+- [x] Check Item 1
+- [ ] Check Item 2
+- [x] **Check Item 3 bold**
+- [ ] [Check Item 4 with link](https://storybook.js.org/)
+
+<!-- storyName = quotes -->
+
+> Note note note
+>
+> Here here
+
+---
+
+> Quotes with [link](https://storybook.js.org/)
+
+<!-- storyName = text emphasizing -->
+
+~~Qwerty~~
+
+_Qwerty_
+
+**Qwerty**
+
+`Inline code snippet`
+
+[`Inline code with as a link`](https://storybook.js.org/)
+
+<!-- storyName = links -->
+
+[Storybook](https://storybook.js.org/)
+
+<!-- storyName = code -->
+
+### js
+
+```js
+class Bar {
+  constructor() {
+  }
+}
+
+function foo() {
+  return 'Bar';
+}
+```
+
+### ts
+
+```ts
+interface StorybookMdxOptions {
+  showStoryCode?: boolean,
+  includeStoryHeadings?: boolean,
+  storyLang?: string,
+  storybookApi?: 'annotations' | 'headings',
+  defaultStoryKind?: DefaultStoryNameFn,
+  defaultStoryName?: DefaultStoryNameFn | string,
+}
+```
+
+### css
+
+```css
+.selector {
+  color: 'red';
+  padding: 10px;
+}
+```
+
+<!-- storyName = table -->
+
+Default md table:
+
+| React | Vue | Angular | HTML |
+|:-----:|:---:|:-------:|:----:|
+| 🚀 | 🚀 | 🚀 | 🚀 |
+| 🏅 | 🏅 | 🏅 | 🏅 |
+| 👍 | 👍 | 👍 | 👍 |
+| 💪 | 💪 | 💪 | 💪 |
+| 😃 | 😃 | 😃 | 😃 |

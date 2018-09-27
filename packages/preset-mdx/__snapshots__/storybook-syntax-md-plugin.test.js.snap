@@ -3,56 +3,440 @@
 exports[`storybook-syntax-md-plugin does not transform comments to special syntax when storybookApi !== annotations 1`] = `
 "export default ({ components, ...props }) => (
   <MDXTag name=\\"wrapper\\" components={components}>
-    {/* storyKind = Welcome */}
-    {/* storyName = Intro */}
-    <MDXTag name=\\"h1\\" components={components}>{\`Welcome\`}</MDXTag>
-    <MDXTag name=\\"h3\\" components={components}>{\`\\"heading\\" API\`}</MDXTag>
+    {/* storyKind = mdx syntax */}
+    {/* storyName = heading */}
+    <MDXTag name=\\"h1\\" components={components}>{\`Heading 1\`}</MDXTag>
+    <MDXTag name=\\"h2\\" components={components}>{\`Heading 2\`}</MDXTag>
+    <MDXTag name=\\"h3\\" components={components}>{\`Heading 3\`}</MDXTag>
+    <MDXTag name=\\"h4\\" components={components}>{\`Heading 4\`}</MDXTag>
+    <MDXTag name=\\"h5\\" components={components}>{\`Heading 5\`}</MDXTag>
+    <MDXTag name=\\"h6\\" components={components}>{\`Heading 6\`}</MDXTag>
+    <MDXTag name=\\"hr\\" components={components} />
+    <MDXTag name=\\"h1\\" components={components}>
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"h1\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Heading 1 With Link\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"h2\\" components={components}>
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"h2\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Heading 2 With Link\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"h3\\" components={components}>
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"h3\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Heading 3 With Link\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"h4\\" components={components}>
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"h4\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Heading 4 With Link\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"hr\\" components={components} />
+    <MDXTag name=\\"h1\\" components={components}>
+      {\`Not link and \`}
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"h1\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Link 1\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"h2\\" components={components}>
+      {\`Not link and \`}
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"h2\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Link 2\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"h3\\" components={components}>
+      {\`Not link and \`}
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"h3\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Link 3\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"h4\\" components={components}>
+      {\`Not link and \`}
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"h4\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Link 4\`}</MDXTag>
+    </MDXTag>
+    {/* storyName = lists */}
     <MDXTag name=\\"ul\\" components={components}>
+      <MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">{\`List Item 1\`}</MDXTag>
+      <MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">{\`List Item 2\`}</MDXTag>
       <MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">
-        {\`When we use \`}
-        <MDXTag name=\\"inlineCode\\" components={components} parentName=\\"li\\">{\`#\`}</MDXTag>
-        {\` in mdx, it will be used as Storybook namespace (like in \`}
-        <MDXTag
-          name=\\"inlineCode\\"
-          components={components}
-          parentName=\\"li\\"
-        >{\`storiesOf('Heading 1')\`}</MDXTag>
-        {\`)\`}
-      </MDXTag>
-      <MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">
-        {\`When we use \`}
-        <MDXTag name=\\"inlineCode\\" components={components} parentName=\\"li\\">{\`##\`}</MDXTag>
-        {\` in mdx, it will be used as Storybook sub directory (like in \`}
-        <MDXTag
-          name=\\"inlineCode\\"
-          components={components}
-          parentName=\\"li\\"
-        >{\`storiesOf('Heading 1').add('Heading 2')\`}</MDXTag>
-        {\` )\`}
-      </MDXTag>
-      <MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">
-        {\`When we do not use \`}
-        <MDXTag name=\\"inlineCode\\" components={components} parentName=\\"li\\">{\`##\`}</MDXTag>
-        {\` the default will be \\"Default\\"\`}
+        <MDXTag name=\\"em\\" components={components} parentName=\\"li\\">{\`List Item 3 italic\`}</MDXTag>
       </MDXTag>
     </MDXTag>
-    <MDXTag name=\\"h3\\" components={components}>{\`\\"annotations\\" API\`}</MDXTag>
-    <MDXTag name=\\"ul\\" components={components}>
-      <MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">
+    <MDXTag name=\\"hr\\" components={components} />
+    <MDXTag name=\\"ol\\" components={components}>
+      <MDXTag name=\\"li\\" components={components} parentName=\\"ol\\">{\`List Item 1\`}</MDXTag>
+      <MDXTag name=\\"li\\" components={components} parentName=\\"ol\\">{\`List Item 2\`}</MDXTag>
+      <MDXTag name=\\"li\\" components={components} parentName=\\"ol\\">
         <MDXTag
-          name=\\"inlineCode\\"
+          name=\\"a\\"
           components={components}
           parentName=\\"li\\"
-        >{\`<!-- storyKind = Story Kind -->\`}</MDXTag>
-        {\` will be used as a Storybook namespace\`}
+          props={{ href: 'https://storybook.js.org/' }}
+        >{\`List Item 3 with link\`}</MDXTag>
       </MDXTag>
-      <MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">
+    </MDXTag>
+    <MDXTag name=\\"hr\\" components={components} />
+    <MDXTag name=\\"ul\\" components={components}>
+      <MDXTag
+        name=\\"li\\"
+        components={components}
+        parentName=\\"ul\\"
+        props={{ className: 'task-list-item' }}
+      >
+        <MDXTag
+          name=\\"input\\"
+          components={components}
+          parentName=\\"li\\"
+          props={{ type: 'checkbox', checked: true, disabled: true }}
+        />
+        {\` \`}
+        {\`Check Item 1\`}
+      </MDXTag>
+      <MDXTag
+        name=\\"li\\"
+        components={components}
+        parentName=\\"ul\\"
+        props={{ className: 'task-list-item' }}
+      >
+        <MDXTag
+          name=\\"input\\"
+          components={components}
+          parentName=\\"li\\"
+          props={{ type: 'checkbox', checked: false, disabled: true }}
+        />
+        {\` \`}
+        {\`Check Item 2\`}
+      </MDXTag>
+      <MDXTag
+        name=\\"li\\"
+        components={components}
+        parentName=\\"ul\\"
+        props={{ className: 'task-list-item' }}
+      >
+        <MDXTag
+          name=\\"input\\"
+          components={components}
+          parentName=\\"li\\"
+          props={{ type: 'checkbox', checked: true, disabled: true }}
+        />
+        {\` \`}
+        <MDXTag name=\\"strong\\" components={components} parentName=\\"li\\">{\`Check Item 3 bold\`}</MDXTag>
+      </MDXTag>
+      <MDXTag
+        name=\\"li\\"
+        components={components}
+        parentName=\\"ul\\"
+        props={{ className: 'task-list-item' }}
+      >
+        <MDXTag
+          name=\\"input\\"
+          components={components}
+          parentName=\\"li\\"
+          props={{ type: 'checkbox', checked: false, disabled: true }}
+        />
+        {\` \`}
+        <MDXTag
+          name=\\"a\\"
+          components={components}
+          parentName=\\"li\\"
+          props={{ href: 'https://storybook.js.org/' }}
+        >{\`Check Item 4 with link\`}</MDXTag>
+      </MDXTag>
+    </MDXTag>
+    {/* storyName = quotes */}
+    <MDXTag name=\\"blockquote\\" components={components}>
+      <MDXTag name=\\"p\\" components={components} parentName=\\"blockquote\\">{\`Note note note\`}</MDXTag>
+      <MDXTag name=\\"p\\" components={components} parentName=\\"blockquote\\">{\`Here here\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"hr\\" components={components} />
+    <MDXTag name=\\"blockquote\\" components={components}>
+      <MDXTag name=\\"p\\" components={components} parentName=\\"blockquote\\">
+        {\`Quotes with \`}
+        <MDXTag
+          name=\\"a\\"
+          components={components}
+          parentName=\\"p\\"
+          props={{ href: 'https://storybook.js.org/' }}
+        >{\`link\`}</MDXTag>
+      </MDXTag>
+    </MDXTag>
+    {/* storyName = text emphasizing */}
+    <MDXTag name=\\"p\\" components={components}>
+      <MDXTag name=\\"del\\" components={components} parentName=\\"p\\">{\`Qwerty\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"p\\" components={components}>
+      <MDXTag name=\\"em\\" components={components} parentName=\\"p\\">{\`Qwerty\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"p\\" components={components}>
+      <MDXTag name=\\"strong\\" components={components} parentName=\\"p\\">{\`Qwerty\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"p\\" components={components}>
+      <MDXTag
+        name=\\"inlineCode\\"
+        components={components}
+        parentName=\\"p\\"
+      >{\`Inline code snippet\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"p\\" components={components}>
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"p\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >
         <MDXTag
           name=\\"inlineCode\\"
           components={components}
-          parentName=\\"li\\"
-        >{\`<!-- storyName = Story Name -->\`}</MDXTag>
-        {\` will be used as a Storybook sub directory\`}
+          parentName=\\"a\\"
+        >{\`Inline code with as a link\`}</MDXTag>
+      </MDXTag>
+    </MDXTag>
+    {/* storyName = links */}
+    <MDXTag name=\\"p\\" components={components}>
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"p\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Storybook\`}</MDXTag>
+    </MDXTag>
+    {/* storyName = code */}
+    <MDXTag name=\\"h3\\" components={components}>{\`js\`}</MDXTag>
+    <MDXTag name=\\"pre\\" components={components}>
+      <MDXTag
+        name=\\"code\\"
+        components={components}
+        parentName=\\"pre\\"
+        props={{ className: 'language-js' }}
+      >{\`class Bar {
+  constructor() {
+  }
+}
+
+function foo() {
+  return 'Bar';
+}
+\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"h3\\" components={components}>{\`ts\`}</MDXTag>
+    <MDXTag name=\\"pre\\" components={components}>
+      <MDXTag
+        name=\\"code\\"
+        components={components}
+        parentName=\\"pre\\"
+        props={{ className: 'language-ts' }}
+      >{\`interface StorybookMdxOptions {
+  showStoryCode?: boolean,
+  includeStoryHeadings?: boolean,
+  storyLang?: string,
+  storybookApi?: 'annotations' | 'headings',
+  defaultStoryKind?: DefaultStoryNameFn,
+  defaultStoryName?: DefaultStoryNameFn | string,
+}
+\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"h3\\" components={components}>{\`css\`}</MDXTag>
+    <MDXTag name=\\"pre\\" components={components}>
+      <MDXTag
+        name=\\"code\\"
+        components={components}
+        parentName=\\"pre\\"
+        props={{ className: 'language-css' }}
+      >{\`.selector {
+  color: 'red';
+  padding: 10px;
+}
+\`}</MDXTag>
+    </MDXTag>
+    {/* storyName = table */}
+    <MDXTag name=\\"p\\" components={components}>{\`Default md table:\`}</MDXTag>
+    <MDXTag name=\\"table\\" components={components}>
+      <MDXTag name=\\"thead\\" components={components} parentName=\\"table\\">
+        <MDXTag name=\\"tr\\" components={components} parentName=\\"thead\\">
+          <MDXTag
+            name=\\"th\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`React\`}</MDXTag>
+          <MDXTag
+            name=\\"th\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`Vue\`}</MDXTag>
+          <MDXTag
+            name=\\"th\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`Angular\`}</MDXTag>
+          <MDXTag
+            name=\\"th\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`HTML\`}</MDXTag>
+        </MDXTag>
+      </MDXTag>
+      <MDXTag name=\\"tbody\\" components={components} parentName=\\"table\\">
+        <MDXTag name=\\"tr\\" components={components} parentName=\\"tbody\\">
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`🚀\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`🚀\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`🚀\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`🚀\`}</MDXTag>
+        </MDXTag>
+        <MDXTag name=\\"tr\\" components={components} parentName=\\"tbody\\">
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`🏅\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`🏅\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`🏅\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`🏅\`}</MDXTag>
+        </MDXTag>
+        <MDXTag name=\\"tr\\" components={components} parentName=\\"tbody\\">
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`👍\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`👍\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`👍\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`👍\`}</MDXTag>
+        </MDXTag>
+        <MDXTag name=\\"tr\\" components={components} parentName=\\"tbody\\">
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`💪\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`💪\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`💪\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`💪\`}</MDXTag>
+        </MDXTag>
+        <MDXTag name=\\"tr\\" components={components} parentName=\\"tbody\\">
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`😃\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`😃\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`😃\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`😃\`}</MDXTag>
+        </MDXTag>
       </MDXTag>
     </MDXTag>
   </MDXTag>
@@ -66,61 +450,469 @@ exports[`storybook-syntax-md-plugin transforms comments to special syntax 1`] = 
     <MDXTag
       name=\\"storybook\\"
       components={components}
-      props={{ annotationKey: 'storyKind', annotationValue: 'Welcome' }}
-    >{\`<!-- storyKind = Welcome -->\`}</MDXTag>
+      props={{ annotationKey: 'storyKind', annotationValue: 'mdx syntax' }}
+    >{\`<!-- storyKind = mdx syntax -->\`}</MDXTag>
     <MDXTag
       name=\\"storybook\\"
       components={components}
-      props={{ annotationKey: 'storyName', annotationValue: 'Intro' }}
-    >{\`<!-- storyName = Intro -->\`}</MDXTag>
-    <MDXTag name=\\"h1\\" components={components}>{\`Welcome\`}</MDXTag>
-    <MDXTag name=\\"h3\\" components={components}>{\`\\"heading\\" API\`}</MDXTag>
+      props={{ annotationKey: 'storyName', annotationValue: 'heading' }}
+    >{\`<!-- storyName = heading -->\`}</MDXTag>
+    <MDXTag name=\\"h1\\" components={components}>{\`Heading 1\`}</MDXTag>
+    <MDXTag name=\\"h2\\" components={components}>{\`Heading 2\`}</MDXTag>
+    <MDXTag name=\\"h3\\" components={components}>{\`Heading 3\`}</MDXTag>
+    <MDXTag name=\\"h4\\" components={components}>{\`Heading 4\`}</MDXTag>
+    <MDXTag name=\\"h5\\" components={components}>{\`Heading 5\`}</MDXTag>
+    <MDXTag name=\\"h6\\" components={components}>{\`Heading 6\`}</MDXTag>
+    <MDXTag name=\\"hr\\" components={components} />
+    <MDXTag name=\\"h1\\" components={components}>
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"h1\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Heading 1 With Link\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"h2\\" components={components}>
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"h2\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Heading 2 With Link\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"h3\\" components={components}>
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"h3\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Heading 3 With Link\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"h4\\" components={components}>
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"h4\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Heading 4 With Link\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"hr\\" components={components} />
+    <MDXTag name=\\"h1\\" components={components}>
+      {\`Not link and \`}
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"h1\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Link 1\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"h2\\" components={components}>
+      {\`Not link and \`}
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"h2\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Link 2\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"h3\\" components={components}>
+      {\`Not link and \`}
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"h3\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Link 3\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"h4\\" components={components}>
+      {\`Not link and \`}
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"h4\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Link 4\`}</MDXTag>
+    </MDXTag>
+    <MDXTag
+      name=\\"storybook\\"
+      components={components}
+      props={{ annotationKey: 'storyName', annotationValue: 'lists' }}
+    >{\`<!-- storyName = lists -->\`}</MDXTag>
     <MDXTag name=\\"ul\\" components={components}>
+      <MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">{\`List Item 1\`}</MDXTag>
+      <MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">{\`List Item 2\`}</MDXTag>
       <MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">
-        {\`When we use \`}
-        <MDXTag name=\\"inlineCode\\" components={components} parentName=\\"li\\">{\`#\`}</MDXTag>
-        {\` in mdx, it will be used as Storybook namespace (like in \`}
-        <MDXTag
-          name=\\"inlineCode\\"
-          components={components}
-          parentName=\\"li\\"
-        >{\`storiesOf('Heading 1')\`}</MDXTag>
-        {\`)\`}
-      </MDXTag>
-      <MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">
-        {\`When we use \`}
-        <MDXTag name=\\"inlineCode\\" components={components} parentName=\\"li\\">{\`##\`}</MDXTag>
-        {\` in mdx, it will be used as Storybook sub directory (like in \`}
-        <MDXTag
-          name=\\"inlineCode\\"
-          components={components}
-          parentName=\\"li\\"
-        >{\`storiesOf('Heading 1').add('Heading 2')\`}</MDXTag>
-        {\` )\`}
-      </MDXTag>
-      <MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">
-        {\`When we do not use \`}
-        <MDXTag name=\\"inlineCode\\" components={components} parentName=\\"li\\">{\`##\`}</MDXTag>
-        {\` the default will be \\"Default\\"\`}
+        <MDXTag name=\\"em\\" components={components} parentName=\\"li\\">{\`List Item 3 italic\`}</MDXTag>
       </MDXTag>
     </MDXTag>
-    <MDXTag name=\\"h3\\" components={components}>{\`\\"annotations\\" API\`}</MDXTag>
-    <MDXTag name=\\"ul\\" components={components}>
-      <MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">
+    <MDXTag name=\\"hr\\" components={components} />
+    <MDXTag name=\\"ol\\" components={components}>
+      <MDXTag name=\\"li\\" components={components} parentName=\\"ol\\">{\`List Item 1\`}</MDXTag>
+      <MDXTag name=\\"li\\" components={components} parentName=\\"ol\\">{\`List Item 2\`}</MDXTag>
+      <MDXTag name=\\"li\\" components={components} parentName=\\"ol\\">
         <MDXTag
-          name=\\"inlineCode\\"
+          name=\\"a\\"
           components={components}
           parentName=\\"li\\"
-        >{\`<!-- storyKind = Story Kind -->\`}</MDXTag>
-        {\` will be used as a Storybook namespace\`}
+          props={{ href: 'https://storybook.js.org/' }}
+        >{\`List Item 3 with link\`}</MDXTag>
       </MDXTag>
-      <MDXTag name=\\"li\\" components={components} parentName=\\"ul\\">
+    </MDXTag>
+    <MDXTag name=\\"hr\\" components={components} />
+    <MDXTag name=\\"ul\\" components={components}>
+      <MDXTag
+        name=\\"li\\"
+        components={components}
+        parentName=\\"ul\\"
+        props={{ className: 'task-list-item' }}
+      >
+        <MDXTag
+          name=\\"input\\"
+          components={components}
+          parentName=\\"li\\"
+          props={{ type: 'checkbox', checked: true, disabled: true }}
+        />
+        {\` \`}
+        {\`Check Item 1\`}
+      </MDXTag>
+      <MDXTag
+        name=\\"li\\"
+        components={components}
+        parentName=\\"ul\\"
+        props={{ className: 'task-list-item' }}
+      >
+        <MDXTag
+          name=\\"input\\"
+          components={components}
+          parentName=\\"li\\"
+          props={{ type: 'checkbox', checked: false, disabled: true }}
+        />
+        {\` \`}
+        {\`Check Item 2\`}
+      </MDXTag>
+      <MDXTag
+        name=\\"li\\"
+        components={components}
+        parentName=\\"ul\\"
+        props={{ className: 'task-list-item' }}
+      >
+        <MDXTag
+          name=\\"input\\"
+          components={components}
+          parentName=\\"li\\"
+          props={{ type: 'checkbox', checked: true, disabled: true }}
+        />
+        {\` \`}
+        <MDXTag name=\\"strong\\" components={components} parentName=\\"li\\">{\`Check Item 3 bold\`}</MDXTag>
+      </MDXTag>
+      <MDXTag
+        name=\\"li\\"
+        components={components}
+        parentName=\\"ul\\"
+        props={{ className: 'task-list-item' }}
+      >
+        <MDXTag
+          name=\\"input\\"
+          components={components}
+          parentName=\\"li\\"
+          props={{ type: 'checkbox', checked: false, disabled: true }}
+        />
+        {\` \`}
+        <MDXTag
+          name=\\"a\\"
+          components={components}
+          parentName=\\"li\\"
+          props={{ href: 'https://storybook.js.org/' }}
+        >{\`Check Item 4 with link\`}</MDXTag>
+      </MDXTag>
+    </MDXTag>
+    <MDXTag
+      name=\\"storybook\\"
+      components={components}
+      props={{ annotationKey: 'storyName', annotationValue: 'quotes' }}
+    >{\`<!-- storyName = quotes -->\`}</MDXTag>
+    <MDXTag name=\\"blockquote\\" components={components}>
+      <MDXTag name=\\"p\\" components={components} parentName=\\"blockquote\\">{\`Note note note\`}</MDXTag>
+      <MDXTag name=\\"p\\" components={components} parentName=\\"blockquote\\">{\`Here here\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"hr\\" components={components} />
+    <MDXTag name=\\"blockquote\\" components={components}>
+      <MDXTag name=\\"p\\" components={components} parentName=\\"blockquote\\">
+        {\`Quotes with \`}
+        <MDXTag
+          name=\\"a\\"
+          components={components}
+          parentName=\\"p\\"
+          props={{ href: 'https://storybook.js.org/' }}
+        >{\`link\`}</MDXTag>
+      </MDXTag>
+    </MDXTag>
+    <MDXTag
+      name=\\"storybook\\"
+      components={components}
+      props={{ annotationKey: 'storyName', annotationValue: 'text emphasizing' }}
+    >{\`<!-- storyName = text emphasizing -->\`}</MDXTag>
+    <MDXTag name=\\"p\\" components={components}>
+      <MDXTag name=\\"del\\" components={components} parentName=\\"p\\">{\`Qwerty\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"p\\" components={components}>
+      <MDXTag name=\\"em\\" components={components} parentName=\\"p\\">{\`Qwerty\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"p\\" components={components}>
+      <MDXTag name=\\"strong\\" components={components} parentName=\\"p\\">{\`Qwerty\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"p\\" components={components}>
+      <MDXTag
+        name=\\"inlineCode\\"
+        components={components}
+        parentName=\\"p\\"
+      >{\`Inline code snippet\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"p\\" components={components}>
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"p\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >
         <MDXTag
           name=\\"inlineCode\\"
           components={components}
-          parentName=\\"li\\"
-        >{\`<!-- storyName = Story Name -->\`}</MDXTag>
-        {\` will be used as a Storybook sub directory\`}
+          parentName=\\"a\\"
+        >{\`Inline code with as a link\`}</MDXTag>
+      </MDXTag>
+    </MDXTag>
+    <MDXTag
+      name=\\"storybook\\"
+      components={components}
+      props={{ annotationKey: 'storyName', annotationValue: 'links' }}
+    >{\`<!-- storyName = links -->\`}</MDXTag>
+    <MDXTag name=\\"p\\" components={components}>
+      <MDXTag
+        name=\\"a\\"
+        components={components}
+        parentName=\\"p\\"
+        props={{ href: 'https://storybook.js.org/' }}
+      >{\`Storybook\`}</MDXTag>
+    </MDXTag>
+    <MDXTag
+      name=\\"storybook\\"
+      components={components}
+      props={{ annotationKey: 'storyName', annotationValue: 'code' }}
+    >{\`<!-- storyName = code -->\`}</MDXTag>
+    <MDXTag name=\\"h3\\" components={components}>{\`js\`}</MDXTag>
+    <MDXTag name=\\"pre\\" components={components}>
+      <MDXTag
+        name=\\"code\\"
+        components={components}
+        parentName=\\"pre\\"
+        props={{ className: 'language-js' }}
+      >{\`class Bar {
+  constructor() {
+  }
+}
+
+function foo() {
+  return 'Bar';
+}
+\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"h3\\" components={components}>{\`ts\`}</MDXTag>
+    <MDXTag name=\\"pre\\" components={components}>
+      <MDXTag
+        name=\\"code\\"
+        components={components}
+        parentName=\\"pre\\"
+        props={{ className: 'language-ts' }}
+      >{\`interface StorybookMdxOptions {
+  showStoryCode?: boolean,
+  includeStoryHeadings?: boolean,
+  storyLang?: string,
+  storybookApi?: 'annotations' | 'headings',
+  defaultStoryKind?: DefaultStoryNameFn,
+  defaultStoryName?: DefaultStoryNameFn | string,
+}
+\`}</MDXTag>
+    </MDXTag>
+    <MDXTag name=\\"h3\\" components={components}>{\`css\`}</MDXTag>
+    <MDXTag name=\\"pre\\" components={components}>
+      <MDXTag
+        name=\\"code\\"
+        components={components}
+        parentName=\\"pre\\"
+        props={{ className: 'language-css' }}
+      >{\`.selector {
+  color: 'red';
+  padding: 10px;
+}
+\`}</MDXTag>
+    </MDXTag>
+    <MDXTag
+      name=\\"storybook\\"
+      components={components}
+      props={{ annotationKey: 'storyName', annotationValue: 'table' }}
+    >{\`<!-- storyName = table -->\`}</MDXTag>
+    <MDXTag name=\\"p\\" components={components}>{\`Default md table:\`}</MDXTag>
+    <MDXTag name=\\"table\\" components={components}>
+      <MDXTag name=\\"thead\\" components={components} parentName=\\"table\\">
+        <MDXTag name=\\"tr\\" components={components} parentName=\\"thead\\">
+          <MDXTag
+            name=\\"th\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`React\`}</MDXTag>
+          <MDXTag
+            name=\\"th\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`Vue\`}</MDXTag>
+          <MDXTag
+            name=\\"th\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`Angular\`}</MDXTag>
+          <MDXTag
+            name=\\"th\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`HTML\`}</MDXTag>
+        </MDXTag>
+      </MDXTag>
+      <MDXTag name=\\"tbody\\" components={components} parentName=\\"table\\">
+        <MDXTag name=\\"tr\\" components={components} parentName=\\"tbody\\">
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`🚀\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`🚀\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`🚀\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`🚀\`}</MDXTag>
+        </MDXTag>
+        <MDXTag name=\\"tr\\" components={components} parentName=\\"tbody\\">
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`🏅\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`🏅\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`🏅\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`🏅\`}</MDXTag>
+        </MDXTag>
+        <MDXTag name=\\"tr\\" components={components} parentName=\\"tbody\\">
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`👍\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`👍\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`👍\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`👍\`}</MDXTag>
+        </MDXTag>
+        <MDXTag name=\\"tr\\" components={components} parentName=\\"tbody\\">
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`💪\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`💪\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`💪\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`💪\`}</MDXTag>
+        </MDXTag>
+        <MDXTag name=\\"tr\\" components={components} parentName=\\"tbody\\">
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`😃\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`😃\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`😃\`}</MDXTag>
+          <MDXTag
+            name=\\"td\\"
+            components={components}
+            parentName=\\"tr\\"
+            props={{ align: 'center' }}
+          >{\`😃\`}</MDXTag>
+        </MDXTag>
       </MDXTag>
     </MDXTag>
   </MDXTag>
