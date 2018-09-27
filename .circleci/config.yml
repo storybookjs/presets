@@ -18,6 +18,9 @@ jobs:
       - run:
           name: Install dependencies
           command: yarn install
+      - run:
+          name: Check that yarn.lock is not corrupted
+          command: yarn repo-dirty-check
       - save_cache:
           name: Cache core dependencies
           key: v1-dependencies-{{ checksum "yarn.lock" }}
