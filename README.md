@@ -1,3 +1,3 @@
 # Storybook Presets
 
-TBD
+![CircleCI master](https://circleci.com/gh/storybooks/presets.svg?style=shield)
