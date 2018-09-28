@@ -8,6 +8,10 @@ function wrapLoader(loader, options) {
     return [];
   }
 
+  if (!options) {
+    return [{ loader }];
+  }
+
   return [
     {
       loader,
