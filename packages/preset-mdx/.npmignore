@@ -1,2 +1,6 @@
+__snapshots__
 .storybook
 node_modules
+*.test.js
+test.mdx
+README.md
