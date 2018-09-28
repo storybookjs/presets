@@ -9,7 +9,7 @@ function getHeadingText(node) {
     return node.value.trim();
   }
 
-  return node.children.map(node => getHeadingText(node)).join(' ');
+  return node.children.map(childNode => getHeadingText(childNode)).join(' ');
 }
 
 function storybookImport() {
