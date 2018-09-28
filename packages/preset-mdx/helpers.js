@@ -1,11 +1,15 @@
 const path = require('path');
 
-function isInvalidNewLine(childNode, currentStory) {
-  return childNode.type === 'text' && childNode.value === '\n' && !currentStory.children.length;
+function isInvalidNewLine(node, currentStory) {
+  return node.type === 'text' && node.value === '\n' && !currentStory.children.length;
 }
 
 function getHeadingText(node) {
-  return node.children[0].value;
+  if (node.type === 'text') {
+    return node.value.trim();
+  }
+
+  return node.children.map(childNode => getHeadingText(childNode)).join(' ');
 }
 
 function storybookImport() {
