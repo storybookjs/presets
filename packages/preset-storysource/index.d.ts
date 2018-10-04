@@ -7,7 +7,7 @@ interface Options {
 
 declare interface PresetStorySource {
   webpack: (config?: Configuration, options?: Options) => Configuration;
-  manager: (entry?: Array<string>) => Array<string>;
+  addons: (entry?: Array<string>) => Array<string>;
 }
 
 export = PresetStorySource;

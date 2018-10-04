@@ -24,8 +24,8 @@ function webpack(webpackConfig = {}, options = {}) {
   };
 }
 
-function manager(entry = []) {
-  return [require.resolve('./addons.js'), ...entry];
+function addons(entry = []) {
+  return [...entry, require.resolve('@storybook/addon-storysource/register')];
 }
 
-module.exports = { webpack, manager };
+module.exports = { webpack, addons };
