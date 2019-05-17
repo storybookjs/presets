@@ -1,3 +1,10 @@
+const path = require('path');
+
 module.exports = [
-  '@storybook/preset-typescript'
+  {
+    name: '@storybook/preset-typescript',
+    options: {
+      include: [path.resolve(__dirname)],
+    },
+  },
 ];
