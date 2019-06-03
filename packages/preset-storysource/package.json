@@ -5,11 +5,11 @@
   "license": "MIT",
   "main": "index.js",
   "bugs": {
-    "url": "https://github.com/storybooks/presets/issues"
+    "url": "https://github.com/storybookjs/presets/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/storybooks/presets.git"
+    "url": "https://github.com/storybookjs/presets.git"
   },
   "scripts": {
     "storybook": "start-storybook -p 8008"

@@ -5,11 +5,11 @@
   "description": "Storybook Presets Repo",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/storybooks/presets/issues"
+    "url": "https://github.com/storybookjs/presets/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/storybooks/presets.git"
+    "url": "https://github.com/storybookjs/presets.git"
   },
   "scripts": {
     "lint": "yarn lint:js .",

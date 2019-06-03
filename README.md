@@ -1,3 +1,3 @@
 # Storybook Presets
 
-![CircleCI master](https://circleci.com/gh/storybooks/presets.svg?style=shield)
+![CircleCI master](https://circleci.com/gh/storybookjs/presets.svg?style=shield)
