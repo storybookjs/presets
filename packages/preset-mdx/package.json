@@ -4,6 +4,7 @@
   "description": "MDX preset for Storybook",
   "license": "MIT",
   "main": "index.js",
+  "homepage": "https://github.com/storybookjs/presets/tree/master/packages/preset-mdx",
   "bugs": {
     "url": "https://github.com/storybookjs/presets/issues"
   },
