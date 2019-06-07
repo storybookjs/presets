@@ -4,6 +4,7 @@
   "description": "Scss preset for Storybook",
   "license": "MIT",
   "main": "index.js",
+  "homepage": "https://github.com/storybookjs/presets/tree/master/packages/preset-scss",    
   "bugs": {
     "url": "https://github.com/storybookjs/presets/issues"
   },

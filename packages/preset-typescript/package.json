@@ -4,6 +4,7 @@
   "description": "Typescript preset for Storybook",
   "license": "MIT",
   "main": "index.js",
+  "homepage": "https://github.com/storybookjs/presets/tree/master/packages/preset-typescript",
   "bugs": {
     "url": "https://github.com/storybookjs/presets/issues"
   },
