@@ -1,11 +1,11 @@
 # Typescript preset for Storybook
 
-Configure storybook to understand typescript and typescript docgen.
+One-line Typescript w/ docgen configuration for storybook.
 
 ## Basic usage
 
 ```
-yarn add @storybook/preset-typescript react-docgen-typescript-loader ts-loader -D
+yarn add -D @storybook/preset-typescript react-docgen-typescript-loader ts-loader
 ```
 
 Then add the following to `.storybook/presets.js`:
