@@ -1,7 +1,7 @@
 {
   "name": "@storybook/preset-scss",
-  "version": "1.0.0",
-  "description": "Scss preset for Storybook",
+  "version": "1.0.1",
+  "description": "SCSS preset for Storybook",
   "license": "MIT",
   "main": "index.js",
   "homepage": "https://github.com/storybookjs/presets/tree/master/packages/preset-scss",    
