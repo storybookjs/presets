@@ -47,3 +47,7 @@ module.exports = [
     }
   }
 ];
+```
+
+##Presets Exposed
+* tsLoaderOptions - to customize ts loader options.

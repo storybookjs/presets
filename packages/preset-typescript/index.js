@@ -1,6 +1,8 @@
-function webpack(webpackConfig = {}, options = {}) {
+async function webpack(webpackConfig = {}, options = {}) {
   const { module = {}, resolve = {} } = webpackConfig;
-  const { tsLoaderOptions, tsDocgenLoaderOptions, include } = options;
+  const { tsLoaderOptions, tsDocgenLoaderOptions, include, presets } = options;
+
+  const loaderOptions = await presets.apply('tsLoaderOptions', tsLoaderOptions, { presets });
 
   return {
     ...webpackConfig,
@@ -13,7 +15,7 @@ function webpack(webpackConfig = {}, options = {}) {
           use: [
             {
               loader: require.resolve('ts-loader'),
-              options: tsLoaderOptions,
+              options: loaderOptions,
             },
             {
               loader: require.resolve('react-docgen-typescript-loader'),
