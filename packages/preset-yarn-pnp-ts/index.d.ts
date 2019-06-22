@@ -1,14 +1,10 @@
 import { Configuration } from 'webpack';
-
-interface Options {
-  tsLoaderOptions?: object;
-  tsDocgenLoaderOptions?: object;
-  include?: string[];
-}
+import { Options } from 'ts-loader';
 
 declare interface PresetYarnPnpTypescript {
-  webpack: (config?: Configuration, options?: Options) => Configuration;
-  managerWebpack: (config?: Configuration, options?: Options) => Configuration;
+  webpack: (config?: Configuration) => Configuration;
+  managerWebpack: (config?: Configuration) => Configuration;
+  tsLoaderOptions: () => Options;
 }
 
 export = PresetYarnPnpTypescript;
