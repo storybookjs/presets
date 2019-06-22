@@ -1,79 +1,60 @@
-const PnpWebpackPlugin = require(require.resolve("pnp-webpack-plugin"));
+const PnpWebpackPlugin = require('pnp-webpack-plugin');
 
-function webpack(webpackConfig = {}, options = {}) {
-  const { module = {}, resolve = {}, resolveLoader = {} } = webpackConfig;
-  const { tsLoaderOptions, tsDocgenLoaderOptions, include } = options;
+function webpack(webpackConfig = {}) {
+  const { resolve = {}, resolveLoader = {} } = webpackConfig;
 
   return {
     ...webpackConfig,
-    module: {
-      ...module,
-      rules: [
-        ...(module.rules || []),
-        {
-          test: /\.tsx?$/,
-          use: [
-            {
-              loader: require.resolve("ts-loader"),
-              options: PnpWebpackPlugin.tsLoaderOptions({
-                "compilerOptions": {
-                  "jsx": "react",
-                  "skipLibCheck": true,
-                  "esModuleInterop": true,
-                  "allowSyntheticDefaultImports": true,
-                  "strict": false
-                }
-              })
-            },
-            {
-              loader: require.resolve("react-docgen-typescript-loader"),
-              options: tsDocgenLoaderOptions
-            }
-          ],
-          include
-        }
-      ]
-    },
     resolve: {
       ...resolve,
-      extensions: [...(resolve.extensions || []), ".ts", ".tsx"],
-      plugins: [...(resolve.plugins || []), PnpWebpackPlugin]
+      plugins: [...(resolve.plugins || []), PnpWebpackPlugin],
     },
     resolveLoader: {
       ...resolveLoader,
       plugins: [
         ...(resolveLoader.plugins || []),
-        PnpWebpackPlugin.moduleLoader("@storybook/react")
-      ]
-    }
+        PnpWebpackPlugin.moduleLoader('@storybook/react'),
+      ],
+    },
   };
 }
 
-function managerWebpack(webpackConfig = {}, options = {}) {
+function tsLoaderOptions() {
+  return PnpWebpackPlugin.tsLoaderOptions({
+    compilerOptions: {
+      jsx: 'react',
+      skipLibCheck: true,
+      esModuleInterop: true,
+      allowSyntheticDefaultImports: true,
+      strict: false,
+    },
+  });
+}
+
+function managerWebpack(webpackConfig = {}) {
   const { module = {}, resolve = {}, resolveLoader = {} } = webpackConfig;
-  const { tsLoaderOptions, tsDocgenLoaderOptions, include } = options;
+
+  const extensions = Array.from(new Set([...(resolve.extensions || []), '.ts', '.tsx']));
 
   return {
     ...webpackConfig,
     module: {
       ...module,
-      rules: [
-        ...(module.rules || [])
-      ]
+      rules: [...(module.rules || [])],
     },
     resolve: {
       ...resolve,
-      extensions: [...(resolve.extensions || []), ".ts", ".tsx"],
-      plugins: [...(resolve.plugins || []), PnpWebpackPlugin]
+      extensions,
+      plugins: [...(resolve.plugins || []), PnpWebpackPlugin],
     },
     resolveLoader: {
       ...resolveLoader,
       plugins: [
         ...(resolveLoader.plugins || []),
-        PnpWebpackPlugin.moduleLoader("@storybook/react")
-      ]
-    }
+        PnpWebpackPlugin.moduleLoader('@storybook/react'),
+      ],
+    },
   };
 }
 
-module.exports = { webpack, managerWebpack };
+module.exports = { webpack, managerWebpack, tsLoaderOptions };

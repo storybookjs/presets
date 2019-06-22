@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = [
   {
-    name: '@storybook/preset-yarn-pnp-ts',
+    name: '@storybook/preset-typescript',
     options: {
       tsDocgenLoaderOptions: {
         tsconfigPath: path.resolve(__dirname, '../tsconfig.json'),
@@ -10,4 +10,5 @@ module.exports = [
       include: [path.resolve(__dirname)],
     },
   },
+  '@storybook/preset-yarn-pnp-ts',
 ];
