@@ -1,6 +1,6 @@
-# Typescript preset for Storybook
+# TypeScript preset for Storybook
 
-One-line Typescript w/ docgen configuration for storybook.
+One-line TypeScript w/ docgen configuration for Storybook.
 
 ## Basic usage
 
@@ -16,7 +16,7 @@ module.exports = ["@storybook/preset-typescript"];
 
 ## Advanced usage
 
-You can pass configurations into the Typescript or Docgen loaders using the `tsLoaderOptions`, `tsDocgenLoaderOptions`, and `include` options in `.storybook/presets.js`, e.g.:
+You can pass configurations into the TypeScript or Docgen loaders using the `tsLoaderOptions`, `tsDocgenLoaderOptions`, and `include` options in `.storybook/presets.js`, e.g.:
 
 ```js
 const path = require("path");
@@ -34,7 +34,7 @@ module.exports = [
 ];
 ```
 
-You also can enable Typescript transpilation on [manager](https://storybook.js.org/docs/addons/writing-addons/) side, by setting the `transpileManager` option to `true`, e.g.:
+You also can enable TypeScript transpilation on [manager](https://storybook.js.org/docs/addons/writing-addons/) side, by setting the `transpileManager` option to `true`, e.g.:
 
 ```js
 const path = require("path");

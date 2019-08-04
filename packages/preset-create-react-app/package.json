@@ -1,0 +1,36 @@
+{
+  "name": "@storybook/preset-create-react-app",
+  "version": "1.0.0-beta.1",
+  "description": "Create React App preset for Storybook",
+  "license": "MIT",
+  "main": "index.js",
+  "homepage": "https://github.com/storybookjs/presets/tree/master/packages/preset-create-react-app",
+  "bugs": {
+    "url": "https://github.com/storybookjs/presets/issues"
+  },
+  "repository": {
+    "url": "https://github.com/storybookjs/presets.git",
+    "directory": "packages/preset-create-react-app"
+  },
+  "files": [
+    "create-react-app.js",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "storybook": "start-storybook -p 8008"
+  },
+  "devDependencies": {
+    "@storybook/react": "^5.1.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "*"
+  },
+  "peerDependencies": {
+    "@storybook/react": ">=5.3",
+    "@types/webpack": "*"
+  },
+  "dependencies": {
+    "@storybook/node-logger": "^5.1.1"
+  },
+  "private": false
+}
