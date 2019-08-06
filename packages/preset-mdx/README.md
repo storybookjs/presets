@@ -1,1 +1,0 @@
-# MDX preset for Storybook
