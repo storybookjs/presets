@@ -11,6 +11,6 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
-export const Button: FC<ButtonProps> = ({ variant }) => (
-  <button type="button">click me! {variant}</button>
-);
+const Button: FC<ButtonProps> = ({ children, disabled, variant = 'small' }) => <button disabled={disabled}>{children} {variant}</button>;
+
+export default Button;

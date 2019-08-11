@@ -34,7 +34,7 @@ function webpack(webpackConfig = {}, options = {}) {
 function managerWebpack(webpackConfig = {}, options = {}) {
   const { module = {}, resolve = {} } = webpackConfig;
   const { tsLoaderOptions, include, transpileManager = false } = options;
-  
+
   if (!transpileManager) {
     return webpackConfig;
   }

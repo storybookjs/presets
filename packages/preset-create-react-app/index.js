@@ -4,12 +4,15 @@ const mergePlugins = require('./helpers/mergePlugins');
 const getReactScriptsPath = require('./helpers/getReactScriptsPath');
 const processCraConfig = require('./helpers/processCraConfig');
 const checkPresets = require('./helpers/checkPresets');
+const getOption = require('./helpers/getOption');
 
-const SCRIPTS_PACKAGE_OPTION = 'scriptsPackageName';
+const CWD = process.cwd();
+const REACT_SCRIPTS_PATH = getReactScriptsPath();
+const OPTION_SCRIPTS_PACKAGE = 'scriptsPackageName';
 
-const reactScriptsPath = getReactScriptsPath();
+// This loader is shared by both the `managerWebpack` and `webpack` functions.
 const resolveLoader = {
-  modules: ['node_modules', path.join(reactScriptsPath, 'node_modules')],
+  modules: ['node_modules', path.join(REACT_SCRIPTS_PATH, 'node_modules')],
 };
 
 // Ensure that loaders are resolved from react-scripts.
@@ -20,17 +23,17 @@ const managerWebpack = (webpackConfig = {}) => ({
 
 // Update the core Webpack config.
 const webpack = (webpackConfig = {}, options = {}) => {
-  const storybookConfigDir = path.resolve(options.configDir);
-  let scriptsPath = reactScriptsPath;
+  const configDir = path.resolve(options.configDir);
+  let scriptsPath = REACT_SCRIPTS_PATH;
 
-  checkPresets(storybookConfigDir);
+  checkPresets(configDir);
 
   // If the user has provided a package by name, try to resolve it.
-  if (options[SCRIPTS_PACKAGE_OPTION]) {
+  if (getOption(options, OPTION_SCRIPTS_PACKAGE)) {
     try {
-      scriptsPath = require.resolve(options[SCRIPTS_PACKAGE_OPTION]);
+      scriptsPath = require.resolve(getOption(options, OPTION_SCRIPTS_PACKAGE));
     } catch (e) {
-      logger.warn(`A \`${SCRIPTS_PACKAGE_OPTION}\` was provided, but couldn't be resolved.`);
+      logger.warn(`A \`${OPTION_SCRIPTS_PACKAGE}\` was provided, but couldn't be resolved.`);
     }
   }
 
@@ -40,9 +43,7 @@ const webpack = (webpackConfig = {}, options = {}) => {
     return webpackConfig;
   }
 
-  logger.info(
-    `=> Loading Webpack configuration from \`${path.relative(process.cwd(), scriptsPath)}\``
-  );
+  logger.info(`=> Loading Webpack configuration from \`${path.relative(CWD, scriptsPath)}\``);
 
   // Remove existing rules related to JavaScript and TypeScript.
   logger.info(`=> Removing existing JavaScript and TypeScript rules.`);
@@ -56,7 +57,7 @@ const webpack = (webpackConfig = {}, options = {}) => {
 
   // Select the relevent CRA rules and add the Storybook config directory.
   logger.info(`=> Modifying Create React App rules.`);
-  const craRules = processCraConfig(craWebpackConfig, storybookConfigDir);
+  const craRules = processCraConfig(craWebpackConfig, options);
 
   // Return the new config.
   return {
@@ -69,7 +70,7 @@ const webpack = (webpackConfig = {}, options = {}) => {
     resolve: {
       ...webpackConfig.resolve,
       extensions: craWebpackConfig.resolve.extensions,
-      modules: [...webpackConfig.resolve.modules, path.join(reactScriptsPath, 'node_modules')],
+      modules: [...webpackConfig.resolve.modules, path.join(REACT_SCRIPTS_PATH, 'node_modules')],
     },
     resolveLoader,
   };

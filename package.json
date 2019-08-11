@@ -1,8 +1,8 @@
 {
-  "private": true,
   "name": "@storybook/root",
   "version": "1.0.0",
-  "description": "Storybook Presets Repo",
+  "private": true,
+  "description": "Storybook presets for quick configuration of Storybook for specific use cases.",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/storybookjs/presets/issues"
@@ -11,30 +11,37 @@
     "type": "git",
     "url": "https://github.com/storybookjs/presets.git"
   },
+  "engines": {
+    "node": ">=10",
+    "yarn": "^1.17.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "lint": "yarn lint:js .",
     "lint:js": "cross-env NODE_ENV=production eslint --cache --cache-location=.cache/eslint --ext .js,.jsx,.json --report-unused-disable-directives",
     "repo-dirty-check": "node ./scripts/repo-dirty-check",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "automation": "jest -c jest.automation.js --runInBand"
   },
-  "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "cross-env": "^5.2.0",
-    "eslint": "^5.6.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^3.1.0",
+  "dependencies": {
+    "babel-eslint": "^10.0.3",
+    "cross-env": "^6.0.0",
+    "eslint": "^6.5.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jest": "^21.22.1",
+    "eslint-plugin-jest": "^22.17.0",
     "eslint-plugin-json": "^1.2.1",
     "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-prettier": "^2.7.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.11.1",
-    "jest": "^23.6.0",
-    "jest-cli": "^23.6.0",
+    "jest": "^24.9.0",
+    "jest-puppeteer": "^4.3.0",
+    "http-server": "^0.11.1",
     "prettier": "^1.14.3",
+    "puppeteer": "^1.20.0",
     "shelljs": "^0.8.2"
-  },
-  "workspaces": [
-    "packages/*"
-  ]
+  }
 }

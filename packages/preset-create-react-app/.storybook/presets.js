@@ -1,6 +1,10 @@
 module.exports = [
   {
     name: '@storybook/preset-create-react-app',
-    options: {}
+    options: {
+      presetCreateReactApp: {
+        // scriptsPackageName: '@my/react-scripts',
+      },
+    }
   },
 ];
