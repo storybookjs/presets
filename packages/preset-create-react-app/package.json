@@ -15,7 +15,7 @@
   "files": [
     "create-react-app.js",
     "index.d.ts",
-    "helpers/"
+    "helpers"
   ],
   "scripts": {
     "storybook": "start-storybook -p 8008"
