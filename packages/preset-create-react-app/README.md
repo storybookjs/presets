@@ -29,7 +29,7 @@ In the event that it doesn't, you can set the package's name with `scriptsPackag
 ```js
 module.exports = [
   {
-    name: '@storybook/preset-create-react-app'',
+    name: '@storybook/preset-create-react-app',
     options: {
       scriptsPackageName: '@my/react-scripts',
     },
