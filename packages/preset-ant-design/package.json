@@ -1,0 +1,41 @@
+{
+  "name": "@storybook/preset-ant-design",
+  "version": "0.0.1",
+  "description": "Ant Design preset for Storybook",
+  "license": "MIT",
+  "main": "index.js",
+  "homepage": "https://github.com/storybookjs/presets/tree/master/packages/preset-ant-design",
+  "bugs": {
+    "url": "https://github.com/storybookjs/presets/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storybookjs/presets.git",
+    "directory": "packages/preset-ant-design"
+  },
+  "scripts": {
+    "storybook": "start-storybook -p 8008"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@storybook/react": "^5.1.3",
+    "@types/node": "^10.5.7",
+    "@types/react": "^16.4.8",
+    "@types/storybook__react": "^3.0.9",
+    "@types/webpack": "^4.4.9",
+    "antd": "^3.23.4",
+    "babel-loader": "^8.0.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
+  },
+  "peerDependencies": {
+    "@types/webpack": "*"
+  },
+  "dependencies": {
+    "babel-plugin-import": "^1.12.2",
+    "css-loader": "^3.2.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "style-loader": "^1.0.0"
+  }
+}
