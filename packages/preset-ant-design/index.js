@@ -1,4 +1,4 @@
-const webpack = (webpackConfig = {}, options = {}) => {
+const webpack = (webpackConfig = {}, options = { lessOptions: {} }) => {
   const { module = {} } = webpackConfig;
   return {
     ...webpackConfig,
@@ -18,7 +18,7 @@ const webpack = (webpackConfig = {}, options = {}) => {
             {
               loader: 'less-loader',
               options: {
-                ...options,
+                ...options.lessOptions,
                 javascriptEnabled: true,
               },
             },
