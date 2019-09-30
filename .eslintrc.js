@@ -17,6 +17,12 @@ module.exports = {
     ecmaVersion: 8,
     sourceType: 'module',
   },
+  globals: {
+    browser: true,
+    context: true,
+    jestPuppeteer: true,
+    page: true,
+  },
   env: {
     es6: true,
     node: true,

@@ -26,12 +26,16 @@ In most cases, this preset will find your `react-scripts` package, even if it's 
 
 In the event that it doesn't, you can set the package's name with `scriptsPackageName`.
 
+You can also enable and configure `react-docgen-typescript-loader`.
+
 ```js
 module.exports = [
   {
     name: '@storybook/preset-create-react-app',
     options: {
       scriptsPackageName: '@my/react-scripts',
+      useTsDocgenLoader: true,
+      tsDocgenLoaderOptions: {},
     },
   },
 ];

@@ -4,7 +4,7 @@ aliases:
   - &defaults
     working_directory: ~/repo
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:10-browsers
 
 jobs:
   build:
@@ -49,6 +49,15 @@ jobs:
       - run:
           name: Test
           command: yarn test
+  automation-test:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Automation
+          command: yarn automation
 workflows:
   version: 2
   build_test_deploy:
@@ -58,5 +67,8 @@ workflows:
           requires:
             - build
       - unit-test:
+          requires:
+            - build
+      - automation-test:
           requires:
             - build
