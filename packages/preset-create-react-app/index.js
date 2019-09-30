@@ -4,7 +4,6 @@ const mergePlugins = require('./helpers/mergePlugins');
 const getReactScriptsPath = require('./helpers/getReactScriptsPath');
 const processCraConfig = require('./helpers/processCraConfig');
 const checkPresets = require('./helpers/checkPresets');
-const getOption = require('./helpers/getOption');
 
 const CWD = process.cwd();
 const REACT_SCRIPTS_PATH = getReactScriptsPath();
@@ -29,9 +28,9 @@ const webpack = (webpackConfig = {}, options = {}) => {
   checkPresets(configDir);
 
   // If the user has provided a package by name, try to resolve it.
-  if (getOption(options, OPTION_SCRIPTS_PACKAGE)) {
+  if (options[OPTION_SCRIPTS_PACKAGE]) {
     try {
-      scriptsPath = require.resolve(getOption(options, OPTION_SCRIPTS_PACKAGE));
+      scriptsPath = require.resolve(options[OPTION_SCRIPTS_PACKAGE]);
     } catch (e) {
       logger.warn(`A \`${OPTION_SCRIPTS_PACKAGE}\` was provided, but couldn't be resolved.`);
     }
@@ -59,12 +58,20 @@ const webpack = (webpackConfig = {}, options = {}) => {
   logger.info(`=> Modifying Create React App rules.`);
   const craRules = processCraConfig(craWebpackConfig, options);
 
+  const tsDocgenRule = options.useTsDocgenLoader
+    ? {
+        test: /\.tsx?$/,
+        loader: require.resolve('react-docgen-typescript-loader'),
+        options: options.tsDocgenLoaderOptions || {},
+      }
+    : {};
+
   // Return the new config.
   return {
     ...webpackConfig,
     module: {
       ...webpackConfig.module,
-      rules: [...filteredRules, ...craRules],
+      rules: [...filteredRules, ...craRules, tsDocgenRule],
     },
     plugins: mergePlugins(webpackConfig.plugins, craWebpackConfig.plugins),
     resolve: {

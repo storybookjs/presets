@@ -53,7 +53,7 @@ const processCraConfig = (craWebpackConfig, storybookOptions) => {
               oneOfRule.loader.includes('babel-loader') &&
               oneOfRule.test.test('.jsx')
             ) {
-              const { include: _include, loader, options, test } = oneOfRule;
+              const { include: _include, options } = oneOfRule;
               const {
                 extends: _extends,
                 plugins = [],
@@ -61,22 +61,14 @@ const processCraConfig = (craWebpackConfig, storybookOptions) => {
               } = storybookOptions.babelOptions;
 
               return {
-                test,
+                ...oneOfRule,
                 include: [_include, configDir],
-                use: [
-                  {
-                    loader,
-                    options: {
-                      ...options,
-                      extends: _extends,
-                      plugins: [...plugins, ...options.plugins],
-                      presets: [...presets, ...options.presets],
-                    },
-                  },
-                  {
-                    loader: require.resolve('react-docgen-typescript-loader'),
-                  },
-                ],
+                options: {
+                  ...options,
+                  extends: _extends,
+                  plugins: [...plugins, ...options.plugins],
+                  presets: [...presets, ...options.presets],
+                },
               };
             }
 
