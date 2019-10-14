@@ -81,7 +81,7 @@ const webpack = (webpackConfig = {}, options = {}) => {
       modules: [
         ...webpackConfig.resolve.modules,
         path.join(REACT_SCRIPTS_PATH, 'node_modules'),
-        ...[getModulePath(CWD)],
+        ...getModulePath(CWD),
       ],
     },
     resolveLoader,

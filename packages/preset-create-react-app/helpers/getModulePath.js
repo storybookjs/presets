@@ -16,9 +16,9 @@ const getModulePath = appDirectory => {
   try {
     // eslint-disable-next-line import/no-dynamic-require,global-require
     const config = require(path.join(appDirectory, configName));
-    return config.compilerOptions.baseUrl;
+    return [config.compilerOptions.baseUrl];
   } catch (e) {
-    return false;
+    return [];
   }
 };
 
