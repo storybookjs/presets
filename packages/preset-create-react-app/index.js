@@ -4,6 +4,7 @@ const mergePlugins = require('./helpers/mergePlugins');
 const getReactScriptsPath = require('./helpers/getReactScriptsPath');
 const processCraConfig = require('./helpers/processCraConfig');
 const checkPresets = require('./helpers/checkPresets');
+const getModulePath = require('./helpers/getModulePath');
 
 const CWD = process.cwd();
 const REACT_SCRIPTS_PATH = getReactScriptsPath();
@@ -77,7 +78,11 @@ const webpack = (webpackConfig = {}, options = {}) => {
     resolve: {
       ...webpackConfig.resolve,
       extensions: craWebpackConfig.resolve.extensions,
-      modules: [...webpackConfig.resolve.modules, path.join(REACT_SCRIPTS_PATH, 'node_modules')],
+      modules: [
+        ...webpackConfig.resolve.modules,
+        path.join(REACT_SCRIPTS_PATH, 'node_modules'),
+        ...[getModulePath(CWD)],
+      ],
     },
     resolveLoader,
   };
