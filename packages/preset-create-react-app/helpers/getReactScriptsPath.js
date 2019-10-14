@@ -4,16 +4,19 @@ const path = require('path');
 const getReactScriptsPath = () => {
   const cwd = process.cwd();
   const scriptsBinPath = path.join(cwd, '/node_modules/.bin/react-scripts');
+
   /*
    * Try to find the scripts package by following the `react-scripts` symlink.
    * This won't work for Windows users, unless within WSL.
    */
-  try {
-    const resolvedBinPath = fs.realpathSync(scriptsBinPath);
-    const scriptsPath = path.join(resolvedBinPath, '..', '..');
-    return scriptsPath;
-  } catch (e) {
-    // NOOP
+  if (process.platform !== 'win32') {
+    try {
+      const resolvedBinPath = fs.realpathSync(scriptsBinPath);
+      const scriptsPath = path.join(resolvedBinPath, '..', '..');
+      return scriptsPath;
+    } catch (e) {
+      // NOOP
+    }
   }
 
   /*
