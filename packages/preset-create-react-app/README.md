@@ -34,7 +34,6 @@ module.exports = [
     name: '@storybook/preset-create-react-app',
     options: {
       scriptsPackageName: '@my/react-scripts',
-      useTsDocgenLoader: true,
       tsDocgenLoaderOptions: {},
     },
   },
