@@ -4,23 +4,12 @@ const path = require('path');
 const getReactScriptsPath = () => {
   const cwd = process.cwd();
   const scriptsBinPath = path.join(cwd, '/node_modules/.bin/react-scripts');
-  /*
-   * Try to find the scripts package by following the `react-scripts` symlink.
-   * This won't work for Windows users, unless within WSL.
-   */
-  try {
-    const resolvedBinPath = fs.realpathSync(scriptsBinPath);
-    const scriptsPath = path.join(resolvedBinPath, '..', '..');
-    return scriptsPath;
-  } catch (e) {
-    // NOOP
-  }
 
-  /*
-   * Try to find the scripts package on Windows by following the `react-scripts` CMD file.
-   * https://github.com/storybookjs/storybook/issues/5801
-   */
   if (process.platform === 'win32') {
+    /*
+     * Try to find the scripts package on Windows by following the `react-scripts` CMD file.
+     * https://github.com/storybookjs/storybook/issues/5801
+     */
     try {
       const content = fs.readFileSync(scriptsBinPath, 'utf8');
       const packagePathMatch = content.match(
@@ -31,6 +20,18 @@ const getReactScriptsPath = () => {
         const scriptsPath = path.join(cwd, '/node_modules/.bin/', packagePathMatch[1]);
         return scriptsPath;
       }
+    } catch (e) {
+      // NOOP
+    }
+  } else {
+    /*
+     * Try to find the scripts package by following the `react-scripts` symlink.
+     * This won't work for Windows users, unless within WSL.
+     */
+    try {
+      const resolvedBinPath = fs.realpathSync(scriptsBinPath);
+      const scriptsPath = path.join(resolvedBinPath, '..', '..');
+      return scriptsPath;
     } catch (e) {
       // NOOP
     }

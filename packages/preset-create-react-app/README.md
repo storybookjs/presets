@@ -1,4 +1,4 @@
-# TypeScript preset for Storybook
+# Create React App preset for Storybook
 
 One-line [Create React App](https://github.com/facebook/create-react-app) configuration for Storybook.
 
