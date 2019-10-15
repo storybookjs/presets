@@ -1,7 +1,4 @@
-import { addDecorator, configure } from '@storybook/react';
-import { withInfo } from '@storybook/addon-info';
-
-addDecorator(withInfo); 
+import { configure } from '@storybook/react';
 
 const req = require.context('./test-project', true, /.stories.(j|t)sx?$/);
 function loadStories () {

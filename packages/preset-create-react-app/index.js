@@ -59,11 +59,16 @@ const webpack = (webpackConfig = {}, options = {}) => {
   logger.info(`=> Modifying Create React App rules.`);
   const craRules = processCraConfig(craWebpackConfig, options);
 
-  const tsDocgenRule = options.tsDocgenLoaderOptions
+  const { tsDocgenLoaderOptions } = options;
+  const tsDocgenRule = tsDocgenLoaderOptions
     ? {
         test: /\.tsx?$/,
         loader: require.resolve('react-docgen-typescript-loader'),
-        options: options.tsDocgenLoaderOptions || {},
+        options: Object.keys(tsDocgenLoaderOptions).length
+          ? tsDocgenLoaderOptions
+          : {
+              tsconfigPath: path.join(CWD, 'tsconfig.json'),
+            },
       }
     : {};
 

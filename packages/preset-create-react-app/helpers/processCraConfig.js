@@ -8,8 +8,8 @@ const testMatch = (rule, string) => {
     : rule.test.test(string);
 };
 
-const processCraConfig = (craWebpackConfig, storybookOptions) => {
-  const configDir = path.resolve(storybookOptions.configDir);
+const processCraConfig = (craWebpackConfig, options) => {
+  const configDir = path.resolve(options.configDir);
 
   return craWebpackConfig.module.rules.reduce((rules, rule) => {
     const { oneOf, include } = rule;
@@ -53,21 +53,41 @@ const processCraConfig = (craWebpackConfig, storybookOptions) => {
               oneOfRule.loader.includes('babel-loader') &&
               oneOfRule.test.test('.jsx')
             ) {
-              const { include: _include, options } = oneOfRule;
+              const { include: _include, options: ruleOptions } = oneOfRule;
               const {
                 extends: _extends,
-                plugins = [],
+                plugins: _plugins = [],
                 presets = [],
-              } = storybookOptions.babelOptions;
+              } = options.babelOptions;
+
+              let plugins = _plugins;
+              let overrides = [];
+
+              // The Babel plugin for docgen conflicts with the TypeScript loader.
+              // This limits it to JavaScript files when the TypeScript loader is enabled.
+              if (options.tsDocgenLoaderOptions) {
+                plugins = _plugins.filter(
+                  ([plugin]) => !plugin.includes('babel-plugin-react-docgen')
+                );
+                overrides = [
+                  {
+                    test: /\.(js|jsx)$/,
+                    plugins: _plugins.filter(([plugin]) =>
+                      plugin.includes('babel-plugin-react-docgen')
+                    ),
+                  },
+                ];
+              }
 
               return {
                 ...oneOfRule,
                 include: [_include, configDir],
                 options: {
-                  ...options,
+                  ...ruleOptions,
                   extends: _extends,
-                  plugins: [...plugins, ...options.plugins],
-                  presets: [...presets, ...options.presets],
+                  plugins: [...plugins, ...ruleOptions.plugins],
+                  presets: [...presets, ...ruleOptions.presets],
+                  overrides,
                 },
               };
             }
