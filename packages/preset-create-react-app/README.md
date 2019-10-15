@@ -26,7 +26,9 @@ In most cases, this preset will find your `react-scripts` package, even if it's 
 
 In the event that it doesn't, you can set the package's name with `scriptsPackageName`.
 
-You can also enable and configure `react-docgen-typescript-loader`.
+You can also enable and configure [`react-docgen-typescript-loader`](https://github.com/strothj/react-docgen-typescript-loader) with `tsDocgenLoaderOptions`.
+
+If set to `{}`, it will be enabled with default Create React App settings.
 
 ```js
 module.exports = [
@@ -35,6 +37,24 @@ module.exports = [
     options: {
       scriptsPackageName: '@my/react-scripts',
       tsDocgenLoaderOptions: {},
+    },
+  },
+];
+```
+
+Alternatively, you can pass your own configuration:
+
+```js
+const path = require('path');
+
+module.exports = [
+  {
+    name: '@storybook/preset-create-react-app',
+    options: {
+      scriptsPackageName: '@my/react-scripts',
+      tsDocgenLoaderOptions: {
+        tsconfigPath: path.resolve(__dirname, '../tsconfig.json'),
+      },
     },
   },
 ];

@@ -1,6 +1,6 @@
 {
   "name": "@storybook/preset-create-react-app",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Create React App preset for Storybook",
   "license": "MIT",
   "main": "index.js",
@@ -20,17 +20,16 @@
     "storybook": "start-storybook"
   },
   "dependencies": {
-    "@storybook/node-logger": "^5.2.1",
-    "react-docgen-typescript-loader": "^3.2.1"
+    "@storybook/node-logger": "^5.2.4",
+    "react-docgen-typescript-loader": "^3.3.0"
   },
   "devDependencies": {
-    "@storybook/addon-info": "^5.2.1",
-    "@storybook/react": "^5.2.1",
+    "@storybook/react": "^5.2.4",
     "prop-types": "^15.7.2",
-    "react": "^16.9",
-    "react-dom": "^16.9",
-    "react-scripts": "^3.1.2",
-    "typescript": "^3.5.3"
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-scripts": "^3.2.0",
+    "typescript": "^3.6.4"
   },
   "peerDependencies": {
     "@storybook/react": ">=5.2",
