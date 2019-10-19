@@ -30,13 +30,19 @@ const processCraConfig = (craWebpackConfig, options) => {
      * Here, we map over those rules and add our `configDir` as above.
      */
     if (oneOf) {
+      const extraExcludes = (options.craOverrides || {}).fileLoaderExcludes || [];
+
+      // EJS must be ignored here as this is used within Storybook.
+      // MDX is used with Storybook Docs.
+      const excludes = ['ejs', 'mdx', ...extraExcludes];
+      const excludeRegex = new RegExp(`\\.(${excludes.join('|')})$`);
+
       return [
         ...rules,
         {
           oneOf: oneOf.map(oneOfRule => {
-            // EJS must be ignored here as this is used within Storybook.
             if (oneOfRule.loader && oneOfRule.loader.includes('file-loader')) {
-              return { ...oneOfRule, exclude: [...oneOfRule.exclude, /\.ejs$/] };
+              return { ...oneOfRule, exclude: [...oneOfRule.exclude, excludeRegex] };
             }
 
             // This rule causes conflicts with Storybook addons like `addon-info`.
