@@ -35,8 +35,9 @@ const processCraConfig = (craWebpackConfig, options) => {
         {
           oneOf: oneOf.map(oneOfRule => {
             // EJS must be ignored here as this is used within Storybook.
+            // MDX is used with Storybook Docs.
             if (oneOfRule.loader && oneOfRule.loader.includes('file-loader')) {
-              return { ...oneOfRule, exclude: [...oneOfRule.exclude, /\.ejs$/] };
+              return { ...oneOfRule, exclude: [...oneOfRule.exclude, /\.(ejs|mdx)$/] };
             }
 
             // This rule causes conflicts with Storybook addons like `addon-info`.

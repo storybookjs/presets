@@ -24,6 +24,7 @@
     "react-docgen-typescript-loader": "^3.3.0"
   },
   "devDependencies": {
+    "@storybook/addon-docs": "^5.2.4",
     "@storybook/react": "^5.2.4",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
