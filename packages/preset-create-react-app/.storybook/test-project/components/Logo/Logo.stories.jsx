@@ -2,11 +2,12 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Logo from './Logo';
 
-const getDocgen = (component) => {
+const getDocgen = component => {
   return component.__docgenInfo;
-}
+};
 
 storiesOf('components/Logo', module)
+  .addParameters({ component: Logo })
   .add('Default', () => {
     return <Logo />;
   })
