@@ -29,11 +29,12 @@
     "react-dom": "^16.4.2",
     "ts-loader": "^6.0.0",
     "ts-node": "^7.0.0",
-    "typescript": "^3.0.1"
+    "typescript": "^3.4.1"
   },
   "peerDependencies": {
     "@types/webpack": "*",
     "react-docgen-typescript-loader": "*",
-    "ts-loader": "*"
+    "ts-loader": "*",
+    "typescript": "^3.4"
   }
 }
