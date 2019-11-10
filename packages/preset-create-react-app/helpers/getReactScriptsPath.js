@@ -13,7 +13,7 @@ const getReactScriptsPath = () => {
     try {
       const content = fs.readFileSync(scriptsBinPath, 'utf8');
       const packagePathMatch = content.match(
-        /"\$basedir[\\/]([^\s]+?[\\/]bin[\\/]react-scripts\.js")/i
+        /"\$basedir[\\/](\S+?)[\\/]bin[\\/]react-scripts\.js"/i
       );
 
       if (packagePathMatch && packagePathMatch.length > 1) {
