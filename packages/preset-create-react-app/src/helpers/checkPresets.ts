@@ -1,0 +1,27 @@
+import { join } from 'path';
+import { logger } from '@storybook/node-logger';
+
+const incompatiblePresets = [
+  '@storybook/preset-scss',
+  '@storybook/preset-typescript',
+];
+
+const checkPresets = (configDir: string) => {
+  try {
+    const presets = require(join(configDir, 'presets.js'));
+
+    // TODO: Create a shared type for presets.
+    presets.forEach((preset: string | { name: string }) => {
+      const presetName = typeof preset === 'string' ? preset : preset.name;
+      if (incompatiblePresets.includes(presetName)) {
+        logger.warn(
+          `\`${presetName}\` may not be compatible with \`@storybook/preset-create-react-app\``,
+        );
+      }
+    });
+  } catch (e) {
+    // NOOP
+  }
+};
+
+export default checkPresets;

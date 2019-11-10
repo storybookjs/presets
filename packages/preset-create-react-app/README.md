@@ -17,7 +17,7 @@ yarn add -D @storybook/preset-create-react-app
 Then add the following to `.storybook/presets.js`:
 
 ```js
-module.exports = ["@storybook/preset-create-react-app"];
+module.exports = ['@storybook/preset-create-react-app'];
 ```
 
 ## CRA Overrides
@@ -31,15 +31,15 @@ Here's how you might configure the preset to ignore PDF files so they can be pro
 ```js
 module.exports = [
   {
-    name: "@storybook/preset-create-react-app",
+    name: '@storybook/preset-create-react-app',
     options: {
-      scriptsPackageName: "@my/react-scripts",
+      scriptsPackageName: '@my/react-scripts',
       craOverrides: {
-        fileLoaderExcludes: ["pdf"]
+        fileLoaderExcludes: ['pdf'],
       },
-      tsDocgenLoaderOptions: {}
-    }
-  }
+      tsDocgenLoaderOptions: {},
+    },
+  },
 ];
 ```
 
@@ -56,31 +56,30 @@ If set to `{}`, it will be enabled with default Create React App settings.
 ```js
 module.exports = [
   {
-    name: "@storybook/preset-create-react-app",
+    name: '@storybook/preset-create-react-app',
     options: {
-      scriptsPackageName: "@my/react-scripts",
-      ignoreFileExtensions: ["ejs", "mdx", "psd"],
-      tsDocgenLoaderOptions: {}
-    }
-  }
+      scriptsPackageName: '@my/react-scripts',
+      tsDocgenLoaderOptions: {},
+    },
+  },
 ];
 ```
 
 Alternatively, you can pass your own configuration:
 
 ```js
-const path = require("path");
+const path = require('path');
 
 module.exports = [
   {
-    name: "@storybook/preset-create-react-app",
+    name: '@storybook/preset-create-react-app',
     options: {
-      scriptsPackageName: "@my/react-scripts",
+      scriptsPackageName: '@my/react-scripts',
       tsDocgenLoaderOptions: {
-        tsconfigPath: path.resolve(__dirname, "../tsconfig.json")
-      }
-    }
-  }
+        tsconfigPath: path.resolve(__dirname, '../tsconfig.json'),
+      },
+    },
+  },
 ];
 ```
 
