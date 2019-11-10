@@ -6,8 +6,9 @@ const incompatiblePresets = [
   '@storybook/preset-typescript',
 ];
 
-const checkPresets = (configDir: string) => {
+const checkPresets = (configDir: string): void => {
   try {
+    // eslint-disable-next-line global-require, import/no-dynamic-require, @typescript-eslint/no-var-requires
     const presets = require(join(configDir, 'presets.js'));
 
     // TODO: Create a shared type for presets.
@@ -24,4 +25,4 @@ const checkPresets = (configDir: string) => {
   }
 };
 
-export default checkPresets;
+export { checkPresets };

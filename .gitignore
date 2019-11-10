@@ -9,4 +9,4 @@ yarn-error.log
 .vscode
 
 # Builds
-packages/*/lib
+packages/*/dist

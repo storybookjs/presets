@@ -6,21 +6,18 @@ module.exports = {
   root: true,
   extends: ['airbnb', 'plugin:jest/recommended', 'prettier', 'prettier/react'],
   parser: 'babel-eslint',
-  parserOptions: {
-    project: './packages/*/tsconfig.json',
-  },
-  globals: {
-    browser: true,
-    context: true,
-    jestPuppeteer: true,
-    page: true,
-  },
   env: {
     es6: true,
     node: true,
     'jest/globals': true,
   },
   overrides: [
+    {
+      files: ['./examples/**'],
+      env: {
+        browser: true,
+      },
+    },
     {
       files: ['*.ts', '*.tsx'],
       extends: [
@@ -29,13 +26,22 @@ module.exports = {
         'prettier/@typescript-eslint',
       ],
       parser: '@typescript-eslint/parser',
-      parserOptions,
+      parserOptions: {
+        project: './{packages,examples}/*/tsconfig.json',
+      },
       rules: {
-        'import/no-default-export': 2,
+        'import/no-default-export': error,
+        'import/prefer-default-export': off,
+        'react/jsx-filename-extension': off,
       },
       settings: {
         'import/parsers': {
           '@typescript-eslint/parser': ['.ts', '.tsx'],
+        },
+        'import/resolver': {
+          ts: {
+            directory: './{packages,examples}/*/tsconfig.json',
+          },
         },
       },
     },

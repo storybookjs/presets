@@ -3,8 +3,8 @@
   "version": "1.2.0",
   "description": "Create React App preset for Storybook",
   "license": "MIT",
-  "main": "lib",
-  "types": "lib",
+  "main": "dist",
+  "types": "dist",
   "homepage": "https://github.com/storybookjs/presets/tree/master/packages/preset-create-react-app",
   "bugs": {
     "url": "https://github.com/storybookjs/presets/issues"
@@ -14,17 +14,20 @@
     "directory": "packages/preset-create-react-app"
   },
   "files": [
-    "lib"
+    "dist"
   ],
   "scripts": {
-    "build": "tsc",
-    "build-watch": "tsc -w",
+    "build": "rm -rf dist & tsc",
+    "build-watch": "yarn build -w",
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
     "@types/webpack": "^4.39.8",
     "@storybook/node-logger": "^5.2.6",
     "react-docgen-typescript-loader": "^3.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.7.2"
   },
   "peerDependencies": {
     "@storybook/react": ">=5.2",

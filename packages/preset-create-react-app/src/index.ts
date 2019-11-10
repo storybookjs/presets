@@ -1,11 +1,11 @@
 import { join, relative, resolve } from 'path';
-import { Configuration } from 'webpack';
+import { Configuration } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import { logger } from '@storybook/node-logger';
-import mergePlugins from './helpers/mergePlugins';
-import getReactScriptsPath from './helpers/getReactScriptsPath';
-import processCraConfig from './helpers/processCraConfig';
-import checkPresets from './helpers/checkPresets';
-import getModulePath from './helpers/getModulePath';
+import { mergePlugins } from './helpers/mergePlugins';
+import { getReactScriptsPath } from './helpers/getReactScriptsPath';
+import { processCraConfig } from './helpers/processCraConfig';
+import { checkPresets } from './helpers/checkPresets';
+import { getModulePath } from './helpers/getModulePath';
 import { Options } from './options';
 
 const CWD = process.cwd();
@@ -18,13 +18,16 @@ const resolveLoader = {
 };
 
 // Ensure that loaders are resolved from react-scripts.
-const managerWebpack = (webpackConfig: Configuration = {}) => ({
+const managerWebpack = (webpackConfig: Configuration = {}): Configuration => ({
   ...webpackConfig,
   resolveLoader,
 });
 
 // Update the core Webpack config.
-const webpack = (webpackConfig: Configuration = {}, options: Options) => {
+const webpack = (
+  webpackConfig: Configuration = {},
+  options: Options,
+): Configuration => {
   const configDir = resolve(options.configDir);
   let scriptsPath = REACT_SCRIPTS_PATH;
 
@@ -67,6 +70,7 @@ const webpack = (webpackConfig: Configuration = {}, options: Options) => {
 
   // Require the CRA config and set the appropriate mode.
   const craWebpackConfigPath = join(scriptsPath, 'config', 'webpack.config');
+  // eslint-disable-next-line global-require, import/no-dynamic-require, @typescript-eslint/no-var-requires
   const craWebpackConfig = require(craWebpackConfigPath)(webpackConfig.mode);
 
   // Select the relevent CRA rules and add the Storybook config directory.
@@ -98,7 +102,7 @@ const webpack = (webpackConfig: Configuration = {}, options: Options) => {
       ...webpackConfig.resolve,
       extensions: craWebpackConfig.resolve.extensions,
       modules: [
-        ...(webpackConfig.resolve?.modules || []),
+        ...((webpackConfig.resolve && webpackConfig.resolve.modules) || []),
         join(REACT_SCRIPTS_PATH, 'node_modules'),
         ...getModulePath(CWD),
       ],
@@ -107,4 +111,5 @@ const webpack = (webpackConfig: Configuration = {}, options: Options) => {
   };
 };
 
+// eslint-disable-next-line import/no-default-export
 export default { managerWebpack, webpack };

@@ -21,6 +21,7 @@ export interface Options {
 
   // TODO: Improve these types.
   // Maybe get from Storybook.
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   configDir: string;
   babelOptions: {
     extends: any;

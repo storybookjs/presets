@@ -1,7 +1,7 @@
 import { readFileSync, realpathSync } from 'fs';
 import { join } from 'path';
 
-const getReactScriptsPath = () => {
+const getReactScriptsPath = (): string => {
   const cwd = process.cwd();
   const scriptsBinPath = join(cwd, '/node_modules/.bin/react-scripts');
 
@@ -12,6 +12,7 @@ const getReactScriptsPath = () => {
      */
     try {
       const content = readFileSync(scriptsBinPath, 'utf8');
+      // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
       const packagePathMatch = content.match(
         /"\$basedir[\\/](\S+?)[\\/]bin[\\/]react-scripts\.js"/i,
       );
@@ -54,4 +55,4 @@ const getReactScriptsPath = () => {
   return '';
 };
 
-export default getReactScriptsPath;
+export { getReactScriptsPath };

@@ -3,15 +3,15 @@ import { storiesOf } from '@storybook/react';
 import { Button } from './Button';
 
 interface IComponentWithDocgenInfo {
-  __docgenInfo?: any,
+  __docgenInfo?: any;
 }
 
 const getDocgen = (component: any) => {
   return (component as IComponentWithDocgenInfo).__docgenInfo;
-}
+};
 
 storiesOf('Example', module)
-  .add('small', () => <Button variant="small" />)
+  .add('small', () => <Button variant='small' />)
   .add('docgenInfo', () => {
     return (
       <>

@@ -11,7 +11,7 @@ yarn add -D @storybook/preset-scss css-loader sass-loader style-loader
 Then add the following to `.storybook/presets.js`:
 
 ```js
-module.exports = ["@storybook/preset-scss"];
+module.exports = ['@storybook/preset-scss'];
 ```
 
 ## Advanced usage
@@ -27,9 +27,9 @@ module.exports = [
     options: {
       cssLoaderOptions: {
         modules: true,
-        localIdentName: '[name]__[local]--[hash:base64:5]'
-      }
-    }
-  }
+        localIdentName: '[name]__[local]--[hash:base64:5]',
+      },
+    },
+  },
 ];
 ```

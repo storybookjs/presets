@@ -1,1 +1,14 @@
+# General
 node_modules
+
+# Builds
+packages/*/dist
+
+# Examples
+examples/*/src/serviceWorker.*
+
+# TODO
+packages/preset-ant-design
+packages/preset-scss
+packages/preset-storysource
+packages/preset-typescript

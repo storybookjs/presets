@@ -13,7 +13,12 @@ function wrapLoader(loader, options) {
 
 function webpack(webpackConfig = {}, options = {}) {
   const { module = {} } = webpackConfig;
-  const { styleLoaderOptions, cssLoaderOptions, sassLoaderOptions, rule = {} } = options;
+  const {
+    styleLoaderOptions,
+    cssLoaderOptions,
+    sassLoaderOptions,
+    rule = {},
+  } = options;
 
   return {
     ...webpackConfig,

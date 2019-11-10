@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types, react/button-has-type */
 import React, { FC } from 'react';
 import logo, { ReactComponent as LogoSvg } from '../../assets/logo.svg';
 
@@ -20,4 +21,5 @@ const Button: FC<ButtonProps> = ({ children, disabled, variant = 'small' }) => (
   </button>
 );
 
+// eslint-disable-next-line import/no-default-export
 export default Button;

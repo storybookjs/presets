@@ -1,15 +1,19 @@
-// TODO: Improve types in this file
-const mergePlugins = (basePlugins: any, additionalPlugins: any) =>
+import { Plugin } from 'webpack';
+
+const mergePlugins = (
+  basePlugins: Plugin[] = [],
+  additionalPlugins: Plugin[] = [],
+): Plugin[] =>
   [...basePlugins, ...additionalPlugins].reduce((plugins, plugin) => {
     if (
       plugins.some(
-        (includedPlugin: any) =>
+        includedPlugin =>
           includedPlugin.constructor.name === plugin.constructor.name,
       )
     ) {
       return plugins;
     }
     return [...plugins, plugin];
-  }, []);
+  }, [] as Plugin[]);
 
-export default mergePlugins;
+export { mergePlugins };

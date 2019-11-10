@@ -1,11 +1,11 @@
 import { Configuration } from 'webpack';
-import { Options as TSLoaderOptions} from 'ts-loader'
-import TSDocgenLoaderOptions from 'react-docgen-typescript-loader/dist/LoaderOptions'
+import { Options as TSLoaderOptions } from 'ts-loader';
+import TSDocgenLoaderOptions from 'react-docgen-typescript-loader/dist/LoaderOptions';
 
 interface Options {
-  tsLoaderOptions?: TSLoaderOptions, 
-  tsDocgenLoaderOptions?: TSDocgenLoaderOptions,
-  transpileManager?: boolean
+  tsLoaderOptions?: TSLoaderOptions;
+  tsDocgenLoaderOptions?: TSDocgenLoaderOptions;
+  transpileManager?: boolean;
   include?: string[];
 }
 

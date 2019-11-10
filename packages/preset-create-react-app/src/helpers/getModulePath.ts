@@ -4,7 +4,7 @@ import { join } from 'path';
 const JSCONFIG = 'jsconfig.json';
 const TSCONFIG = 'tsconfig.json';
 
-const getModulePath = (appDirectory: string) => {
+const getModulePath = (appDirectory: string): string[] => {
   // CRA only supports `jsconfig.json` if `tsconfig.json` doesn't exist.
   let configName = '';
   if (existsSync(join(appDirectory, TSCONFIG))) {
@@ -14,6 +14,7 @@ const getModulePath = (appDirectory: string) => {
   }
 
   try {
+    // eslint-disable-next-line global-require, import/no-dynamic-require, @typescript-eslint/no-var-requires
     const { baseUrl } = require(join(appDirectory, configName)).compilerOptions;
     return baseUrl ? [baseUrl] : [];
   } catch (e) {
@@ -21,4 +22,4 @@ const getModulePath = (appDirectory: string) => {
   }
 };
 
-export default getModulePath;
+export { getModulePath };
