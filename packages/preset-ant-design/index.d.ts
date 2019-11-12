@@ -8,4 +8,4 @@ declare interface PresetAntDesign {
   webpack: (config?: Configuration, options?: Options) => Configuration;
 }
 
-export = PresetAntDesign
+export = PresetAntDesign;

@@ -12,5 +12,5 @@ interface ButtonProps {
 }
 
 export const Button: FC<ButtonProps> = ({ variant }) => (
-  <button type="button">click me! {variant}</button>
+  <button type='button'>click me! {variant}</button>
 );

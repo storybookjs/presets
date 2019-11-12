@@ -1,91 +1,49 @@
 const error = 2;
 const warn = 1;
-const ignore = 0;
+const off = 0;
 
 module.exports = {
   root: true,
-  extends: [
-    'airbnb',
-    'plugin:jest/recommended',
-    'plugin:import/react-native',
-    'prettier',
-    'prettier/react',
-  ],
-  plugins: ['prettier', 'jest', 'import', 'react', 'jsx-a11y', 'json'],
+  extends: ['airbnb', 'plugin:jest/recommended', 'prettier', 'prettier/react'],
   parser: 'babel-eslint',
-  parserOptions: {
-    ecmaVersion: 8,
-    sourceType: 'module',
-  },
-  globals: {
-    browser: true,
-    context: true,
-    jestPuppeteer: true,
-    page: true,
-  },
   env: {
     es6: true,
     node: true,
     'jest/globals': true,
   },
-  settings: {
-    'import/core-modules': ['enzyme'],
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.ts'],
+  overrides: [
+    {
+      files: ['./examples/**'],
+      env: {
+        browser: true,
       },
     },
-  },
-  rules: {
-    'no-debugger': process.env.NODE_ENV === 'production' ? error : ignore,
-    'no-continue': ignore,
-    'no-restricted-syntax': ignore,
-    'no-underscore-dangle': error,
-    'class-methods-use-this': ignore,
-    'prettier/prettier': [
-      warn,
-      {
-        printWidth: 100,
-        tabWidth: 2,
-        bracketSpacing: true,
-        trailingComma: 'es5',
-        singleQuote: true,
+    {
+      files: ['*.ts', '*.tsx'],
+      extends: [
+        'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        'prettier/@typescript-eslint',
+      ],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        project: './{packages,examples}/*/tsconfig.json',
       },
-    ],
-    'import/extensions': [
-      error,
-      'always',
-      {
-        js: 'never',
-        ts: 'never',
+      rules: {
+        'import/no-default-export': error,
+        'import/prefer-default-export': off,
+        'react/jsx-filename-extension': off,
       },
-    ],
-    'import/no-extraneous-dependencies': [
-      error,
-      {
-        peerDependencies: true,
-      }
-    ],
-    'import/prefer-default-export': ignore,
-    'import/default': error,
-    'import/named': error,
-    'import/namespace': error,
-    'react/no-unescaped-entities': ignore,
-    'react/jsx-filename-extension': [
-      warn,
-      {
-        extensions: ['.js', '.jsx'],
+      settings: {
+        'import/parsers': {
+          '@typescript-eslint/parser': ['.ts', '.tsx'],
+        },
+        'import/resolver': {
+          ts: {
+            directory: './{packages,examples}/*/tsconfig.json',
+          },
+        },
       },
-    ],
-    'react/jsx-no-bind': [
-      error,
-      {
-        ignoreDOMComponents: true,
-        ignoreRefs: true,
-        allowArrowFunctions: true,
-        allowFunctions: true,
-        allowBind: true,
-      },
-    ],
-  },
+    },
+  ],
 };
