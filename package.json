@@ -16,32 +16,51 @@
     "yarn": "^1.17.0"
   },
   "workspaces": [
+    "examples/*",
     "packages/*"
   ],
   "scripts": {
-    "lint": "yarn lint:js .",
-    "lint:js": "cross-env NODE_ENV=production eslint --cache --cache-location=.cache/eslint --ext .js,.jsx,.json --report-unused-disable-directives",
+    "lint": "yarn lint-code && yarn lint-style -c",
+    "lint-code": "eslint '{examples,packages}/**/*.{js,ts,tsx}'",
+    "lint-style": "yarn prettier '{examples,packages}/**/*.{js,ts,tsx,css,html,json,md,mdx,scss,yml}'",
     "repo-dirty-check": "node ./scripts/repo-dirty-check",
-    "test": "jest --passWithNoTests",
-    "automation": "jest -c jest.automation.js --runInBand"
+    "test": "jest --passWithNoTests"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{css,html,json,md,mdx,scss,yml}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.6.1",
+    "@typescript-eslint/parser": "^2.6.1",
     "babel-eslint": "^10.0.3",
-    "cross-env": "^6.0.0",
-    "eslint": "^6.5.0",
+    "cross-env": "^6.0.3",
+    "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.3.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jest": "^22.17.0",
-    "eslint-plugin-json": "^1.2.1",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-react": "^7.11.1",
-    "jest": "^24.9.0",
-    "jest-puppeteer": "^4.3.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-import-resolver-ts": "^0.4.2",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.0.3",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.2.0",
     "http-server": "^0.11.1",
-    "prettier": "^1.14.3",
-    "puppeteer": "^1.20.0",
+    "husky": "^3.0.9",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.4.2",
+    "prettier": "^1.19.1",
     "shelljs": "^0.8.2"
   }
 }

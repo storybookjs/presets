@@ -11,7 +11,7 @@ yarn add -D @storybook/preset-typescript react-docgen-typescript-loader ts-loade
 Then add the following to `.storybook/presets.js`:
 
 ```js
-module.exports = ["@storybook/preset-typescript"];
+module.exports = ['@storybook/preset-typescript'];
 ```
 
 ## Advanced usage
@@ -19,34 +19,35 @@ module.exports = ["@storybook/preset-typescript"];
 You can pass configurations into the TypeScript or Docgen loaders using the `tsLoaderOptions`, `tsDocgenLoaderOptions`, and `include` options in `.storybook/presets.js`, e.g.:
 
 ```js
-const path = require("path");
+const path = require('path');
 
 module.exports = [
   {
-    name: "@storybook/preset-typescript",
+    name: '@storybook/preset-typescript',
     options: {
       tsLoaderOptions: {
         configFile: path.resolve(__dirname, '../tsconfig.json'),
       },
       tsDocgenLoaderOptions: {
-        tsconfigPath: path.resolve(__dirname, "../tsconfig.json")
+        tsconfigPath: path.resolve(__dirname, '../tsconfig.json'),
       },
-      include: [path.resolve(__dirname, "../src")]
-    }
-  }
+      include: [path.resolve(__dirname, '../src')],
+    },
+  },
 ];
 ```
 
 You also can enable TypeScript transpilation on [manager](https://storybook.js.org/docs/addons/writing-addons/) side, by setting the `transpileManager` option to `true`, e.g.:
 
 ```js
-const path = require("path");
+const path = require('path');
 
 module.exports = [
   {
-    name: "@storybook/preset-typescript",
+    name: '@storybook/preset-typescript',
     options: {
-      transpileManager: true
-    }
-  }
+      transpileManager: true,
+    },
+  },
 ];
+```

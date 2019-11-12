@@ -14,7 +14,7 @@ jobs:
       - restore_cache:
           name: Restore core dependencies cache
           keys:
-          - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-{{ checksum "yarn.lock" }}
       - run:
           name: Install dependencies
           command: yarn install
@@ -49,15 +49,6 @@ jobs:
       - run:
           name: Test
           command: yarn test
-  automation-test:
-    <<: *defaults
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - run:
-          name: Automation
-          command: yarn automation
 workflows:
   version: 2
   build_test_deploy:
@@ -67,8 +58,5 @@ workflows:
           requires:
             - build
       - unit-test:
-          requires:
-            - build
-      - automation-test:
           requires:
             - build

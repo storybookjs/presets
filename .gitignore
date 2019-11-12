@@ -1,5 +1,12 @@
-.idea
+# General
 .cache
+.DS_store
 node_modules
 yarn-error.log
-.DS_store
+
+# IDEs
+.idea
+.vscode
+
+# Builds
+packages/*/dist

@@ -11,7 +11,7 @@ yarn add -D @storybook/preset-ant-design
 Then add the following to `.storybook/presets.js`:
 
 ```js
-module.exports = ["@storybook/preset-ant-design"];
+module.exports = ['@storybook/preset-ant-design'];
 ```
 
 ## Advanced usage
@@ -27,9 +27,9 @@ module.exports = [
         modifyVars: {
           'primary-color': '#1DA57A',
           'border-radius-base': '2px',
-        }
-      }
-    }
-  }
-]
+        },
+      },
+    },
+  },
+];
 ```
