@@ -2,9 +2,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import logo, { ReactComponent as LogoSvg } from '../../assets/logo.svg';
+import styles from './Button.module.scss';
 
 const Button = ({ children, disabled, variant = 'small' }) => (
-  <button disabled={disabled}>
+  <button disabled={disabled} className={styles.Button}>
     <img src={logo} alt='Logo' />
     <LogoSvg />
     {children} {variant}
