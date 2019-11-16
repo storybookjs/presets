@@ -67,12 +67,10 @@ const processCraConfig = (
 
               // This rule causes conflicts with Storybook addons like `addon-info`.
               if (testMatch(oneOfRule, '.css')) {
-                // FIXME: This rules has been disabled as it conflicts with Storybook's `style-loader`.
-                /* return {
-                ...oneOfRule,
-                exclude: [oneOfRule.exclude, /@storybook/],
-              }; */
-                return {};
+                return {
+                  ...oneOfRule,
+                  exclude: [oneOfRule.exclude as RegExp, /@storybook/],
+                };
               }
 
               // Target `babel-loader` and add user's Babel config.
