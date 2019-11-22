@@ -1,0 +1,30 @@
+{
+  "name": "@storybook/preset-inline-svg",
+  "version": "0.0.1",
+  "description": "Inline SVG loader preset for Storybook",
+  "license": "MIT",
+  "main": "index.js",
+  "homepage": "https://github.com/storybookjs/presets/tree/master/packages/preset-typescript",
+  "bugs": {
+    "url": "https://github.com/storybookjs/presets/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storybookjs/presets.git",
+    "directory": "packages/preset-inline-svg"
+  },
+  "scripts": {
+    "storybook": "start-storybook -p 8008"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@storybook/react": "^5.2.6",
+    "babel-loader": "^8.0.6",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "svg-inline-loader": "^0.8.0"
+  },
+  "peerDependencies": {
+    "svg-inline-loader": "*"
+  }
+}

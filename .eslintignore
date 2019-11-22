@@ -12,3 +12,4 @@ packages/preset-ant-design
 packages/preset-scss
 packages/preset-storysource
 packages/preset-typescript
+packages/preset-inline-svg

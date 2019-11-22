@@ -2,6 +2,7 @@ import { join } from 'path';
 import { logger } from '@storybook/node-logger';
 
 const incompatiblePresets = [
+  '@storybook/preset-inline-svg',
   '@storybook/preset-scss',
   '@storybook/preset-typescript',
 ];
