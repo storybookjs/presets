@@ -1,11 +1,11 @@
 # TypeScript preset for Storybook
 
-One-line TypeScript w/ docgen configuration for Storybook.
+One-line TypeScript configuration for Storybook.
 
 ## Basic usage
 
 ```
-yarn add -D @storybook/preset-typescript react-docgen-typescript-loader ts-loader
+yarn add -D @storybook/preset-typescript ts-loader
 ```
 
 Then add the following to `.storybook/presets.js`:
@@ -16,7 +16,7 @@ module.exports = ['@storybook/preset-typescript'];
 
 ## Advanced usage
 
-You can pass configurations into the TypeScript or Docgen loaders using the `tsLoaderOptions`, `tsDocgenLoaderOptions`, and `include` options in `.storybook/presets.js`, e.g.:
+You can pass configurations into the TypeScript or Docgen loaders using the `tsLoaderOptions` and `include` options in `.storybook/presets.js`, e.g.:
 
 ```js
 const path = require('path');
@@ -27,9 +27,6 @@ module.exports = [
     options: {
       tsLoaderOptions: {
         configFile: path.resolve(__dirname, '../tsconfig.json'),
-      },
-      tsDocgenLoaderOptions: {
-        tsconfigPath: path.resolve(__dirname, '../tsconfig.json'),
       },
       include: [path.resolve(__dirname, '../src')],
     },
