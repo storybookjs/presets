@@ -7,7 +7,7 @@ aliases:
       - image: circleci/node:10-browsers
 
 jobs:
-  build:
+  install:
     <<: *defaults
     steps:
       - checkout
@@ -17,7 +17,7 @@ jobs:
             - v1-dependencies-{{ checksum "yarn.lock" }}
       - run:
           name: Install dependencies
-          command: yarn install
+          command: yarn
       - run:
           name: Check that yarn.lock is not corrupted
           command: yarn repo-dirty-check
@@ -31,6 +31,17 @@ jobs:
           paths:
             - node_modules
             - packages
+
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Build
+          command: yarn workspaces run build
+
   lint:
     <<: *defaults
     steps:
@@ -40,6 +51,7 @@ jobs:
       - run:
           name: Lint
           command: yarn lint
+
   unit-test:
     <<: *defaults
     steps:
@@ -49,14 +61,18 @@ jobs:
       - run:
           name: Test
           command: yarn test
+
 workflows:
   version: 2
   build_test_deploy:
     jobs:
-      - build
+      - install
+      - build:
+          requires:
+            - install
       - lint:
           requires:
-            - build
+            - install
       - unit-test:
           requires:
-            - build
+            - install
