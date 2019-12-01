@@ -69,6 +69,7 @@ const processCraConfig = (
               if (testMatch(oneOfRule, '.css')) {
                 return {
                   ...oneOfRule,
+                  include: [configDir],
                   exclude: [oneOfRule.exclude as RegExp, /@storybook/],
                 };
               }

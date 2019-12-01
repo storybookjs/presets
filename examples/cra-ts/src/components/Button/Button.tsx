@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types, react/button-has-type */
 import React, { FC } from 'react';
 import logo, { ReactComponent as LogoSvg } from '../../assets/logo.svg';
+import styles from './Button.module.scss';
 
 interface ButtonProps {
   /**
@@ -14,7 +15,7 @@ interface ButtonProps {
 }
 
 const Button: FC<ButtonProps> = ({ children, disabled, variant = 'small' }) => (
-  <button disabled={disabled}>
+  <button disabled={disabled} className={styles.Button}>
     <img src={logo} alt='Logo' />
     <LogoSvg />
     {children} {variant}
