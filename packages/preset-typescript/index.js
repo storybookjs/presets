@@ -1,6 +1,6 @@
 function webpack(webpackConfig = {}, options = {}) {
   const { module = {}, resolve = {} } = webpackConfig;
-  const { tsLoaderOptions, tsDocgenLoaderOptions, include } = options;
+  const { tsLoaderOptions = {}, tsDocgenLoaderOptions = {}, include = [] } = options;
 
   return {
     ...webpackConfig,
