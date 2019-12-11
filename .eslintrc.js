@@ -30,6 +30,7 @@ module.exports = {
         project: './{packages,examples}/*/tsconfig.json',
       },
       rules: {
+        'import/extensions': off, //[warn, { ts: 'never', tsx: 'never' }],
         'import/no-default-export': error,
         'import/prefer-default-export': off,
         'react/jsx-filename-extension': off,

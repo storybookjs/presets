@@ -1,4 +1,4 @@
-import { join, relative, resolve } from 'path';
+import { join, relative } from 'path';
 import { Configuration } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import { logger } from '@storybook/node-logger';
 import { mergePlugins } from './helpers/mergePlugins';
@@ -28,11 +28,10 @@ const webpack = (
   webpackConfig: Configuration = {},
   options: Options,
 ): Configuration => {
-  const configDir = resolve(options.configDir);
   let scriptsPath = REACT_SCRIPTS_PATH;
 
   // Flag any potentially conflicting presets.
-  checkPresets(configDir);
+  checkPresets(options);
 
   // If the user has provided a package by name, try to resolve it.
   const scriptsPackageName = options[OPTION_SCRIPTS_PACKAGE];
