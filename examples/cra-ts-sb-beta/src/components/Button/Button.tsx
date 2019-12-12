@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types, react/button-has-type */
 import React, { FC } from 'react';
 import logo, { ReactComponent as LogoSvg } from '../../assets/logo.svg';
-// import styles from './Button.module.scss';
-const styles = {};
+import styles from './Button.module.scss';
 
 interface ButtonProps {
   /**
