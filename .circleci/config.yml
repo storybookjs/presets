@@ -30,6 +30,7 @@ jobs:
           root: .
           paths:
             - node_modules
+            - examples
             - packages
 
   build:
@@ -38,6 +39,9 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
+      - run:
+          name: Build CRA preset
+          command: yarn workspace @storybook/preset-create-react-app build
       - run:
           name: Build
           command: yarn workspaces run build

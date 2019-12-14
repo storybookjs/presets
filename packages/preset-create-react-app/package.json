@@ -22,7 +22,7 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "@storybook/node-logger": "^5.2.7",
+    "@storybook/node-logger": "^5.2.8",
     "@types/webpack": "^4.41.0",
     "react-docgen-typescript-loader": "^3.6.0"
   },
