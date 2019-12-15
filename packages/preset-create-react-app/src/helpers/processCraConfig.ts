@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import { Configuration, RuleSetRule } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
+import semver from 'semver';
 import { Options } from '../options';
 
 const isRegExp = (value: RegExp | unknown): value is RegExp =>
@@ -21,6 +22,9 @@ const processCraConfig = (
   options: Options,
 ): RuleSetRule[] => {
   const configDir = resolve(options.configDir);
+
+  const storybookVersion = semver.coerce(options.packageJson.version) || '';
+  const isStorybook530 = semver.gte(storybookVersion, '5.3.0');
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return craWebpackConfig.module!.rules.reduce((rules, rule): RuleSetRule[] => {
@@ -51,17 +55,20 @@ const processCraConfig = (
                 isString(oneOfRule.loader) &&
                 oneOfRule.loader.includes('file-loader')
               ) {
-                // FIXME: This rules has been disabled as it conflicts with Storybook's `file-loader`.
-                /* const excludes = [
-                  'ejs', // Used within Storybook.
-                  'mdx', // Used with Storybook Docs.
-                  ...(options.craOverrides?.fileLoaderExcludes || []),
-                ];
-                const excludeRegex = new RegExp(`\\.(${excludes.join('|')})$`);
-                return {
-                  ...oneOfRule,
-                  exclude: [...oneOfRule.exclude, excludeRegex],
-                }; */
+                if (isStorybook530) {
+                  const excludes = [
+                    'ejs', // Used within Storybook.
+                    'mdx', // Used with Storybook Docs.
+                    ...(options.craOverrides?.fileLoaderExcludes || []),
+                  ];
+                  const excludeRegex = new RegExp(
+                    `\\.(${excludes.join('|')})$`,
+                  );
+                  return {
+                    ...oneOfRule,
+                    exclude: [...oneOfRule.exclude, excludeRegex],
+                  };
+                }
                 return {};
               }
 

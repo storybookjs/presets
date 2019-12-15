@@ -30,4 +30,7 @@ export interface Options {
     presets: any;
   };
   presetsList: Preset[];
+  packageJson: {
+    version: string;
+  };
 }
