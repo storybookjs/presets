@@ -1,10 +1,19 @@
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+
 function webpack(webpackConfig = {}, options = {}) {
-  const { module = {}, resolve = {} } = webpackConfig;
+  const { module = {}, resolve = {}, plugins = [] } = webpackConfig;
   const {
-    tsLoaderOptions = {},
+    tsLoaderOptions = { transpileOnly: true },
     tsDocgenLoaderOptions = {},
+    forkTsCheckerWebpackPluginOptions,
     include = [],
   } = options;
+
+  if (tsLoaderOptions.transpileOnly) {
+    plugins.push(
+      new ForkTsCheckerWebpackPlugin(forkTsCheckerWebpackPluginOptions),
+    );
+  }
 
   return {
     ...webpackConfig,
@@ -36,11 +45,22 @@ function webpack(webpackConfig = {}, options = {}) {
 }
 
 function managerWebpack(webpackConfig = {}, options = {}) {
-  const { module = {}, resolve = {} } = webpackConfig;
-  const { tsLoaderOptions, include, transpileManager = false } = options;
+  const { module = {}, resolve = {}, plugins = [] } = webpackConfig;
+  const {
+    tsLoaderOptions = { transpileOnly: true },
+    include,
+    forkTsCheckerWebpackPluginOptions,
+    transpileManager = false,
+  } = options;
 
   if (!transpileManager) {
     return webpackConfig;
+  }
+
+  if (tsLoaderOptions.transpileOnly) {
+    plugins.push(
+      new ForkTsCheckerWebpackPlugin({ forkTsCheckerWebpackPluginOptions }),
+    );
   }
 
   return {

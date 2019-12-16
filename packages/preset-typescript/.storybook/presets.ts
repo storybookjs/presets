@@ -1,13 +1,16 @@
-const path = require('path');
+const { resolve } = require('path');
 
 module.exports = [
   {
     name: '@storybook/preset-typescript',
     options: {
       tsDocgenLoaderOptions: {
-        tsconfigPath: path.resolve(__dirname, '../tsconfig.json'),
+        tsconfigPath: resolve(__dirname, '../tsconfig.json'),
       },
-      include: [path.resolve(__dirname)],
+      forkTsCheckerWebpackPluginOptions: {
+        colors: false // disables built-in colors in logger messages
+      },
+      include: [resolve(__dirname)]
     },
   },
 ];
