@@ -34,17 +34,17 @@ module.exports = [
     name: '@storybook/preset-typescript',
     options: {
       tsLoaderOptions: {
-        configFile: path.resolve(__dirname, '../tsconfig.json')
+        configFile: path.resolve(__dirname, '../tsconfig.json'),
       },
       tsDocgenLoaderOptions: {
-        tsconfigPath: path.resolve(__dirname, '../tsconfig.json')
+        tsconfigPath: path.resolve(__dirname, '../tsconfig.json'),
       },
       forkTsCheckerWebpackPluginOptions: {
-        colors: false // disables built-in colors in logger messages
+        colors: false, // disables built-in colors in logger messages
       },
-      include: [path.resolve(__dirname, '../src')]
-    }
-  }
+      include: [path.resolve(__dirname, '../src')],
+    },
+  },
 ];
 ```
 
@@ -75,8 +75,8 @@ Type: `Object`
 
 ```js
 {
-  transpileOnly: true
-}
+  transpileOnly: true,
+};
 ```
 
 [ts-loader](https://github.com/TypeStrong/ts-loader#loader-options) options. If set to `true` [fork-ts-checker-webpack-plugin](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin) gets enabled automatically to run the separate process for type checking.
@@ -88,7 +88,7 @@ Type: `Object`
 #### Default value
 
 ```js
-undefined
+undefined;
 ```
 
 [react-docgen-typescript-loader](https://github.com/strothj/react-docgen-typescript-loader#loader-options) options.
@@ -100,7 +100,7 @@ Type: `Object`
 #### Default value
 
 ```js
-undefined
+undefined;
 ```
 
 [fork-ts-checker-webpack-plugin](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin#options) options. `transpileOnly` flag needs to be set to `true` in `tsLoaderOptions` to be able to set options for this webpack plugin.
@@ -112,7 +112,7 @@ Type: [Rule condition](https://webpack.js.org/configuration/module/#rule-conditi
 #### Default value
 
 ```js
-undefined
+undefined;
 ```
 
 [include rule](https://webpack.js.org/configuration/module/#ruleinclude) for `/\.tsx?$/`.
@@ -124,7 +124,7 @@ Type: `Boolean`
 #### Default value
 
 ```js
-false
+false;
 ```
 
 Toggles TypeScript transpilation on [manager](https://storybook.js.org/docs/addons/writing-addons/) side.

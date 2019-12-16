@@ -8,9 +8,9 @@ module.exports = [
         tsconfigPath: resolve(__dirname, '../tsconfig.json'),
       },
       forkTsCheckerWebpackPluginOptions: {
-        colors: false // disables built-in colors in logger messages
+        colors: false, // disables built-in colors in logger messages
       },
-      include: [resolve(__dirname)]
+      include: [resolve(__dirname)],
     },
   },
 ];
