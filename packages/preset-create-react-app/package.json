@@ -24,9 +24,11 @@
   "dependencies": {
     "@storybook/node-logger": "^5.2.8",
     "@types/webpack": "^4.41.0",
-    "react-docgen-typescript-loader": "^3.6.0"
+    "react-docgen-typescript-loader": "^3.6.0",
+    "semver": "7.0.0"
   },
   "devDependencies": {
+    "@types/semver": "^6.2.0",
     "typescript": "^3.7.2"
   },
   "peerDependencies": {

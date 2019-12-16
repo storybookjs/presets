@@ -4,40 +4,54 @@ One-line [Create React App](https://github.com/facebook/create-react-app) config
 
 This preset is designed to use alongside [`@storybook/react`](https://github.com/storybookjs/storybook/tree/master/app/react).
 
-## A note on custom Babel configs
-
-We temporarily don't support using a custom Babel config with this preset. Support for this will be added shortly.
-
 ## Basic usage
 
+First, install this preset to your project.
+
 ```
+# Yarn
 yarn add -D @storybook/preset-create-react-app
+
+# npm
+npm install -D @storybook/preset-create-react-app
 ```
 
-Then add the following to `.storybook/presets.js`:
+Once installed, add this preset to the appropriate file:
 
-```js
-module.exports = ['@storybook/preset-create-react-app'];
-```
+- `./.storybook/main.js` (for Storybook 5.3.0 and newer)
 
-## CRA Overrides
+  ```js
+  module.exports = {
+    presets: ['@storybook/preset-create-react-app'],
+  };
+  ```
 
-The CRA preset uses CRA's webpack/babel configurations, so that Storybook's behavior matches your app's behavior. However, there are some cases where you'd rather override CRA's default behavior. That's what the `craOverrides` object does.
+- `./.storybook/presets.js` (for all Storybook versions)
 
-For example, CRA automatically adds webpack `file-loader` rules for all file types that it doesn't know about. This interferes with Storybook. If you want CRA to ignore certain file extensions so that you can they can be processed by an another preset, you can pass an array of file extensions to ignore, to the option `craOverrides.fileLoaderExcludes`, which appends to the default value `['ejs', 'mdx']` which are needed by Storybook.
+  ```js
+  module.exports = ['@storybook/preset-create-react-app'];
+  ```
 
-Here's how you might configure the preset to ignore PDF files so they can be processed by another preset:
+## CRA overrides
+
+This preset uses CRA's Webpack/Babel configurations, so that Storybook's behavior matches your app's behavior.
+
+However, there may be some cases where you'd rather override CRA's default behavior. If that is something you need, you can use the `craOverrides` object.
+
+| Option               | Default          | Behaviour | Type       | Description                                                                                                        |
+| -------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------ |
+| `fileLoaderExcludes` | `['ejs', 'mdx']` | Extends   | `string[]` | Excludes file types (by extension) from CRA's `file-loader` configuration. The defaults are required by Storybook. |
+
+Here's how you might configure this preset to ignore PDF files so they can be processed by another preset or loader:
 
 ```js
 module.exports = [
   {
     name: '@storybook/preset-create-react-app',
     options: {
-      scriptsPackageName: '@my/react-scripts',
       craOverrides: {
         fileLoaderExcludes: ['pdf'],
       },
-      tsDocgenLoaderOptions: {},
     },
   },
 ];
@@ -86,3 +100,4 @@ module.exports = [
 ## Resources
 
 - [Walkthrough to set up Storybook Docs with CRA & typescript](https://gist.github.com/shilman/bc9cbedb2a7efb5ec6710337cbd20c0c)
+- [Example projects (used for testing this preset)](https://github.com/storybookjs/presets/tree/master/examples)
