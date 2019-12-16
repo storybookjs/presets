@@ -81,10 +81,14 @@ const processCraConfig = (
                 };
               }
 
+              // Used for the next two rules modifications.
+              const isBabelLoader =
+                isString(oneOfRule.loader) &&
+                oneOfRule.loader.includes('babel-loader');
+
               // Target `babel-loader` and add user's Babel config.
               if (
-                isString(oneOfRule.loader) &&
-                oneOfRule.loader.includes('babel-loader') &&
+                isBabelLoader &&
                 isRegExp(oneOfRule.test) &&
                 oneOfRule.test.test('.jsx')
               ) {
@@ -129,6 +133,18 @@ const processCraConfig = (
                     presets: [...presets, ...rulePresets],
                     overrides,
                   },
+                };
+              }
+
+              // Target `babel-loader` that processes `node_modules`, and add Storybook config dir.
+              if (
+                isBabelLoader &&
+                isRegExp(oneOfRule.test) &&
+                oneOfRule.test.test('.js')
+              ) {
+                return {
+                  ...oneOfRule,
+                  include: [configDir],
                 };
               }
 
