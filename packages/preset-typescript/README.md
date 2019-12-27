@@ -42,7 +42,8 @@ module.exports = [
       forkTsCheckerWebpackPluginOptions: {
         colors: false, // disables built-in colors in logger messages
       },
-      include: [path.resolve(__dirname, '../src')],
+      include: [path.resolve(__dirname, '../')],
+      exclude: [path.resolve(__dirname, '../node_modules')],
     },
   },
 ];

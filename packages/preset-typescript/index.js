@@ -1,4 +1,7 @@
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const path = require("path");
+const includePaths = [path.resolve('./')];
+const excludePaths = [path.resolve('./node_modules')];
 
 function webpack(webpackConfig = {}, options = {}) {
   const { module = {}, resolve = {}, plugins = [] } = webpackConfig;
@@ -6,7 +9,8 @@ function webpack(webpackConfig = {}, options = {}) {
     tsLoaderOptions = { transpileOnly: true },
     tsDocgenLoaderOptions = {},
     forkTsCheckerWebpackPluginOptions,
-    include = [],
+    include = includePaths,
+    exclude = excludePaths
   } = options;
 
   if (tsLoaderOptions.transpileOnly) {
@@ -34,6 +38,7 @@ function webpack(webpackConfig = {}, options = {}) {
             },
           ],
           include,
+          exclude
         },
       ],
     },
@@ -48,8 +53,9 @@ function managerWebpack(webpackConfig = {}, options = {}) {
   const { module = {}, resolve = {}, plugins = [] } = webpackConfig;
   const {
     tsLoaderOptions = { transpileOnly: true },
-    include,
     forkTsCheckerWebpackPluginOptions,
+    include = includePaths,
+    exclude = excludePaths,
     transpileManager = false,
   } = options;
 
@@ -78,6 +84,7 @@ function managerWebpack(webpackConfig = {}, options = {}) {
             },
           ],
           include,
+          exclude
         },
       ],
     },
