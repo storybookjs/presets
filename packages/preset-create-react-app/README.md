@@ -8,7 +8,7 @@ This preset is designed to use alongside [`@storybook/react`](https://github.com
 
 First, install this preset to your project.
 
-```
+```sh
 # Yarn
 yarn add -D @storybook/preset-create-react-app
 
@@ -22,7 +22,7 @@ Once installed, add this preset to the appropriate file:
 
   ```js
   module.exports = {
-    presets: ['@storybook/preset-create-react-app'],
+    addons: ['@storybook/preset-create-react-app'],
   };
   ```
 
@@ -32,7 +32,59 @@ Once installed, add this preset to the appropriate file:
   module.exports = ['@storybook/preset-create-react-app'];
   ```
 
-## CRA overrides
+## Advanced usage
+
+### Enabling docgen (for [Storybook Docs](https://github.com/storybookjs/storybook/tree/master/addons/docs))
+
+You can optionally enable and configure [`react-docgen-typescript-loader`](https://github.com/strothj/react-docgen-typescript-loader) with `tsDocgenLoaderOptions`.
+
+If set to `{}`, it will be enabled with the default settings for Create React App. In most cases, this will is all the configuration needed.
+
+```js
+module.exports = {
+  addons: [
+    {
+      name: '@storybook/preset-create-react-app',
+      options: {
+        tsDocgenLoaderOptions: {},
+      },
+    },
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        configureJSX: true,
+      },
+    },
+  ],
+};
+```
+
+Alternatively, you can pass your own configuration:
+
+```js
+const path = require('path');
+
+module.exports = {
+  addons: [
+    {
+      name: '@storybook/preset-create-react-app',
+      options: {
+        tsDocgenLoaderOptions: {
+          tsconfigPath: path.resolve(__dirname, '../tsconfig.json'),
+        },
+      },
+    },
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        configureJSX: true,
+      },
+    },
+  ],
+};
+```
+
+### CRA overrides
 
 This preset uses CRA's Webpack/Babel configurations, so that Storybook's behavior matches your app's behavior.
 
@@ -45,56 +97,37 @@ However, there may be some cases where you'd rather override CRA's default behav
 Here's how you might configure this preset to ignore PDF files so they can be processed by another preset or loader:
 
 ```js
-module.exports = [
-  {
-    name: '@storybook/preset-create-react-app',
-    options: {
-      craOverrides: {
-        fileLoaderExcludes: ['pdf'],
+module.exports = {
+  addons: [
+    {
+      name: '@storybook/preset-create-react-app',
+      options: {
+        craOverrides: {
+          fileLoaderExcludes: ['pdf'],
+        },
       },
     },
-  },
-];
+  ],
+};
 ```
 
-## Advanced usage
+### Custom `react-scripts` packages
 
 In most cases, this preset will find your `react-scripts` package, even if it's a fork of the offical `react-scripts`.
 
 In the event that it doesn't, you can set the package's name with `scriptsPackageName`.
 
-You can also enable and configure [`react-docgen-typescript-loader`](https://github.com/strothj/react-docgen-typescript-loader) with `tsDocgenLoaderOptions`.
-
-If set to `{}`, it will be enabled with default Create React App settings.
-
 ```js
-module.exports = [
-  {
-    name: '@storybook/preset-create-react-app',
-    options: {
-      scriptsPackageName: '@my/react-scripts',
-      tsDocgenLoaderOptions: {},
-    },
-  },
-];
-```
-
-Alternatively, you can pass your own configuration:
-
-```js
-const path = require('path');
-
-module.exports = [
-  {
-    name: '@storybook/preset-create-react-app',
-    options: {
-      scriptsPackageName: '@my/react-scripts',
-      tsDocgenLoaderOptions: {
-        tsconfigPath: path.resolve(__dirname, '../tsconfig.json'),
+module.exports = {
+  addons: [
+    {
+      name: '@storybook/preset-create-react-app',
+      options: {
+        scriptsPackageName: '@my/react-scripts',
       },
     },
-  },
-];
+  ],
+};
 ```
 
 ## Resources
