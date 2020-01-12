@@ -23,6 +23,16 @@ const processCraConfig = (
 ): RuleSetRule[] => {
   const configDir = resolve(options.configDir);
 
+  /*
+   * NOTE: As of version 5.3.0 of Storybook, Storybook's default loaders are no
+   * longer appended when using this preset, meaning less customisation is
+   * needed when used alongside that version.
+   *
+   * When loaders were appended in previous Storybook versions, some CRA loaders
+   * had to be disabled or modified to avoid conflicts.
+   *
+   * See: https://github.com/storybookjs/storybook/pull/9157
+   */
   const storybookVersion = semver.coerce(options.packageJson.version) || '';
   const isStorybook530 = semver.gte(storybookVersion, '5.3.0');
 
@@ -76,7 +86,7 @@ const processCraConfig = (
               if (testMatch(oneOfRule, '.css')) {
                 return {
                   ...oneOfRule,
-                  include: [configDir],
+                  include: isStorybook530 ? undefined : [configDir],
                   exclude: [oneOfRule.exclude as RegExp, /@storybook/],
                 };
               }
@@ -106,8 +116,11 @@ const processCraConfig = (
                 let plugins: string[] = _plugins;
                 let overrides: RuleSetRule['options'][] = [];
 
-                // The Babel plugin for docgen conflicts with the TypeScript loader.
-                // This limits it to JavaScript files when the TypeScript loader is enabled.
+                /*
+                 * The Babel plugin for docgen conflicts with the TypeScript
+                 * docgen loader. When the TypeScript loader is enabled, this
+                 * scopes the Babel plugin to JavaScript files (only).
+                 */
                 if (options.tsDocgenLoaderOptions) {
                   plugins = _plugins.filter(
                     ([plugin]: string[]) =>

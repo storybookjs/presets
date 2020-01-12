@@ -8,7 +8,7 @@ module.exports = {
       },
     },
     {
-      name: '@storybook/addon-docs/preset',
+      name: '@storybook/addon-docs',
       options: {
         configureJSX: true,
       },
