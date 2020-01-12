@@ -2635,7 +2635,7 @@
     pretty-hrtime "^1.0.3"
     regenerator-runtime "^0.12.1"
 
-"@storybook/node-logger@5.3.0", "@storybook/node-logger@^5.3.0":
+"@storybook/node-logger@5.3.0", "@storybook/node-logger@^5.2.0":
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/@storybook/node-logger/-/node-logger-5.3.0.tgz#9e07bf94373e78604f3694402f703a0ed7dff948"
   integrity sha512-VTZ9JCqy0DAKMpQ0NNq1LdMFnS+Ej3npfTswSpyIGXq0MtxiGIKC/m1JvT+qE9JnH6BgLdI4MhHSg2RWhNAYkQ==
