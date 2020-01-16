@@ -14,6 +14,19 @@ Then add the following to `.storybook/presets.js`:
 module.exports = ['@storybook/preset-ant-design'];
 ```
 
+If used with `preset-create-react-app`, Make sure override the default file loader.
+
+```json
+{
+  name: '@storybook/preset-create-react-app',
+  options: {
+    craOverrides: {
+      fileLoaderExcludes: ['less']
+    }
+  }
+}
+```
+
 ## Advanced usage
 
 You can customize theme variable by passing `modifyVars` options into less loader in`.storybook/presets.js`, e.g.:
