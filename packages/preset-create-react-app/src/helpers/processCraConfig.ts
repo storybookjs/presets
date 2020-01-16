@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { Configuration, RuleSetRule } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
+import { Configuration, RuleSetRule } from 'webpack';
 import semver from 'semver';
 import { Options } from '../options';
 
@@ -68,6 +68,7 @@ const processCraConfig = (
                 if (isStorybook530) {
                   const excludes = [
                     'ejs', // Used within Storybook.
+                    'md', // Used with Storybook Notes.
                     'mdx', // Used with Storybook Docs.
                     ...(options.craOverrides?.fileLoaderExcludes || []),
                   ];
@@ -138,7 +139,7 @@ const processCraConfig = (
 
                 return {
                   ...oneOfRule,
-                  include: [_include as string, configDir].filter(Boolean),
+                  include: [_include as string, configDir],
                   options: {
                     ...(ruleOptions as object),
                     extends: _extends,
@@ -161,9 +162,7 @@ const processCraConfig = (
                 };
               }
 
-              return oneOfRule.include
-                ? { ...oneOfRule, include: [oneOfRule.include, configDir] }
-                : oneOfRule;
+              return oneOfRule;
             },
           ),
         },
