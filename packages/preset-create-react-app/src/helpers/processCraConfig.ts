@@ -63,7 +63,7 @@ const processCraConfig = (
             (oneOfRule: RuleSetRule): RuleSetRule => {
               if (
                 isString(oneOfRule.loader) &&
-                oneOfRule.loader.includes('file-loader')
+                /[/\\]file-loader[/\\]/.test(oneOfRule.loader)
               ) {
                 if (isStorybook530) {
                   const excludes = [
@@ -94,7 +94,7 @@ const processCraConfig = (
               // Used for the next two rules modifications.
               const isBabelLoader =
                 isString(oneOfRule.loader) &&
-                oneOfRule.loader.includes('babel-loader');
+                /[/\\]babel-loader[/\\]/.test(oneOfRule.loader);
 
               // Target `babel-loader` and add user's Babel config.
               if (
@@ -124,13 +124,13 @@ const processCraConfig = (
                 if (options.tsDocgenLoaderOptions) {
                   plugins = _plugins.filter(
                     ([plugin]: string[]) =>
-                      !plugin.includes('babel-plugin-react-docgen'),
+                      !/[/\\]babel-plugin-react-docgen[/\\]/.test(plugin),
                   );
                   overrides = [
                     {
                       test: /\.(js|jsx)$/,
                       plugins: _plugins.filter(([plugin]: string[]) =>
-                        plugin.includes('babel-plugin-react-docgen'),
+                        /[/\\]babel-plugin-react-docgen[/\\]/.test(plugin),
                       ),
                     },
                   ];
