@@ -18,10 +18,10 @@ If used with `preset-create-react-app`, Make sure override the default file load
 
 ```json
 {
-  name: '@storybook/preset-create-react-app',
-  options: {
-    craOverrides: {
-      fileLoaderExcludes: ['less']
+  "name": "@storybook/preset-create-react-app",
+  "options": {
+    "craOverrides": {
+      "fileLoaderExcludes": ["less"]
     }
   }
 }
