@@ -132,23 +132,23 @@ module.exports = {
 
 ### Warning for forks of 'react-scripts'
 
-One of the tasks that this preset does is inject the storybook config directory (the default is `.storybook`) 
-into the `includes` key of the webpack babel-loader config that react-scripts (or your fork) provides. This is 
-nice because then any components/code you've defined in your storybook config directory will be run through the 
+One of the tasks that this preset does is inject the storybook config directory (the default is `.storybook`)
+into the `includes` key of the webpack babel-loader config that react-scripts (or your fork) provides. This is
+nice because then any components/code you've defined in your storybook config directory will be run through the
 babel-loader as well.
 
-The potential gotcha exists if you have tweaked the Conditions of the webpack babel-loader rule in your fork of 
+The potential gotcha exists if you have tweaked the Conditions of the webpack babel-loader rule in your fork of
 react-scripts. This preset will make the `include` condition an array (if not already), and inject the storybook
-config directory. If you have changed the conditions to utilize an `exclude`, then BOTH conditions will need to 
-be true (which isn't likely going to work as expected). 
+config directory. If you have changed the conditions to utilize an `exclude`, then BOTH conditions will need to
+be true (which isn't likely going to work as expected).
 
 The steps to remedy this would be to follow the steps for customizing the webpack config within the storybook
 side of things. [Details for storybook custom webpack config](https://storybook.js.org/docs/configurations/custom-webpack-config/)
 You'll have access to all of the rules in `config.module.rules`. You'll need to find the offending rule,
 and customize it how you need it to be to be compatible with your fork.
 
-See [Webpack Rule Conditions](https://webpack.js.org/configuration/module/#rule-conditions) for more details 
-concerning the conditions. 
+See [Webpack Rule Conditions](https://webpack.js.org/configuration/module/#rule-conditions) for more details
+concerning the conditions.
 
 ## Resources
 
