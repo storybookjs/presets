@@ -5,5 +5,5 @@ import Button from './Button';
 export default { title: 'Button', component: Button };
 
 export const Default: FC = () => (
-  <Button>{process.env.REACT_APP_TEST_VAR}</Button>
+  <Button variant='small'>{process.env.REACT_APP_TEST_VAR}</Button>
 );
