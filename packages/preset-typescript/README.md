@@ -16,17 +16,54 @@ yarn add -D @storybook/preset-typescript react-docgen-typescript-loader ts-loade
 npm install --save-dev @storybook/preset-typescript react-docgen-typescript-loader ts-loader fork-ts-checker-webpack-plugin
 ```
 
-Then add the following to `.storybook/presets.js`:
+Then add the following to `./storybook/main.js`:
 
 ```js
+// ./storybook/main.js
+module.exports = {
+  addons: ['@storybook/preset-typescript']
+};
+```
+
+Alternatively if you are not using the `.storybook/main.js` file, then add the following to `.storybook/presets.js`:
+
+```js
+// .storybook/presets.js
 module.exports = ['@storybook/preset-typescript'];
 ```
 
 ## Advanced usage
 
-You can pass configurations into the `TypeScript`, `Docgen` loaders or `ForkTsCheckerWebpackPlugin` using the `tsLoaderOptions`, `tsDocgenLoaderOptions`, `include` and `forkTsCheckerWebpackPluginOptions` options in `.storybook/presets.js`, e.g.:
+You can pass configurations into the `TypeScript`, `Docgen` loaders or `ForkTsCheckerWebpackPlugin` using the `tsLoaderOptions`, `tsDocgenLoaderOptions`, `include` and `forkTsCheckerWebpackPluginOptions` options.
+
+If you are using `.storybook/main.js`:
 
 ```js
+// ./storybook/main.js
+const path = require('path');
+
+module.exports = {
+  addons: [
+    {
+      name: '@storybook/preset-typescript',
+      options: {
+        tsLoaderOptions: {
+          configFile: path.resolve(__dirname, './tsconfig.json'),
+        },
+        tsDocgenLoaderOptions: {
+          tsconfigPath: path.resolve(__dirname, './tsconfig.json'),
+        },
+        include: [path.resolve(__dirname, '../src')],
+      },
+    },
+  ],
+};
+```
+
+Alternatively if you are using `.storybook/presets.js`:
+
+```js
+// .storybook/presets.js
 const path = require('path');
 
 module.exports = [
@@ -53,6 +90,7 @@ All available options are described in the [Options](#options) section.
 You also can enable TypeScript transpilation on [manager](https://storybook.js.org/docs/addons/writing-addons/) side, by setting the `transpileManager` option to `true`, e.g.:
 
 ```js
+// .storybook/presets.js
 const path = require('path');
 
 module.exports = [
