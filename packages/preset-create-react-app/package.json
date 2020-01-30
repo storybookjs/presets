@@ -1,6 +1,6 @@
 {
   "name": "@storybook/preset-create-react-app",
-  "version": "1.5.0",
+  "version": "1.5.2",
   "description": "Create React App preset for Storybook",
   "license": "MIT",
   "main": "dist",
@@ -22,14 +22,14 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "@storybook/node-logger": "^5.2.8",
-    "@types/webpack": "^4.41.0",
+    "@storybook/node-logger": "^5.2.0",
+    "@types/webpack": "^4.41.2",
     "react-docgen-typescript-loader": "^3.6.0",
-    "semver": "7.0.0"
+    "semver": "^7.1.1"
   },
   "devDependencies": {
     "@types/semver": "^6.2.0",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.5"
   },
   "peerDependencies": {
     "@storybook/react": ">=5.2",

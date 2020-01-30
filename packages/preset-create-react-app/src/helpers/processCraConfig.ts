@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { Configuration, RuleSetRule } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
+import { Configuration, RuleSetRule } from 'webpack';
 import semver from 'semver';
 import { Options } from '../options';
 
@@ -23,6 +23,16 @@ const processCraConfig = (
 ): RuleSetRule[] => {
   const configDir = resolve(options.configDir);
 
+  /*
+   * NOTE: As of version 5.3.0 of Storybook, Storybook's default loaders are no
+   * longer appended when using this preset, meaning less customisation is
+   * needed when used alongside that version.
+   *
+   * When loaders were appended in previous Storybook versions, some CRA loaders
+   * had to be disabled or modified to avoid conflicts.
+   *
+   * See: https://github.com/storybookjs/storybook/pull/9157
+   */
   const storybookVersion = semver.coerce(options.packageJson.version) || '';
   const isStorybook530 = semver.gte(storybookVersion, '5.3.0');
 
@@ -53,11 +63,12 @@ const processCraConfig = (
             (oneOfRule: RuleSetRule): RuleSetRule => {
               if (
                 isString(oneOfRule.loader) &&
-                oneOfRule.loader.includes('file-loader')
+                /[/\\]file-loader[/\\]/.test(oneOfRule.loader)
               ) {
                 if (isStorybook530) {
                   const excludes = [
                     'ejs', // Used within Storybook.
+                    'md', // Used with Storybook Notes.
                     'mdx', // Used with Storybook Docs.
                     ...(options.craOverrides?.fileLoaderExcludes || []),
                   ];
@@ -76,7 +87,7 @@ const processCraConfig = (
               if (testMatch(oneOfRule, '.css')) {
                 return {
                   ...oneOfRule,
-                  include: [configDir],
+                  include: isStorybook530 ? undefined : [configDir],
                   exclude: [oneOfRule.exclude as RegExp, /@storybook/],
                 };
               }
@@ -84,7 +95,7 @@ const processCraConfig = (
               // Used for the next two rules modifications.
               const isBabelLoader =
                 isString(oneOfRule.loader) &&
-                oneOfRule.loader.includes('babel-loader');
+                /[/\\]babel-loader[/\\]/.test(oneOfRule.loader);
 
               // Target `babel-loader` and add user's Babel config.
               if (
@@ -106,18 +117,21 @@ const processCraConfig = (
                 let plugins: string[] = _plugins;
                 let overrides: RuleSetRule['options'][] = [];
 
-                // The Babel plugin for docgen conflicts with the TypeScript loader.
-                // This limits it to JavaScript files when the TypeScript loader is enabled.
+                /*
+                 * The Babel plugin for docgen conflicts with the TypeScript
+                 * docgen loader. When the TypeScript loader is enabled, this
+                 * scopes the Babel plugin to JavaScript files (only).
+                 */
                 if (options.tsDocgenLoaderOptions) {
                   plugins = _plugins.filter(
                     ([plugin]: string[]) =>
-                      !plugin.includes('babel-plugin-react-docgen'),
+                      !/[/\\]babel-plugin-react-docgen[/\\]/.test(plugin),
                   );
                   overrides = [
                     {
                       test: /\.(js|jsx)$/,
                       plugins: _plugins.filter(([plugin]: string[]) =>
-                        plugin.includes('babel-plugin-react-docgen'),
+                        /[/\\]babel-plugin-react-docgen[/\\]/.test(plugin),
                       ),
                     },
                   ];
@@ -125,7 +139,7 @@ const processCraConfig = (
 
                 return {
                   ...oneOfRule,
-                  include: [_include as string, configDir].filter(Boolean),
+                  include: [_include as string, configDir],
                   options: {
                     ...(ruleOptions as object),
                     extends: _extends,
@@ -148,9 +162,7 @@ const processCraConfig = (
                 };
               }
 
-              return oneOfRule.include
-                ? { ...oneOfRule, include: [oneOfRule.include, configDir] }
-                : oneOfRule;
+              return oneOfRule;
             },
           ),
         },

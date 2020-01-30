@@ -7,14 +7,14 @@ interface ButtonProps {
   /**
    * Sets the button size.
    */
-  variant?: 'small' | 'large';
+  variant: 'small' | 'large';
   /**
    * Disables the button.
    */
   disabled?: boolean;
 }
 
-const Button: FC<ButtonProps> = ({ children, disabled, variant = 'small' }) => (
+const Button: FC<ButtonProps> = ({ children, disabled, variant }) => (
   <button disabled={disabled} className={styles.Button}>
     <img src={logo} alt='Logo' />
     <LogoSvg />
