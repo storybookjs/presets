@@ -7,7 +7,7 @@ This folder holds example projects, designed to test presets in isolation and in
 | Name           | Command                                   | addon-docs | ant-design | create-react-app | scss | storysource | typescript |
 | -------------- | ----------------------------------------- | ---------- | ---------- | ---------------- | ---- | ----------- | ---------- |
 | example-cra    | `yarn workspace example-cra storybook`    | ✔          |            | ✔                |      |             |            |
-| example-cra-ts | `yarn workspace example-cra-ts storybook` | ✔          |            | ✔                |      |             |            |
+| example-cra-ts | `yarn workspace example-cra-ts storybook` | ✔          |            | ✔                |      |             | ✔          |
 
 ## Notes
 
