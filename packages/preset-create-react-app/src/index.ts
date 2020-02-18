@@ -1,5 +1,5 @@
 import { join, relative, resolve } from 'path';
-import { Configuration } from 'webpack';
+import { Configuration } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import { logger } from '@storybook/node-logger';
 import { mergePlugins } from './helpers/mergePlugins';
 import { getReactScriptsPath } from './helpers/getReactScriptsPath';
@@ -76,19 +76,6 @@ const webpack = (
   logger.info(`=> Modifying Create React App rules.`);
   const craRules = processCraConfig(craWebpackConfig, options);
 
-  const { tsDocgenLoaderOptions } = options;
-  const tsDocgenRule = tsDocgenLoaderOptions
-    ? {
-        test: /\.tsx?$/,
-        loader: require.resolve('react-docgen-typescript-loader'),
-        options: Object.keys(tsDocgenLoaderOptions).length
-          ? tsDocgenLoaderOptions
-          : {
-              tsconfigPath: join(CWD, 'tsconfig.json'),
-            },
-      }
-    : {};
-
   // CRA uses the `ModuleScopePlugin` to limit suppot to the `src` directory.
   // Here, we select the plugin and modify its configuration to include Storybook config directory.
   const plugins = craWebpackConfig.resolve.plugins.map(
@@ -107,7 +94,7 @@ const webpack = (
     ...webpackConfig,
     module: {
       ...webpackConfig.module,
-      rules: [...(filteredRules || []), ...craRules, tsDocgenRule],
+      rules: [...(filteredRules || []), ...craRules],
     },
     plugins: mergePlugins(webpackConfig.plugins, craWebpackConfig.plugins),
     resolve: {

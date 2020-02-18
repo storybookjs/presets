@@ -34,46 +34,15 @@ Once installed, add this preset to the appropriate file:
 
 ## Advanced usage
 
-### Enabling docgen (for [Storybook Docs](https://github.com/storybookjs/storybook/tree/master/addons/docs))
+### Usage with Docs
 
-You can optionally enable and configure [`react-docgen-typescript-loader`](https://github.com/strothj/react-docgen-typescript-loader) with `tsDocgenLoaderOptions`.
-
-If set to `{}`, it will be enabled with the default settings for Create React App. In most cases, this is all the configuration needed.
-
-```js
-module.exports = {
-  addons: [
-    {
-      name: '@storybook/preset-create-react-app',
-      options: {
-        tsDocgenLoaderOptions: {},
-      },
-    },
-    {
-      name: '@storybook/addon-docs',
-      options: {
-        configureJSX: true,
-      },
-    },
-  ],
-};
-```
-
-Alternatively, you can pass your own configuration:
+When working with Storybook Docs, simply add the following config to your `main.js` file.
 
 ```js
 const path = require('path');
 
 module.exports = {
   addons: [
-    {
-      name: '@storybook/preset-create-react-app',
-      options: {
-        tsDocgenLoaderOptions: {
-          tsconfigPath: path.resolve(__dirname, '../tsconfig.json'),
-        },
-      },
-    },
     {
       name: '@storybook/addon-docs',
       options: {

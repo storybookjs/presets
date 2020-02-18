@@ -15,7 +15,10 @@ function webpack(webpackConfig = {}, options = {}) {
   }
 
   if (options.framework === 'vue') {
-    tsLoaderOptions.appendTsSuffixTo = [...(tsLoaderOptions.appendTsSuffixTo || []), /\.vue$/];
+    tsLoaderOptions.appendTsSuffixTo = [
+      ...(tsLoaderOptions.appendTsSuffixTo || []),
+      /\.vue$/,
+    ];
   }
 
   const tsLoader = {
