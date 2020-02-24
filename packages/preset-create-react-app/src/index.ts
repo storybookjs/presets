@@ -1,20 +1,31 @@
 import { join, relative, resolve } from 'path';
 import { Configuration } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import { logger } from '@storybook/node-logger';
+import PnpWebpackPlugin from 'pnp-webpack-plugin';
 import { mergePlugins } from './helpers/mergePlugins';
-import { getReactScriptsPath } from './helpers/getReactScriptsPath';
+import {
+  getReactScriptsPath,
+  getReactScriptsPathWithYarnPnp,
+} from './helpers/getReactScriptsPath';
 import { processCraConfig } from './helpers/processCraConfig';
 import { checkPresets } from './helpers/checkPresets';
 import { getModulePath } from './helpers/getModulePath';
 import { Options } from './options';
 
 const CWD = process.cwd();
-const REACT_SCRIPTS_PATH = getReactScriptsPath();
+// When operating under PnP environments, this value will be set to a number
+// indicating the version of the PnP standard, see: https://yarnpkg.com/advanced/pnpapi#processversionspnp
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const IS_USING_YARN_PNP = (process.versions as any).pnp;
+const REACT_SCRIPTS_PATH = IS_USING_YARN_PNP
+  ? getReactScriptsPathWithYarnPnp()
+  : getReactScriptsPath();
 const OPTION_SCRIPTS_PACKAGE = 'scriptsPackageName';
 
 // This loader is shared by both the `managerWebpack` and `webpack` functions.
 const resolveLoader = {
   modules: ['node_modules', join(REACT_SCRIPTS_PATH, 'node_modules')],
+  plugins: [PnpWebpackPlugin.moduleLoader(module)],
 };
 
 // Ensure that loaders are resolved from react-scripts.
@@ -37,7 +48,9 @@ const webpack = (
   const scriptsPackageName = options[OPTION_SCRIPTS_PACKAGE];
   if (typeof scriptsPackageName === 'string') {
     try {
-      scriptsPath = require.resolve(scriptsPackageName);
+      scriptsPath = IS_USING_YARN_PNP
+        ? getReactScriptsPathWithYarnPnp(scriptsPackageName)
+        : require.resolve(scriptsPackageName);
     } catch (e) {
       logger.warn(
         `A \`${OPTION_SCRIPTS_PACKAGE}\` was provided, but couldn't be resolved.`,
@@ -105,7 +118,7 @@ const webpack = (
         join(REACT_SCRIPTS_PATH, 'node_modules'),
         ...getModulePath(CWD),
       ],
-      plugins,
+      plugins: plugins.concat([PnpWebpackPlugin]),
     },
     resolveLoader,
   };

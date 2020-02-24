@@ -24,6 +24,7 @@
   "dependencies": {
     "@storybook/node-logger": "^5.3.14",
     "@types/webpack": "^4.41.7",
+    "pnp-webpack-plugin": "^1.6.4",
     "semver": "^7.1.3"
   },
   "devDependencies": {
