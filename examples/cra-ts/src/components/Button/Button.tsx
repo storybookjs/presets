@@ -1,9 +1,13 @@
 /* eslint-disable react/prop-types, react/button-has-type */
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import logo, { ReactComponent as LogoSvg } from '../../assets/logo.svg';
 import styles from './Button.module.scss';
 
 interface ButtonProps {
+  /**
+   * The content of the button.
+   */
+  children: ReactNode;
   /**
    * Sets the button size.
    */
@@ -14,7 +18,12 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
-const Button: FC<ButtonProps> = ({ children, disabled, variant }) => (
+// NOTE: Right now FC<Props> is not working.
+const Button: FC<ButtonProps> = ({
+  children,
+  disabled,
+  variant,
+}: ButtonProps) => (
   <button disabled={disabled} className={styles.Button}>
     <img src={logo} alt='Logo' />
     <LogoSvg />
