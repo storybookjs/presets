@@ -33,3 +33,18 @@ module.exports = [
   },
 ];
 ```
+
+You can add loaders before and after the css loaders using `preLoaders` and `postLoaders` keys.
+
+For example:
+
+```js
+module.exports = [
+  {
+    name: '@storybook/preset-scss',
+    options: {
+      postLoaders: ['postcss-loader'],
+    },
+  },
+];
+```
