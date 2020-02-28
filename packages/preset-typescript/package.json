@@ -34,7 +34,6 @@
   "peerDependencies": {
     "@types/webpack": "*",
     "fork-ts-checker-webpack-plugin": "*",
-    "react-docgen-typescript-loader": "*",
     "ts-loader": "*",
     "typescript": "^3.4"
   },
