@@ -15,8 +15,7 @@ import { Options } from './options';
 const CWD = process.cwd();
 // When operating under PnP environments, this value will be set to a number
 // indicating the version of the PnP standard, see: https://yarnpkg.com/advanced/pnpapi#processversionspnp
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const IS_USING_YARN_PNP = (process.versions as any).pnp;
+const IS_USING_YARN_PNP = typeof process.versions.pnp !== 'undefined';
 const REACT_SCRIPTS_PATH = IS_USING_YARN_PNP
   ? getReactScriptsPathWithYarnPnp()
   : getReactScriptsPath();
