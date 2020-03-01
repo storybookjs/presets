@@ -117,7 +117,7 @@ const webpack = (
         join(REACT_SCRIPTS_PATH, 'node_modules'),
         ...getModulePath(CWD),
       ],
-      plugins: plugins.concat([PnpWebpackPlugin]),
+      plugins: [...plugins, PnpWebpackPlugin],
     },
     resolveLoader,
   };
