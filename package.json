@@ -54,7 +54,11 @@
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.5.0",
     "husky": "^4.2.3",
+<<<<<<< HEAD
     "jest": "24.9.0",
+=======
+    "jest": "^24.9.0",
+>>>>>>> ci: add GitHub Actions
     "lint-staged": "^10.0.8",
     "prettier": "^1.19.1",
     "shelljs": "^0.8.2"

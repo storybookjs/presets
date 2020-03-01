@@ -1,0 +1,65 @@
+name: CI
+
+on: [pull_request]
+
+env:
+  CI: true
+
+jobs:
+  # Checks files with ESLint and Prettier
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - uses: actions/cache@v1
+        with:
+          path: /home/runner/.cache/yarn/v6
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+      - name: Lint all files
+        run: yarn lint
+
+  # Runs unit tests
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - uses: actions/cache@v1
+        with:
+          path: /home/runner/.cache/yarn/v6
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+      - name: Run all tests
+        run: yarn test
+
+  # Ensures all projects can build
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        node: [10, 12]
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: actions/cache@v1
+        with:
+          path: /home/runner/.cache/yarn/v6
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+      - name: Build all projects
+        run: yarn workspaces run build
