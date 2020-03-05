@@ -6,7 +6,7 @@ function webpack(webpackConfig = {}, options = {}) {
     tsLoaderOptions = { transpileOnly: true },
     tsDocgenLoaderOptions = {},
     forkTsCheckerWebpackPluginOptions,
-    include = [],
+    include,
   } = options;
 
   if (tsLoaderOptions.transpileOnly) {
@@ -15,27 +15,29 @@ function webpack(webpackConfig = {}, options = {}) {
     );
   }
 
+  const tsLoader = {
+    test: /\.tsx?$/,
+    use: [
+      {
+        loader: require.resolve('ts-loader'),
+        options: tsLoaderOptions,
+      },
+      {
+        loader: require.resolve('react-docgen-typescript-loader'),
+        options: tsDocgenLoaderOptions,
+      },
+    ],
+  };
+
+  if (include) {
+    tsLoader.include = include;
+  }
+
   return {
     ...webpackConfig,
     module: {
       ...module,
-      rules: [
-        ...(module.rules || []),
-        {
-          test: /\.tsx?$/,
-          use: [
-            {
-              loader: require.resolve('ts-loader'),
-              options: tsLoaderOptions,
-            },
-            {
-              loader: require.resolve('react-docgen-typescript-loader'),
-              options: tsDocgenLoaderOptions,
-            },
-          ],
-          include,
-        },
-      ],
+      rules: [...(module.rules || []), tsLoader],
     },
     resolve: {
       ...resolve,
