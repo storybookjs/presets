@@ -1,5 +1,6 @@
 import { resolve } from 'path';
-import { Configuration, RuleSetRule } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
+import { Configuration, RuleSetRule } from 'webpack';
+import semver from 'semver';
 import { Options } from '../options';
 
 const isRegExp = (value: RegExp | unknown): value is RegExp =>
@@ -21,6 +22,19 @@ const processCraConfig = (
   options: Options,
 ): RuleSetRule[] => {
   const configDir = resolve(options.configDir);
+
+  /*
+   * NOTE: As of version 5.3.0 of Storybook, Storybook's default loaders are no
+   * longer appended when using this preset, meaning less customisation is
+   * needed when used alongside that version.
+   *
+   * When loaders were appended in previous Storybook versions, some CRA loaders
+   * had to be disabled or modified to avoid conflicts.
+   *
+   * See: https://github.com/storybookjs/storybook/pull/9157
+   */
+  const storybookVersion = semver.coerce(options.packageJson.version) || '';
+  const isStorybook530 = semver.gte(storybookVersion, '5.3.0');
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return craWebpackConfig.module!.rules.reduce((rules, rule): RuleSetRule[] => {
@@ -49,19 +63,23 @@ const processCraConfig = (
             (oneOfRule: RuleSetRule): RuleSetRule => {
               if (
                 isString(oneOfRule.loader) &&
-                oneOfRule.loader.includes('file-loader')
+                /[/\\]file-loader[/\\]/.test(oneOfRule.loader)
               ) {
-                // FIXME: This rules has been disabled as it conflicts with Storybook's `file-loader`.
-                /* const excludes = [
-                  'ejs', // Used within Storybook.
-                  'mdx', // Used with Storybook Docs.
-                  ...(options.craOverrides?.fileLoaderExcludes || []),
-                ];
-                const excludeRegex = new RegExp(`\\.(${excludes.join('|')})$`);
-                return {
-                  ...oneOfRule,
-                  exclude: [...oneOfRule.exclude, excludeRegex],
-                }; */
+                if (isStorybook530) {
+                  const excludes = [
+                    'ejs', // Used within Storybook.
+                    'md', // Used with Storybook Notes.
+                    'mdx', // Used with Storybook Docs.
+                    ...(options.craOverrides?.fileLoaderExcludes || []),
+                  ];
+                  const excludeRegex = new RegExp(
+                    `\\.(${excludes.join('|')})$`,
+                  );
+                  return {
+                    ...oneOfRule,
+                    exclude: [...oneOfRule.exclude, excludeRegex],
+                  };
+                }
                 return {};
               }
 
@@ -69,14 +87,19 @@ const processCraConfig = (
               if (testMatch(oneOfRule, '.css')) {
                 return {
                   ...oneOfRule,
+                  include: isStorybook530 ? undefined : [configDir],
                   exclude: [oneOfRule.exclude as RegExp, /@storybook/],
                 };
               }
 
+              // Used for the next two rules modifications.
+              const isBabelLoader =
+                isString(oneOfRule.loader) &&
+                /[/\\]babel-loader[/\\]/.test(oneOfRule.loader);
+
               // Target `babel-loader` and add user's Babel config.
               if (
-                isString(oneOfRule.loader) &&
-                oneOfRule.loader.includes('babel-loader') &&
+                isBabelLoader &&
                 isRegExp(oneOfRule.test) &&
                 oneOfRule.test.test('.jsx')
               ) {
@@ -94,18 +117,21 @@ const processCraConfig = (
                 let plugins: string[] = _plugins;
                 let overrides: RuleSetRule['options'][] = [];
 
-                // The Babel plugin for docgen conflicts with the TypeScript loader.
-                // This limits it to JavaScript files when the TypeScript loader is enabled.
+                /*
+                 * The Babel plugin for docgen conflicts with the TypeScript
+                 * docgen loader. When the TypeScript loader is enabled, this
+                 * scopes the Babel plugin to JavaScript files (only).
+                 */
                 if (options.tsDocgenLoaderOptions) {
                   plugins = _plugins.filter(
                     ([plugin]: string[]) =>
-                      !plugin.includes('babel-plugin-react-docgen'),
+                      !/[/\\]babel-plugin-react-docgen[/\\]/.test(plugin),
                   );
                   overrides = [
                     {
                       test: /\.(js|jsx)$/,
                       plugins: _plugins.filter(([plugin]: string[]) =>
-                        plugin.includes('babel-plugin-react-docgen'),
+                        /[/\\]babel-plugin-react-docgen[/\\]/.test(plugin),
                       ),
                     },
                   ];
@@ -113,7 +139,7 @@ const processCraConfig = (
 
                 return {
                   ...oneOfRule,
-                  include: [_include as string, configDir].filter(Boolean),
+                  include: [_include as string, configDir],
                   options: {
                     ...(ruleOptions as object),
                     extends: _extends,
@@ -124,9 +150,19 @@ const processCraConfig = (
                 };
               }
 
-              return oneOfRule.include
-                ? { ...oneOfRule, include: [oneOfRule.include, configDir] }
-                : oneOfRule;
+              // Target `babel-loader` that processes `node_modules`, and add Storybook config dir.
+              if (
+                isBabelLoader &&
+                isRegExp(oneOfRule.test) &&
+                oneOfRule.test.test('.js')
+              ) {
+                return {
+                  ...oneOfRule,
+                  include: [configDir],
+                };
+              }
+
+              return oneOfRule;
             },
           ),
         },

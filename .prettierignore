@@ -1,2 +1,4 @@
 # Builds
 packages/*/dist
+examples/*/build
+examples/*/storybook-static

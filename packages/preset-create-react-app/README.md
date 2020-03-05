@@ -4,65 +4,59 @@ One-line [Create React App](https://github.com/facebook/create-react-app) config
 
 This preset is designed to use alongside [`@storybook/react`](https://github.com/storybookjs/storybook/tree/master/app/react).
 
-## A note on custom Babel configs
-
-We temporarily don't support using a custom Babel config with this preset. Support for this will be added shortly.
-
 ## Basic usage
 
-```
+First, install this preset to your project.
+
+```sh
+# Yarn
 yarn add -D @storybook/preset-create-react-app
+
+# npm
+npm install -D @storybook/preset-create-react-app
 ```
 
-Then add the following to `.storybook/presets.js`:
+Once installed, add this preset to the appropriate file:
 
-```js
-module.exports = ['@storybook/preset-create-react-app'];
-```
+- `./.storybook/main.js` (for Storybook 5.3.0 and newer)
 
-## CRA Overrides
+  ```js
+  module.exports = {
+    addons: ['@storybook/preset-create-react-app'],
+  };
+  ```
 
-The CRA preset uses CRA's webpack/babel configurations, so that Storybook's behavior matches your app's behavior. However, there are some cases where you'd rather override CRA's default behavior. That's what the `craOverrides` object does.
+- `./.storybook/presets.js` (for all Storybook versions)
 
-For example, CRA automatically adds webpack `file-loader` rules for all file types that it doesn't know about. This interferes with Storybook. If you want CRA to ignore certain file extensions so that you can they can be processed by an another preset, you can pass an array of file extensions to ignore, to the option `craOverrides.fileLoaderExcludes`, which appends to the default value `['ejs', 'mdx']` which are needed by Storybook.
-
-Here's how you might configure the preset to ignore PDF files so they can be processed by another preset:
-
-```js
-module.exports = [
-  {
-    name: '@storybook/preset-create-react-app',
-    options: {
-      scriptsPackageName: '@my/react-scripts',
-      craOverrides: {
-        fileLoaderExcludes: ['pdf'],
-      },
-      tsDocgenLoaderOptions: {},
-    },
-  },
-];
-```
+  ```js
+  module.exports = ['@storybook/preset-create-react-app'];
+  ```
 
 ## Advanced usage
 
-In most cases, this preset will find your `react-scripts` package, even if it's a fork of the offical `react-scripts`.
+### Enabling docgen (for [Storybook Docs](https://github.com/storybookjs/storybook/tree/master/addons/docs))
 
-In the event that it doesn't, you can set the package's name with `scriptsPackageName`.
+You can optionally enable and configure [`react-docgen-typescript-loader`](https://github.com/strothj/react-docgen-typescript-loader) with `tsDocgenLoaderOptions`.
 
-You can also enable and configure [`react-docgen-typescript-loader`](https://github.com/strothj/react-docgen-typescript-loader) with `tsDocgenLoaderOptions`.
-
-If set to `{}`, it will be enabled with default Create React App settings.
+If set to `{}`, it will be enabled with the default settings for Create React App. In most cases, this is all the configuration needed.
 
 ```js
-module.exports = [
-  {
-    name: '@storybook/preset-create-react-app',
-    options: {
-      scriptsPackageName: '@my/react-scripts',
-      tsDocgenLoaderOptions: {},
+module.exports = {
+  addons: [
+    {
+      name: '@storybook/preset-create-react-app',
+      options: {
+        tsDocgenLoaderOptions: {},
+      },
     },
-  },
-];
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        configureJSX: true,
+      },
+    },
+  ],
+};
 ```
 
 Alternatively, you can pass your own configuration:
@@ -70,19 +64,93 @@ Alternatively, you can pass your own configuration:
 ```js
 const path = require('path');
 
-module.exports = [
-  {
-    name: '@storybook/preset-create-react-app',
-    options: {
-      scriptsPackageName: '@my/react-scripts',
-      tsDocgenLoaderOptions: {
-        tsconfigPath: path.resolve(__dirname, '../tsconfig.json'),
+module.exports = {
+  addons: [
+    {
+      name: '@storybook/preset-create-react-app',
+      options: {
+        tsDocgenLoaderOptions: {
+          tsconfigPath: path.resolve(__dirname, '../tsconfig.json'),
+        },
       },
     },
-  },
-];
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        configureJSX: true,
+      },
+    },
+  ],
+};
 ```
+
+### CRA overrides
+
+This preset uses CRA's Webpack/Babel configurations, so that Storybook's behavior matches your app's behavior.
+
+However, there may be some cases where you'd rather override CRA's default behavior. If that is something you need, you can use the `craOverrides` object.
+
+| Option               | Default          | Behaviour | Type       | Description                                                                                                        |
+| -------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------ |
+| `fileLoaderExcludes` | `['ejs', 'mdx']` | Extends   | `string[]` | Excludes file types (by extension) from CRA's `file-loader` configuration. The defaults are required by Storybook. |
+
+Here's how you might configure this preset to ignore PDF files so they can be processed by another preset or loader:
+
+```js
+module.exports = {
+  addons: [
+    {
+      name: '@storybook/preset-create-react-app',
+      options: {
+        craOverrides: {
+          fileLoaderExcludes: ['pdf'],
+        },
+      },
+    },
+  ],
+};
+```
+
+### Custom `react-scripts` packages
+
+In most cases, this preset will find your `react-scripts` package, even if it's a fork of the offical `react-scripts`.
+
+In the event that it doesn't, you can set the package's name with `scriptsPackageName`.
+
+```js
+module.exports = {
+  addons: [
+    {
+      name: '@storybook/preset-create-react-app',
+      options: {
+        scriptsPackageName: '@my/react-scripts',
+      },
+    },
+  ],
+};
+```
+
+### Warning for forks of 'react-scripts'
+
+One of the tasks that this preset does is inject the storybook config directory (the default is `.storybook`)
+into the `includes` key of the webpack babel-loader config that react-scripts (or your fork) provides. This is
+nice because then any components/code you've defined in your storybook config directory will be run through the
+babel-loader as well.
+
+The potential gotcha exists if you have tweaked the Conditions of the webpack babel-loader rule in your fork of
+react-scripts. This preset will make the `include` condition an array (if not already), and inject the storybook
+config directory. If you have changed the conditions to utilize an `exclude`, then BOTH conditions will need to
+be true (which isn't likely going to work as expected).
+
+The steps to remedy this would be to follow the steps for customizing the webpack config within the storybook
+side of things. [Details for storybook custom webpack config](https://storybook.js.org/docs/configurations/custom-webpack-config/)
+You'll have access to all of the rules in `config.module.rules`. You'll need to find the offending rule,
+and customize it how you need it to be to be compatible with your fork.
+
+See [Webpack Rule Conditions](https://webpack.js.org/configuration/module/#rule-conditions) for more details
+concerning the conditions.
 
 ## Resources
 
 - [Walkthrough to set up Storybook Docs with CRA & typescript](https://gist.github.com/shilman/bc9cbedb2a7efb5ec6710337cbd20c0c)
+- [Example projects (used for testing this preset)](https://github.com/storybookjs/presets/tree/master/examples)

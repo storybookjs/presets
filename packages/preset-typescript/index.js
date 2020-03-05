@@ -1,24 +1,38 @@
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+
 function webpack(webpackConfig = {}, options = {}) {
-  const { module = {}, resolve = {} } = webpackConfig;
-  const { tsLoaderOptions, include } = options;
+  const { module = {}, resolve = {}, plugins = [] } = webpackConfig;
+  const {
+    tsLoaderOptions = { transpileOnly: true },
+    forkTsCheckerWebpackPluginOptions,
+    include,
+  } = options;
+
+  if (tsLoaderOptions.transpileOnly) {
+    plugins.push(
+      new ForkTsCheckerWebpackPlugin(forkTsCheckerWebpackPluginOptions),
+    );
+  }
+
+  const tsLoader = {
+    test: /\.tsx?$/,
+    use: [
+      {
+        loader: require.resolve('ts-loader'),
+        options: tsLoaderOptions,
+      },
+    ],
+  };
+
+  if (include) {
+    tsLoader.include = include;
+  }
 
   return {
     ...webpackConfig,
     module: {
       ...module,
-      rules: [
-        ...(module.rules || []),
-        {
-          test: /\.tsx?$/,
-          use: [
-            {
-              loader: require.resolve('ts-loader'),
-              options: tsLoaderOptions,
-            },
-          ],
-          include,
-        },
-      ],
+      rules: [...(module.rules || []), tsLoader],
     },
     resolve: {
       ...resolve,
@@ -28,11 +42,22 @@ function webpack(webpackConfig = {}, options = {}) {
 }
 
 function managerWebpack(webpackConfig = {}, options = {}) {
-  const { module = {}, resolve = {} } = webpackConfig;
-  const { tsLoaderOptions, include, transpileManager = false } = options;
+  const { module = {}, resolve = {}, plugins = [] } = webpackConfig;
+  const {
+    tsLoaderOptions = { transpileOnly: true },
+    include,
+    forkTsCheckerWebpackPluginOptions,
+    transpileManager = false,
+  } = options;
 
   if (!transpileManager) {
     return webpackConfig;
+  }
+
+  if (tsLoaderOptions.transpileOnly) {
+    plugins.push(
+      new ForkTsCheckerWebpackPlugin({ forkTsCheckerWebpackPluginOptions }),
+    );
   }
 
   return {

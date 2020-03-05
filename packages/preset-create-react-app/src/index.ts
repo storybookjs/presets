@@ -1,5 +1,5 @@
 import { join, relative, resolve } from 'path';
-import { Configuration } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
+import { Configuration } from 'webpack';
 import { logger } from '@storybook/node-logger';
 import { mergePlugins } from './helpers/mergePlugins';
 import { getReactScriptsPath } from './helpers/getReactScriptsPath';
@@ -28,11 +28,10 @@ const webpack = (
   webpackConfig: Configuration = {},
   options: Options,
 ): Configuration => {
-  const configDir = resolve(options.configDir);
   let scriptsPath = REACT_SCRIPTS_PATH;
 
   // Flag any potentially conflicting presets.
-  checkPresets(configDir);
+  checkPresets(options);
 
   // If the user has provided a package by name, try to resolve it.
   const scriptsPackageName = options[OPTION_SCRIPTS_PACKAGE];
@@ -90,6 +89,19 @@ const webpack = (
       }
     : {};
 
+  // CRA uses the `ModuleScopePlugin` to limit suppot to the `src` directory.
+  // Here, we select the plugin and modify its configuration to include Storybook config directory.
+  const plugins = craWebpackConfig.resolve.plugins.map(
+    (plugin: { appSrcs: string[] }) => {
+      if (plugin.appSrcs) {
+        // Mutate the plugin directly as opposed to recreating it.
+        // eslint-disable-next-line no-param-reassign
+        plugin.appSrcs = [...plugin.appSrcs, resolve(options.configDir)];
+      }
+      return plugin;
+    },
+  );
+
   // Return the new config.
   return {
     ...webpackConfig,
@@ -106,6 +118,7 @@ const webpack = (
         join(REACT_SCRIPTS_PATH, 'node_modules'),
         ...getModulePath(CWD),
       ],
+      plugins,
     },
     resolveLoader,
   };

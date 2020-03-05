@@ -14,6 +14,7 @@
     "directory": "packages/preset-typescript"
   },
   "scripts": {
+    "build": "exit 0",
     "storybook": "start-storybook -p 8008"
   },
   "devDependencies": {
@@ -24,6 +25,7 @@
     "@types/storybook__react": "^3.0.9",
     "@types/webpack": "^4.39.8",
     "babel-loader": "^8.0.2",
+    "fork-ts-checker-webpack-plugin": "^3.1.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "ts-loader": "^6.2.1",
@@ -32,7 +34,12 @@
   },
   "peerDependencies": {
     "@types/webpack": "*",
+    "fork-ts-checker-webpack-plugin": "*",
+    "react-docgen-typescript-loader": "*",
     "ts-loader": "*",
     "typescript": "^3.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

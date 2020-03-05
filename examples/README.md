@@ -11,4 +11,4 @@ This folder holds example projects, designed to test presets in isolation and in
 
 ## Notes
 
-- Create React App does not require any other presets to work.
+- Create React App does not require any other presets to work, and may conflict with presets such as SCSS and TypeScript.

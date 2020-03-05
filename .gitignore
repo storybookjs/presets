@@ -10,3 +10,5 @@ yarn-error.log
 
 # Builds
 packages/*/dist
+examples/*/build
+examples/*/storybook-static

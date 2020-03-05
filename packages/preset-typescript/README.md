@@ -1,50 +1,116 @@
-# TypeScript preset for Storybook
+<h1>Storybook TypeScript preset</h1>
 
 One-line TypeScript configuration for Storybook.
 
-## Basic usage
+- [Installation](#installation)
+- [Advanced usage](#advanced-usage)
+- [Options](#options)
+  - [tsLoaderOptions](#tsloaderoptions)
+  - [forkTsCheckerWebpackPluginOptions](#forktscheckerwebpackpluginoptions)
+  - [include](#include)
+  - [transpileManager](#transpilemanager)
+
+## Installation
+
+First, install this preset to your project.
 
 ```
-yarn add -D @storybook/preset-typescript ts-loader
+npm install -D @storybook/preset-typescript ts-loader fork-ts-checker-webpack-plugin # or yarn
 ```
 
-Then add the following to `.storybook/presets.js`:
+Once installed, add this preset to the appropriate file:
 
-```js
-module.exports = ['@storybook/preset-typescript'];
-```
+- `./.storybook/main.js` (for Storybook 5.3.0 and newer)
+
+  ```js
+  module.exports = {
+    addons: ['@storybook/preset-typescript'],
+  };
+  ```
+
+- `./.storybook/presets.js` (for all Storybook versions)
+
+  ```js
+  module.exports = ['@storybook/preset-typescript'];
+  ```
 
 ## Advanced usage
 
-You can pass configurations into the TypeScript or Docgen loaders using the `tsLoaderOptions` and `include` options in `.storybook/presets.js`, e.g.:
+You can also pass extra configuration options to configure the preset. For example:
 
 ```js
+// ./storybook/main.js
 const path = require('path');
 
-module.exports = [
-  {
-    name: '@storybook/preset-typescript',
-    options: {
-      tsLoaderOptions: {
-        configFile: path.resolve(__dirname, '../tsconfig.json'),
+module.exports = {
+  addons: [
+    {
+      name: '@storybook/preset-typescript',
+      options: {
+        tsLoaderOptions: {
+          configFile: path.resolve(__dirname, './tsconfig.json'),
+        },
+        forkTsCheckerWebpackPluginOptions: {
+          colors: false, // disables built-in colors in logger messages
+        },
+        include: [path.resolve(__dirname, '../src')],
+        transpileManager: true,
       },
-      include: [path.resolve(__dirname, '../src')],
     },
-  },
-];
+  ],
+};
 ```
 
-You also can enable TypeScript transpilation on [manager](https://storybook.js.org/docs/addons/writing-addons/) side, by setting the `transpileManager` option to `true`, e.g.:
+All available options are described in the [Options](#options) section below.
+
+## Options
+
+### tsLoaderOptions
+
+Type: `Object`
+
+<h5>Default value</h5>
 
 ```js
-const path = require('path');
-
-module.exports = [
-  {
-    name: '@storybook/preset-typescript',
-    options: {
-      transpileManager: true,
-    },
-  },
-];
+{
+  transpileOnly: true,
+};
 ```
+
+[ts-loader](https://github.com/TypeStrong/ts-loader#loader-options) options. If set to `true` [fork-ts-checker-webpack-plugin](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin) gets enabled automatically to run the separate process for type checking.
+
+### forkTsCheckerWebpackPluginOptions
+
+Type: `Object`
+
+<h5>Default value</h5>
+
+```js
+undefined;
+```
+
+[fork-ts-checker-webpack-plugin](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin#options) options. `transpileOnly` flag needs to be set to `true` in `tsLoaderOptions` to be able to set options for this webpack plugin.
+
+### include
+
+Type: [Rule condition](https://webpack.js.org/configuration/module/#rule-conditions)
+
+<h5>Default value</h5>
+
+```js
+undefined;
+```
+
+[include rule](https://webpack.js.org/configuration/module/#ruleinclude) for `/\.tsx?$/`.
+
+### transpileManager
+
+Type: `Boolean`
+
+<h5>Default value</h5>
+
+```js
+false;
+```
+
+Toggles TypeScript transpilation on [manager](https://storybook.js.org/docs/addons/writing-addons/) side.
