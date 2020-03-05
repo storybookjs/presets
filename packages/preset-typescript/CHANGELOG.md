@@ -1,3 +1,7 @@
+## 2.1.0
+
+- Improve compatibility with Vue [#108](https://github.com/storybookjs/presets/pull/108)
+
 ## 2.0.0
 
 - Remove builtin support for `react-docgen-typescript-loader`, which is React-specific [#68](https://github.com/storybookjs/presets/pull/68)
