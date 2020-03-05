@@ -4,7 +4,6 @@ function webpack(webpackConfig = {}, options = {}) {
   const { module = {}, resolve = {}, plugins = [] } = webpackConfig;
   const {
     tsLoaderOptions = { transpileOnly: true },
-    tsDocgenLoaderOptions = {},
     forkTsCheckerWebpackPluginOptions,
     include,
   } = options;
@@ -21,10 +20,6 @@ function webpack(webpackConfig = {}, options = {}) {
       {
         loader: require.resolve('ts-loader'),
         options: tsLoaderOptions,
-      },
-      {
-        loader: require.resolve('react-docgen-typescript-loader'),
-        options: tsDocgenLoaderOptions,
       },
     ],
   };
