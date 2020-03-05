@@ -2,7 +2,7 @@
 
 - Remove builtin support for `react-docgen-typescript-loader`, which is React-specific [#68](https://github.com/storybookjs/presets/pull/68)
 
-If you want to manually configure it, add the following to your `.storybook/main.js`:
+**NOTE:** React users, we are recommending moving to `babel-plugin-react-docgen`, which is bundled as part of `@storybook/react` and now supports Typescript. If you need to manually configure your setup to add back `react-docgen-typescript-loader`, add the following to your `.storybook/main.js`:
 
 ```js
 module.exports = {
