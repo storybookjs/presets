@@ -39,5 +39,8 @@
     "react-docgen-typescript-loader": "*",
     "ts-loader": "*",
     "typescript": "^3.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

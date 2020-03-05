@@ -32,5 +32,8 @@
     "css-loader": "*",
     "sass-loader": "*",
     "style-loader": "*"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
