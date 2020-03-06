@@ -23,7 +23,6 @@
     "lint": "yarn lint-code && yarn lint-style -c",
     "lint-code": "eslint '{examples,packages}/**/*.{js,ts,tsx}'",
     "lint-style": "yarn prettier '{examples,packages}/**/*.{js,ts,tsx,css,html,json,md,mdx,scss,yml}'",
-    "repo-dirty-check": "node ./scripts/repo-dirty-check",
     "test": "jest --passWithNoTests"
   },
   "husky": {
@@ -54,11 +53,7 @@
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.5.0",
     "husky": "^4.2.3",
-<<<<<<< HEAD
     "jest": "24.9.0",
-=======
-    "jest": "^24.9.0",
->>>>>>> ci: add GitHub Actions
     "lint-staged": "^10.0.8",
     "prettier": "^1.19.1",
     "shelljs": "^0.8.2"
