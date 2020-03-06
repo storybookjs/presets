@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { Configuration, RuleSetRule } from 'webpack';
+import { Configuration, RuleSetRule } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import semver from 'semver';
 import { Options } from '../options';
 
@@ -110,32 +110,9 @@ const processCraConfig = (
 
                 const {
                   extends: _extends,
-                  plugins: _plugins = [],
+                  plugins = [],
                   presets = [],
                 } = options.babelOptions;
-
-                let plugins: string[] = _plugins;
-                let overrides: RuleSetRule['options'][] = [];
-
-                /*
-                 * The Babel plugin for docgen conflicts with the TypeScript
-                 * docgen loader. When the TypeScript loader is enabled, this
-                 * scopes the Babel plugin to JavaScript files (only).
-                 */
-                if (options.tsDocgenLoaderOptions) {
-                  plugins = _plugins.filter(
-                    ([plugin]: string[]) =>
-                      !/[/\\]babel-plugin-react-docgen[/\\]/.test(plugin),
-                  );
-                  overrides = [
-                    {
-                      test: /\.(js|jsx)$/,
-                      plugins: _plugins.filter(([plugin]: string[]) =>
-                        /[/\\]babel-plugin-react-docgen[/\\]/.test(plugin),
-                      ),
-                    },
-                  ];
-                }
 
                 return {
                   ...oneOfRule,
@@ -145,7 +122,6 @@ const processCraConfig = (
                     extends: _extends,
                     plugins: [...plugins, ...rulePlugins],
                     presets: [...presets, ...rulePresets],
-                    overrides,
                   },
                 };
               }

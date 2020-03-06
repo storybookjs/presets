@@ -8,13 +8,6 @@ export interface Options {
   scriptsPackageName?: string;
 
   /**
-   * Options for `ts-docgen-loader`.
-   */
-  tsDocgenLoaderOptions?: {
-    tsconfigPath?: string;
-  };
-
-  /**
    * Overrides for Create React App's Webpack configuration.
    */
   craOverrides?: {

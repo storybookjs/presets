@@ -1,12 +1,7 @@
 module.exports = {
   stories: ['../src/**/*.stories.(tsx|mdx)'],
   addons: [
-    {
-      name: '@storybook/preset-create-react-app',
-      options: {
-        tsDocgenLoaderOptions: {},
-      },
-    },
+    '@storybook/preset-create-react-app',
     {
       name: '@storybook/addon-docs',
       options: {
