@@ -1,4 +1,5 @@
-import { join, relative, resolve } from 'path';
+import { join, relative, resolve, dirname } from 'path';
+import { existsSync } from 'fs';
 import { Configuration } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import { logger } from '@storybook/node-logger';
 import { mergePlugins } from './helpers/mergePlugins';
@@ -37,11 +38,21 @@ const webpack = (
   const scriptsPackageName = options[OPTION_SCRIPTS_PACKAGE];
   if (typeof scriptsPackageName === 'string') {
     try {
-      scriptsPath = require.resolve(scriptsPackageName);
+      scriptsPath = dirname(require.resolve(scriptsPackageName));
     } catch (e) {
-      logger.warn(
-        `A \`${OPTION_SCRIPTS_PACKAGE}\` was provided, but couldn't be resolved.`,
-      );
+      const fallbackPath = join(CWD, 'node_modules', scriptsPackageName);
+
+      // Fallback -- unaltered react-scripts does not define 'main' in package.json,
+      // which causes require.resolve() to fail
+      if (existsSync(fallbackPath)) {
+        logger.info(`=> Trying fallback scripts package path: ${fallbackPath}`);
+
+        scriptsPath = fallbackPath;
+      } else {
+        logger.warn(
+          `A \`${OPTION_SCRIPTS_PACKAGE}\` was provided, but couldn't be resolved.`,
+        );
+      }
     }
   }
 
