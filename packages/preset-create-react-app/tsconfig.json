@@ -3,9 +3,7 @@
     "declaration": true,
     "downlevelIteration": true,
     "esModuleInterop": true,
-    "lib": [
-      "esnext"
-    ],
+    "lib": ["esnext"],
     "outDir": "dist",
     "skipLibCheck": true,
     "sourceMap": true,
