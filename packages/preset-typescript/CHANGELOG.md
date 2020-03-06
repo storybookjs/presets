@@ -6,24 +6,7 @@
 
 - Remove builtin support for `react-docgen-typescript-loader`, which is React-specific [#68](https://github.com/storybookjs/presets/pull/68)
 
-**NOTE:** React users, we are recommending moving to `babel-plugin-react-docgen`, which is bundled as part of `@storybook/react` and now supports Typescript. If you need to manually configure your setup to add back `react-docgen-typescript-loader`, add the following to your `.storybook/main.js`:
-
-```js
-module.exports = {
-  webpack: async (config, { configType }) => ({
-    ...config,
-    module: {
-      ...config.module,
-      rules: [
-        ...config.module.rules,
-        {
-          loader: require.resolve('react-docgen-typescript-loader'),
-          options: {}, // your options here
-        },
-    }
-  }
-}
-```
+Starting in `v5.x`, `react-docgen` supports typescript natively, so we no longer recommend `react-docgen-typescript-loader` and have removed it from the preset. This is a breaking change and the migration is documented in [Storybook](https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#react-prop-tables-with-typescript).
 
 ## 1.2.2
 
