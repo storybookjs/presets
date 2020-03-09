@@ -1,5 +1,4 @@
 import { join, relative, resolve, dirname } from 'path';
-import { existsSync } from 'fs';
 import { Configuration } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import { logger } from '@storybook/node-logger';
 import { mergePlugins } from './helpers/mergePlugins';
