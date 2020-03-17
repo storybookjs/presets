@@ -1,6 +1,6 @@
 import { Plugin } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 
-const mergePlugins = (
+export const mergePlugins = (
   basePlugins: Plugin[] = [],
   additionalPlugins: Plugin[] = [],
 ): Plugin[] =>
@@ -15,5 +15,3 @@ const mergePlugins = (
     }
     return [...plugins, plugin];
   }, [] as Plugin[]);
-
-export { mergePlugins };

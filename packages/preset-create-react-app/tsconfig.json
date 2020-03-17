@@ -1,13 +1,6 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "declaration": true,
-    "downlevelIteration": true,
-    "esModuleInterop": true,
-    "lib": ["esnext"],
-    "outDir": "dist",
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "strict": true,
-    "target": "es5"
+    "outDir": "dist"
   }
 }

@@ -1,6 +1,6 @@
 # Storybook Presets
 
-![CircleCI master](https://circleci.com/gh/storybookjs/presets.svg?style=shield)
+![CI](https://github.com/storybookjs/presets/workflows/CI/badge.svg)
 
 Storybook presets are grouped collections of babel, webpack, and addons configurations that support specific use cases.
 

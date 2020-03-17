@@ -17,7 +17,7 @@ const testMatch = (rule: RuleSetRule, string: string): boolean => {
     : isRegExp(rule.test) && rule.test.test(string);
 };
 
-const processCraConfig = (
+export const processCraConfig = (
   craWebpackConfig: Configuration,
   options: Options,
 ): RuleSetRule[] => {
@@ -148,5 +148,3 @@ const processCraConfig = (
     return [...rules, rule];
   }, [] as RuleSetRule[]);
 };
-
-export { processCraConfig };

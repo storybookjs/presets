@@ -1,0 +1,22 @@
+{
+  "name": "example-ts-react",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "exit 0;",
+    "build-storybook": "build-storybook",
+    "storybook": "start-storybook"
+  },
+  "dependencies": {
+    "@babel/core": "^7.8.7",
+    "@storybook/addon-docs": "^5.3.14",
+    "@storybook/preset-typescript": "*",
+    "@storybook/react": "^5.3.17",
+    "@types/react": "^16.9.23",
+    "@types/react-dom": "^16.9.5",
+    "babel-loader": "^8.0.6",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "typescript": "^3.8.3"
+  }
+}

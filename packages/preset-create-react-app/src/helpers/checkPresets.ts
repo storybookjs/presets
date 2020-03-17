@@ -7,7 +7,7 @@ const incompatiblePresets = [
   '@storybook/preset-typescript',
 ];
 
-const checkPresets = (options: Options): void => {
+export const checkPresets = (options: Options): void => {
   let presetsList: Preset[] = options.presetsList || [];
 
   // Look for a legacy presets file if one exists.
@@ -30,5 +30,3 @@ const checkPresets = (options: Options): void => {
     }
   });
 };
-
-export { checkPresets };

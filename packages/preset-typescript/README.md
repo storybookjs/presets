@@ -5,7 +5,6 @@ One-line TypeScript configuration for Storybook.
 - [Installation](#installation)
 - [Advanced usage](#advanced-usage)
 - [Options](#options)
-  - [tsLoaderOptions](#tsloaderoptions)
   - [forkTsCheckerWebpackPluginOptions](#forktscheckerwebpackpluginoptions)
   - [include](#include)
   - [transpileManager](#transpilemanager)
@@ -64,20 +63,6 @@ module.exports = {
 All available options are described in the [Options](#options) section below.
 
 ## Options
-
-### tsLoaderOptions
-
-Type: `Object`
-
-<h5>Default value</h5>
-
-```js
-{
-  transpileOnly: true,
-};
-```
-
-[ts-loader](https://github.com/TypeStrong/ts-loader#loader-options) options. If set to `true` [fork-ts-checker-webpack-plugin](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin) gets enabled automatically to run the separate process for type checking.
 
 ### forkTsCheckerWebpackPluginOptions
 

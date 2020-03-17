@@ -1,7 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { resolve } = require('path');
 
 module.exports = {
-  stories: ['./stories/*.stories.*'],
+  stories: ['../src/**/*.stories.(tsx|mdx)'],
   addons: [
     {
       name: '@storybook/preset-typescript',
@@ -9,7 +10,13 @@ module.exports = {
         forkTsCheckerWebpackPluginOptions: {
           colors: false, // disables built-in colors in logger messages
         },
-        include: [resolve(__dirname)],
+        include: [resolve('../src')],
+      },
+    },
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        configureJSX: true,
       },
     },
   ],

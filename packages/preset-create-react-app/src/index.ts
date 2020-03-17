@@ -28,13 +28,15 @@ const resolveLoader = {
 };
 
 // Ensure that loaders are resolved from react-scripts.
-const managerWebpack = (webpackConfig: Configuration = {}): Configuration => ({
+export const managerWebpack = (
+  webpackConfig: Configuration = {},
+): Configuration => ({
   ...webpackConfig,
   resolveLoader,
 });
 
 // Update the core Webpack config.
-const webpack = (
+export const webpack = (
   webpackConfig: Configuration = {},
   options: Options,
 ): Configuration => {
@@ -122,6 +124,3 @@ const webpack = (
     resolveLoader,
   };
 };
-
-// eslint-disable-next-line import/no-default-export
-export default { managerWebpack, webpack };
