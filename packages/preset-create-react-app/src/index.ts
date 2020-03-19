@@ -49,12 +49,7 @@ const webpack = (
     try {
       scriptsPath = IS_USING_YARN_PNP
         ? getReactScriptsPathWithYarnPnp(scriptsPackageName)
-        : dirname(
-          require.resolve(`${scriptsPackageName}/package.json`),
-        );
-      scriptsPath = dirname(
-        require.resolve(`${scriptsPackageName}/package.json`),
-      );
+        : dirname(require.resolve(`${scriptsPackageName}/package.json`));
     } catch (e) {
       logger.warn(
         `A \`${OPTION_SCRIPTS_PACKAGE}\` was provided, but couldn't be resolved.`,
