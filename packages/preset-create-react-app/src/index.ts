@@ -1,4 +1,4 @@
-import { join, relative, resolve } from 'path';
+import { join, relative, resolve, dirname } from 'path';
 import { Configuration } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import { logger } from '@storybook/node-logger';
 import PnpWebpackPlugin from 'pnp-webpack-plugin';
@@ -49,7 +49,12 @@ const webpack = (
     try {
       scriptsPath = IS_USING_YARN_PNP
         ? getReactScriptsPathWithYarnPnp(scriptsPackageName)
-        : require.resolve(scriptsPackageName);
+        : dirname(
+          require.resolve(`${scriptsPackageName}/package.json`),
+        );
+      scriptsPath = dirname(
+        require.resolve(`${scriptsPackageName}/package.json`),
+      );
     } catch (e) {
       logger.warn(
         `A \`${OPTION_SCRIPTS_PACKAGE}\` was provided, but couldn't be resolved.`,
