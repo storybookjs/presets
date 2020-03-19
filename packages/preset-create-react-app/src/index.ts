@@ -1,4 +1,4 @@
-import { join, relative, resolve } from 'path';
+import { join, relative, resolve, dirname } from 'path';
 import { Configuration } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import { logger } from '@storybook/node-logger';
 import { mergePlugins } from './helpers/mergePlugins';
@@ -37,7 +37,9 @@ const webpack = (
   const scriptsPackageName = options[OPTION_SCRIPTS_PACKAGE];
   if (typeof scriptsPackageName === 'string') {
     try {
-      scriptsPath = require.resolve(scriptsPackageName);
+      scriptsPath = dirname(
+        require.resolve(`${scriptsPackageName}/package.json`),
+      );
     } catch (e) {
       logger.warn(
         `A \`${OPTION_SCRIPTS_PACKAGE}\` was provided, but couldn't be resolved.`,
