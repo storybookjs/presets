@@ -1,3 +1,7 @@
+## 2.1.0
+
+- Yarn PNP compatibility [#104](https://github.com/storybookjs/presets/pull/104)
+
 ## 2.0.0
 
 - Remove `react-docgen-typescript-loader` from the preset [#103](https://github.com/storybookjs/presets/pull/103)
