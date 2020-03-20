@@ -3,7 +3,8 @@
   "version": "2.1.0",
   "description": "TypeScript preset for Storybook",
   "license": "MIT",
-  "main": "index.js",
+  "main": "dist",
+  "types": "dist",
   "homepage": "https://github.com/storybookjs/presets/tree/master/packages/preset-typescript",
   "bugs": {
     "url": "https://github.com/storybookjs/presets/issues"
@@ -13,29 +14,27 @@
     "url": "https://github.com/storybookjs/presets.git",
     "directory": "packages/preset-typescript"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "exit 0",
-    "storybook": "start-storybook -p 8008"
+    "build": "rm -rf dist & tsc",
+    "build-watch": "yarn build -w",
+    "build-storybook": "exit 0;",
+    "prepublishOnly": "yarn build"
+  },
+  "dependencies": {
+    "@babel/preset-typescript": "^7.8.3",
+    "@storybook/node-logger": "^5.3.17",
+    "@types/babel__core": "^7.1.6",
+    "babel-preset-typescript-vue": "^1.0.3",
+    "fork-ts-checker-webpack-plugin": "^4.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.2",
-    "@storybook/react": "^5.3.14",
-    "@types/node": "^10.5.7",
-    "@types/react": "^16.9.23",
-    "@types/webpack": "^4.41.7",
-    "babel-loader": "^8.0.2",
-    "fork-ts-checker-webpack-plugin": "^4.0.5",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "ts-loader": "^6.2.1",
-    "ts-node": "^7.0.0",
     "typescript": "^3.8.3"
   },
   "peerDependencies": {
-    "@types/webpack": "*",
-    "fork-ts-checker-webpack-plugin": "*",
-    "ts-loader": "*",
-    "typescript": "^3.4"
+    "typescript": ">=3.4"
   },
   "publishConfig": {
     "access": "public"

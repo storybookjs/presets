@@ -1,7 +1,7 @@
 import { readFileSync, realpathSync } from 'fs';
 import { join } from 'path';
 
-const getReactScriptsPath = (): string => {
+export const getReactScriptsPath = (): string => {
   const cwd = process.cwd();
   const scriptsBinPath = join(cwd, '/node_modules/.bin/react-scripts');
 
@@ -55,11 +55,14 @@ const getReactScriptsPath = (): string => {
   return '';
 };
 
-const getReactScriptsPathWithYarnPnp = (
+export const getReactScriptsPathWithYarnPnp = (
   packageName = 'react-scripts',
 ): string => {
-  // Use Plug'n'Play API to introspect the dependency tree at runtime, see: https://yarnpkg.com/advanced/pnpapi
-  // eslint-disable-next-line import/no-unresolved,@typescript-eslint/no-var-requires,global-require
+  /*
+   * Use Plug'n'Play API to introspect the dependency tree at runtime.
+   * See https://yarnpkg.com/advanced/pnpapi for more.
+   */
+  // eslint-disable-next-line import/no-unresolved, @typescript-eslint/no-var-requires, global-require
   const pnpApi = require('pnpapi');
 
   // Get list of all dependencies of the project
@@ -68,14 +71,14 @@ const getReactScriptsPathWithYarnPnp = (
     reference: null,
   });
 
-  // Get location of the package named `packageName`, this package must be
-  // listed as dependency to be able to find it's location (and no more just
-  // be present in node_modules folder)
+  /*
+   * Get location of the package named `packageName`, this package must be
+   * listed as dependency to be able to find it's location (and no more just
+   * be present in node_modules folder)
+   */
   const { packageLocation } = pnpApi.getPackageInformation(
     pnpApi.getLocator(packageName, packageDependencies.get(packageName)),
   );
 
   return packageLocation;
 };
-
-export { getReactScriptsPath, getReactScriptsPathWithYarnPnp };

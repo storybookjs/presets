@@ -9,11 +9,9 @@ examples/*/src/serviceWorker.*
 examples/*/build
 examples/*/storybook-static
 
-# TODO
+# TODO: Refactor to TypeScript, and our style conventions.
 packages/preset-ant-design
 packages/preset-scss
-packages/preset-storysource
-packages/preset-typescript
 
 # ESLint ignores 'hidden' folders by default.
 !.storybook

@@ -1,3 +1,5 @@
+import { PluginItem } from '@babel/core'; // eslint-disable-line import/no-extraneous-dependencies
+
 export type Preset = string | { name: string };
 
 export interface Options {
@@ -15,12 +17,11 @@ export interface Options {
   };
 
   // TODO: Expose these from Storybook.
-  /* eslint-disable @typescript-eslint/no-explicit-any */
   configDir: string;
   babelOptions: {
-    extends: any;
-    plugins: any;
-    presets: any;
+    extends: string | null;
+    plugins: PluginItem[] | null;
+    presets: PluginItem[] | null;
   };
   presetsList: Preset[];
   packageJson: {

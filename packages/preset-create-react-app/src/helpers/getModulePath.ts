@@ -4,7 +4,7 @@ import { join } from 'path';
 const JSCONFIG = 'jsconfig.json';
 const TSCONFIG = 'tsconfig.json';
 
-const getModulePath = (appDirectory: string): string[] => {
+export const getModulePath = (appDirectory: string): string[] => {
   // CRA only supports `jsconfig.json` if `tsconfig.json` doesn't exist.
   let configName = '';
   if (existsSync(join(appDirectory, TSCONFIG))) {
@@ -21,5 +21,3 @@ const getModulePath = (appDirectory: string): string[] => {
     return [];
   }
 };
-
-export { getModulePath };

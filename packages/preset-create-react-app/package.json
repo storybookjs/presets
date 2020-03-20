@@ -10,6 +10,7 @@
     "url": "https://github.com/storybookjs/presets/issues"
   },
   "repository": {
+    "type": "git",
     "url": "https://github.com/storybookjs/presets.git",
     "directory": "packages/preset-create-react-app"
   },
@@ -19,10 +20,12 @@
   "scripts": {
     "build": "rm -rf dist & tsc",
     "build-watch": "yarn build -w",
+    "build-storybook": "exit 0;",
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "@storybook/node-logger": "^5.3.14",
+    "@storybook/node-logger": "^5.3.17",
+    "@types/babel__core": "^7.1.6",
     "@types/webpack": "^4.41.7",
     "pnp-webpack-plugin": "^1.6.4",
     "semver": "^7.1.3"

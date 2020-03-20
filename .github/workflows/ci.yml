@@ -62,4 +62,6 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile --prefer-offline
       - name: Build all projects
-        run: yarn workspaces run build
+        run: |
+          yarn workspaces run build
+          yarn workspaces run build-storybook
