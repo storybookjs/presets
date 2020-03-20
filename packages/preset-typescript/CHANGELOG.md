@@ -1,3 +1,7 @@
+## 3.0.0-alpha.0
+
+- Use babel to process typescript [#115](https://github.com/storybookjs/presets/pull/115)
+
 ## 2.1.0
 
 - Improve compatibility with Vue [#108](https://github.com/storybookjs/presets/pull/108)
