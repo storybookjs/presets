@@ -1,3 +1,7 @@
+## 3.0.0-alpha.1
+
+- Fix for nullish babel include [#117](https://github.com/storybookjs/presets/pull/117)
+
 ## 3.0.0-alpha.0
 
 - Use babel to process typescript [#115](https://github.com/storybookjs/presets/pull/115)

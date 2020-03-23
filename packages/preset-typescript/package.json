@@ -1,6 +1,6 @@
 {
   "name": "@storybook/preset-typescript",
-  "version": "3.0.0-alpha.0",
+  "version": "3.0.0-alpha.1",
   "description": "TypeScript preset for Storybook",
   "license": "MIT",
   "main": "dist",
