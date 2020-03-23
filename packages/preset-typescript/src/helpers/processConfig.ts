@@ -26,7 +26,7 @@ export const processConfig = (
     if (isBabelRule) {
       return {
         ...rule,
-        include: [...rule.include, ...include],
+        include: [...(rule.include || []), ...include],
         test: new RegExp(
           `\\.(${['mjs', 'js', 'jsx', ...tsExtensions]
             .join('|')
