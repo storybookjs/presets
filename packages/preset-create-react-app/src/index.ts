@@ -21,6 +21,12 @@ const REACT_SCRIPTS_PATH = IS_USING_YARN_PNP
   : getReactScriptsPath();
 const OPTION_SCRIPTS_PACKAGE = 'scriptsPackageName';
 
+// Ensures that assets are served from the correct path when Storybook is built.
+// Resolves: https://github.com/storybookjs/storybook/issues/4645
+if (!process.env.PUBLIC_URL) {
+  process.env.PUBLIC_URL = '.';
+}
+
 // This loader is shared by both the `managerWebpack` and `webpack` functions.
 const resolveLoader = {
   modules: ['node_modules', join(REACT_SCRIPTS_PATH, 'node_modules')],
