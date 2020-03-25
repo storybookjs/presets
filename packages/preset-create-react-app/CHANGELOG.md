@@ -1,3 +1,7 @@
+## 2.1.1
+
+- Set PUBLIC_URL if not set [#104](https://github.com/storybookjs/presets/pull/104)
+
 ## 2.1.0
 
 - Yarn PNP compatibility [#104](https://github.com/storybookjs/presets/pull/104)
