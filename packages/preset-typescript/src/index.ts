@@ -1,10 +1,9 @@
-import { Configuration } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
+import { Configuration, Module, RuleSetRule } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import { Options } from './options';
 import { processConfig } from './helpers/processConfig';
 import { isCompatible } from './helpers/isCompatible';
 
 const babelPresetTypeScript = require.resolve('@babel/preset-typescript');
-const babelPresetVueTypeScript = require.resolve('babel-preset-typescript-vue');
 
 export const babel = (
   config: Options['babelOptions'],
@@ -13,10 +12,7 @@ export const babel = (
   if (!isCompatible(options, true)) return config;
 
   const { presets = [] } = config;
-  const preset =
-    options.framework === 'vue'
-      ? babelPresetVueTypeScript
-      : babelPresetTypeScript;
+  const preset = babelPresetTypeScript;
   return {
     ...config,
     presets: [...presets, preset],
@@ -63,7 +59,36 @@ export const webpack = (
         vue: options.forkTsCheckerWebpackPluginOptions?.vue ?? true,
       },
     };
-    return processConfig(webpackConfig, updatedOptions);
+
+    const { tsLoaderOptions = { transpileOnly: true } } = options;
+    tsLoaderOptions.appendTsSuffixTo = [
+      ...(tsLoaderOptions.appendTsSuffixTo || []),
+      /\.vue$/,
+    ];
+
+    const tsLoader: RuleSetRule = {
+      test: /\.tsx?$/,
+      use: [
+        {
+          loader: require.resolve('ts-loader'),
+          options: tsLoaderOptions,
+        },
+      ],
+    };
+
+    if (options.include) {
+      tsLoader.include = options.include;
+    }
+
+    const module: Module = webpackConfig.module || { rules: [] };
+    const updatedWebpack = {
+      ...webpackConfig,
+      module: {
+        ...module,
+        rules: [...module.rules, tsLoader],
+      },
+    };
+    return processConfig(updatedWebpack, updatedOptions);
   }
 
   return processConfig(webpackConfig, options);

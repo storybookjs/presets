@@ -28,4 +28,7 @@ export interface Options {
     presets: PluginItem[] | null;
   };
   framework: 'angular' | 'react' | 'vue'; // NOTE: Non-exhaustive list.
+
+  // TODO: Proper typing
+  tsLoaderOptions: any;
 }

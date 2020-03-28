@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "strict": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true
+  },
+  "include": ["src", ".storybook/*"]
+}
