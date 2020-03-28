@@ -4,6 +4,7 @@ import { processConfig } from './helpers/processConfig';
 import { isCompatible } from './helpers/isCompatible';
 
 const babelPresetTypeScript = require.resolve('@babel/preset-typescript');
+const babelPresetVueTypeScript = require.resolve('babel-preset-typescript-vue');
 
 export const babel = (
   config: Options['babelOptions'],
@@ -12,7 +13,10 @@ export const babel = (
   if (!isCompatible(options, true)) return config;
 
   const { presets = [] } = config;
-  const preset = babelPresetTypeScript;
+  const preset =
+    options.framework === 'vue'
+      ? babelPresetVueTypeScript
+      : babelPresetTypeScript;
   return {
     ...config,
     presets: [...presets, preset],
