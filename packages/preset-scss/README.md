@@ -33,3 +33,24 @@ module.exports = [
   },
 ];
 ```
+
+## Advanced usage with main.js
+Using `.storybook/presets.js` with `.storybook/main.js` is not possible anymore. You can pass the configurations through `main.js` by using Object addon declaration under the `addons` key. You can register other addons through the string declaration as normal.
+```
+module.exports = {
+  addons: [
+    {
+      name: '@storybook/preset-scss',
+      options: {
+        cssLoaderOptions: {
+           modules: true,
+           localIdentName: '[name]__[local]--[hash:base64:5]',
+        }
+      }
+    },
+    // You can add other presets/addons by using the string declaration
+    '@storybook/preset-typescript',
+    '@storybook/addon-actions',
+  ]
+}
+```
