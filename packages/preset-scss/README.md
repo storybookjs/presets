@@ -12,11 +12,12 @@ Then add the following to `.storybook/main.js`:
 
 ```js
 module.exports = {
-  addons: ['@storybook/preset-scss']
+  addons: ['@storybook/preset-scss'],
 };
 ```
 
 ## Advanced usage
+
 You can pass configurations by using Object addon declaration for `@storybook/preset-scss` and adding the configurations under the `option` key. You can pass configurations into the preset's webpack loaders using `styleLoaderOptions`, `cssLoaderOptions`, and `sassLoaderOptions` keys. See documentation for each respective loader to learn about valid options. You can register other addons through the string declaration as normal.
 
 ```
