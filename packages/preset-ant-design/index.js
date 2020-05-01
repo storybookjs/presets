@@ -18,8 +18,10 @@ const webpack = (webpackConfig = {}, options = { lessOptions: {} }) => {
             {
               loader: 'less-loader',
               options: {
-                ...options.lessOptions,
-                javascriptEnabled: true,
+                lessOptions : {
+                  ...options.lessOptions,
+                  javascriptEnabled: true,
+                }
               },
             },
           ],
