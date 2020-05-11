@@ -1,3 +1,7 @@
+## 2.1.2
+
+- Make `@storybook/node-logger` dependency less strict [#138](https://github.com/storybookjs/presets/pull/138)
+
 ## 2.1.1
 
 - Set PUBLIC_URL if not set [#104](https://github.com/storybookjs/presets/pull/104)
