@@ -2,8 +2,9 @@
 import React, { FC, ReactNode } from 'react';
 import logo, { ReactComponent as LogoSvg } from '../../assets/logo.svg';
 import styles from './Button.module.scss';
+import { SomeProps } from './someProps';
 
-interface ButtonProps {
+interface ButtonProps extends SomeProps {
   /**
    * The content of the button.
    */
