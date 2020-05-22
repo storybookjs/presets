@@ -1,3 +1,10 @@
+## 3.0.0
+
+Reverse course on typescript docgen handling [#142](https://github.com/storybookjs/presets/pull/142)
+
+- Add back `react-docgen-typescript-loader` to the preset
+- Add compatibility with SB6's main.js `typescript` setting
+
 ## 2.1.2
 
 - Make `@storybook/node-logger` dependency less strict [#138](https://github.com/storybookjs/presets/pull/138)

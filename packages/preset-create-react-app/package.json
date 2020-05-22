@@ -1,6 +1,6 @@
 {
   "name": "@storybook/preset-create-react-app",
-  "version": "2.1.2",
+  "version": "3.0.0",
   "description": "Create React App preset for Storybook",
   "license": "MIT",
   "main": "dist",
