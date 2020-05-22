@@ -27,4 +27,9 @@ export interface Options {
   packageJson: {
     version: string;
   };
+  typescriptOptions: {
+    // eslint-disable-next-line
+    reactDocgenTypescriptOptions: any;
+    reactDocgen: 'react-docgen' | 'react-docgen-typescript' | null;
+  };
 }

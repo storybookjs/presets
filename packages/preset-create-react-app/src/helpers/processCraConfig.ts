@@ -122,6 +122,25 @@ export const processCraConfig = (
                     extends: _extends,
                     plugins: [...plugins, ...rulePlugins],
                     presets: [...presets, ...rulePresets],
+                    // A temporary fix to align with Storybook 6.
+                    overrides: [
+                      {
+                        test:
+                          options.typescriptOptions?.reactDocgen ===
+                          'react-docgen'
+                            ? /\.(mjs|tsx?|jsx?)$/
+                            : /\.(mjs|jsx?)$/,
+                        plugins: [
+                          [
+                            require.resolve('babel-plugin-react-docgen'),
+                            {
+                              DOC_GEN_COLLECTION_NAME:
+                                'STORYBOOK_REACT_CLASSES',
+                            },
+                          ],
+                        ],
+                      },
+                    ],
                   },
                 };
               }

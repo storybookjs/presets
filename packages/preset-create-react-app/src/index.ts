@@ -109,12 +109,30 @@ export const webpack = (
     },
   );
 
+  // A temporary fix to align with Storybook 6.
+  const { typescriptOptions } = options;
+  const tsDocgenRule =
+    !typescriptOptions ||
+    typescriptOptions.reactDocgen === 'react-docgen-typescript'
+      ? [
+          {
+            test: /\.tsx?$/,
+            use: [
+              {
+                loader: require.resolve('react-docgen-typescript-loader'),
+                options: typescriptOptions?.reactDocgenTypescriptOptions,
+              },
+            ],
+          },
+        ]
+      : [];
+
   // Return the new config.
   return {
     ...webpackConfig,
     module: {
       ...webpackConfig.module,
-      rules: [...(filteredRules || []), ...craRules],
+      rules: [...(filteredRules || []), ...craRules, ...tsDocgenRule],
     },
     plugins: mergePlugins(webpackConfig.plugins, craWebpackConfig.plugins),
     resolve: {
