@@ -33,6 +33,15 @@ const resolveLoader = {
   plugins: [PnpWebpackPlugin.moduleLoader(module)],
 };
 
+// Don't use Storybook's default Babel config.
+export const babelDefault = (): Record<
+  string,
+  (string | [string, object])[]
+> => ({
+  presets: [],
+  plugins: [],
+});
+
 // Ensure that loaders are resolved from react-scripts.
 export const managerWebpack = (
   webpackConfig: Configuration = {},
