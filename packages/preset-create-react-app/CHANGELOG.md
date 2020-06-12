@@ -1,3 +1,7 @@
+## 3.0.1
+
+- Ignore default babel Config from Storybook [#147](https://github.com/storybookjs/presets/pull/147)
+
 ## 3.0.0
 
 Reverse course on typescript docgen handling [#142](https://github.com/storybookjs/presets/pull/142)
