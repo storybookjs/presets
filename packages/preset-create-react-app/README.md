@@ -39,8 +39,6 @@ Once installed, add this preset to the appropriate file:
 When working with Storybook Docs, simply add the following config to your `main.js` file.
 
 ```js
-const path = require('path');
-
 module.exports = {
   addons: [
     '@storybook/preset-create-react-app',
