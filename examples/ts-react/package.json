@@ -9,9 +9,9 @@
   },
   "dependencies": {
     "@babel/core": "^7.8.7",
-    "@storybook/addon-docs": "^5.3.14",
+    "@storybook/addon-docs": "^5.3.19",
     "@storybook/preset-typescript": "*",
-    "@storybook/react": "^5.3.17",
+    "@storybook/react": "^5.3.19",
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
     "babel-loader": "^8.0.6",

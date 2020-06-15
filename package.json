@@ -40,12 +40,12 @@
     ]
   },
   "resolutions": {
-    "babel-loader": "8.0.6"
+    "babel-loader": "8.1.0"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
-    "babel-eslint": "10.0.3",
+    "babel-eslint": "10.1.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^6.10.0",
@@ -58,7 +58,7 @@
     "husky": "^4.2.3",
     "jest": "24.9.0",
     "lint-staged": "^10.0.8",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.5",
     "shelljs": "^0.8.2"
   }
 }

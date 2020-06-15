@@ -34,10 +34,13 @@
   },
   "devDependencies": {
     "@types/semver": "^7.2.0",
+    "react-docgen-typescript-plugin": "^0.4.0",
     "typescript": "^3.9.3"
   },
   "peerDependencies": {
+    "@babel/core": "*",
     "@storybook/react": ">=5.2",
+    "react-docgen-typescript-plugin": ">=0.4.0",
     "react-scripts": ">=3.0.0"
   },
   "publishConfig": {

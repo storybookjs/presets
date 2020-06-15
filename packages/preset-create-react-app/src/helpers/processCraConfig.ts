@@ -1,7 +1,7 @@
 import { resolve } from 'path';
 import { Configuration, RuleSetRule } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import semver from 'semver';
-import { Options } from '../options';
+import { StorybookConfig } from '../types';
 
 const isRegExp = (value: RegExp | unknown): value is RegExp =>
   value instanceof RegExp;
@@ -13,13 +13,13 @@ const isString = (value: string | unknown): value is string =>
 const testMatch = (rule: RuleSetRule, string: string): boolean => {
   if (!rule.test) return false;
   return Array.isArray(rule.test)
-    ? rule.test.some(test => isRegExp(test) && test.test(string))
+    ? rule.test.some((test) => isRegExp(test) && test.test(string))
     : isRegExp(rule.test) && rule.test.test(string);
 };
 
 export const processCraConfig = (
   craWebpackConfig: Configuration,
-  options: Options,
+  options: StorybookConfig,
 ): RuleSetRule[] => {
   const configDir = resolve(options.configDir);
 
