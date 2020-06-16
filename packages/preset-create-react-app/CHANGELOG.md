@@ -1,3 +1,7 @@
+## 3.1.0
+
+- Move to react-docgen-typescript-plugin [#149](https://github.com/storybookjs/presets/pull/149)
+
 ## 3.0.1
 
 - Ignore default babel Config from Storybook [#147](https://github.com/storybookjs/presets/pull/147)
