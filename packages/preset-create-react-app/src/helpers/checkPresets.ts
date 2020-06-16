@@ -1,13 +1,13 @@
 import { join, resolve } from 'path';
 import { logger } from '@storybook/node-logger';
-import { Preset, Options } from '../options';
+import { Preset, StorybookConfig } from '../types';
 
 const incompatiblePresets = [
   '@storybook/preset-scss',
   '@storybook/preset-typescript',
 ];
 
-export const checkPresets = (options: Options): void => {
+export const checkPresets = (options: StorybookConfig): void => {
   let presetsList: Preset[] = options.presetsList || [];
 
   // Look for a legacy presets file if one exists.

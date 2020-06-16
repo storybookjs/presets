@@ -9,9 +9,9 @@
   },
   "dependencies": {
     "@babel/core": "^7.8.7",
-    "@storybook/addon-docs": "^5.3.14",
+    "@storybook/addon-docs": "^5.3.19",
     "@storybook/preset-typescript": "*",
-    "@storybook/vue": "^5.3.14",
+    "@storybook/vue": "^5.3.19",
     "babel-loader": "^8.0.6",
     "babel-preset-vue": "^2.0.2",
     "typescript": "^3.8.3",

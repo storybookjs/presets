@@ -1,7 +1,8 @@
 import { join, relative, resolve, dirname } from 'path';
-import { Configuration } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
+import { Configuration, Plugin } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import { logger } from '@storybook/node-logger';
 import PnpWebpackPlugin from 'pnp-webpack-plugin';
+import ReactDocgenTypescriptPlugin from 'react-docgen-typescript-plugin';
 import { mergePlugins } from './helpers/mergePlugins';
 import {
   getReactScriptsPath,
@@ -10,7 +11,7 @@ import {
 import { processCraConfig } from './helpers/processCraConfig';
 import { checkPresets } from './helpers/checkPresets';
 import { getModulePath } from './helpers/getModulePath';
-import { Options } from './options';
+import { StorybookConfig } from './types';
 
 const CWD = process.cwd();
 // When operating under PnP environments, this value will be set to a number
@@ -53,7 +54,7 @@ export const managerWebpack = (
 // Update the core Webpack config.
 export const webpack = (
   webpackConfig: Configuration = {},
-  options: Options,
+  options: StorybookConfig,
 ): Configuration => {
   let scriptsPath = REACT_SCRIPTS_PATH;
 
@@ -118,21 +119,19 @@ export const webpack = (
     },
   );
 
-  // A temporary fix to align with Storybook 6.
-  const { typescriptOptions } = options;
-  const tsDocgenRule =
-    !typescriptOptions ||
+  // NOTE: These are set by default in Storybook 6.
+  const {
+    typescriptOptions = {
+      reactDocgen: 'react-docgen-typescript',
+      reactDocgenTypescriptOptions: {},
+    },
+  } = options;
+  const tsDocgenPlugin =
     typescriptOptions.reactDocgen === 'react-docgen-typescript'
       ? [
-          {
-            test: /\.tsx?$/,
-            use: [
-              {
-                loader: require.resolve('react-docgen-typescript-loader'),
-                options: typescriptOptions?.reactDocgenTypescriptOptions,
-              },
-            ],
-          },
+          new ReactDocgenTypescriptPlugin(
+            typescriptOptions.reactDocgenTypescriptOptions,
+          ),
         ]
       : [];
 
@@ -141,9 +140,13 @@ export const webpack = (
     ...webpackConfig,
     module: {
       ...webpackConfig.module,
-      rules: [...(filteredRules || []), ...craRules, ...tsDocgenRule],
+      rules: [...(filteredRules || []), ...craRules],
     },
-    plugins: mergePlugins(webpackConfig.plugins, craWebpackConfig.plugins),
+    plugins: mergePlugins(
+      webpackConfig.plugins || ([] as Plugin[]),
+      craWebpackConfig.plugins,
+      tsDocgenPlugin,
+    ),
     resolve: {
       ...webpackConfig.resolve,
       extensions: craWebpackConfig.resolve.extensions,

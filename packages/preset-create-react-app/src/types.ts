@@ -1,8 +1,10 @@
-import { PluginItem } from '@babel/core'; // eslint-disable-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
+import type { PluginItem } from '@babel/core';
+import type { PluginOptions } from 'react-docgen-typescript-plugin';
 
 export type Preset = string | { name: string };
 
-export interface Options {
+export interface StorybookConfig {
   /**
    * Optionally set the package name of a react-scripts fork.
    * In most cases, the package is located automatically by this preset.
@@ -16,7 +18,7 @@ export interface Options {
     fileLoaderExcludes?: string[];
   };
 
-  // TODO: Expose these from Storybook.
+  // TODO: Expose these from Storybook, will require Storybook 6.
   configDir: string;
   babelOptions: {
     extends: string | null;
@@ -27,9 +29,9 @@ export interface Options {
   packageJson: {
     version: string;
   };
-  typescriptOptions: {
-    // eslint-disable-next-line
-    reactDocgenTypescriptOptions: any;
-    reactDocgen: 'react-docgen' | 'react-docgen-typescript' | null;
+  // This always exists from Storybook 6, but not for older versions.
+  typescriptOptions?: {
+    reactDocgen: 'react-docgen-typescript' | 'react-docgen' | false;
+    reactDocgenTypescriptOptions: PluginOptions;
   };
 }

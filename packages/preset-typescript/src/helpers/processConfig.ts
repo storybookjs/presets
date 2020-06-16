@@ -14,12 +14,12 @@ export const processConfig = (
   const { resolve = {}, plugins = [], module } = webpackConfig;
   const { forkTsCheckerWebpackPluginOptions, include = [] } = options;
 
-  const rules = module?.rules.map(rule => {
+  const rules = module?.rules.map((rule) => {
     // Find the rule containing 'babel-loader'
     const isBabelRule =
       Array.isArray(rule.use) &&
       rule.use.find(
-        use => isLoader(use) && use.loader?.includes('babel-loader'),
+        (use) => isLoader(use) && use.loader?.includes('babel-loader'),
       );
 
     // If this is the
