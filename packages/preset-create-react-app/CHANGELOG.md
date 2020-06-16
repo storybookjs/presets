@@ -1,3 +1,7 @@
+## 3.1.1
+
+- Fix react-docgen-typescript-plugin deps [#151](https://github.com/storybookjs/presets/pull/151)
+
 ## 3.1.0
 
 - Move to react-docgen-typescript-plugin [#149](https://github.com/storybookjs/presets/pull/149)
