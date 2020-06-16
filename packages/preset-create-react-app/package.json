@@ -29,18 +29,16 @@
     "@types/webpack": "^4.41.13",
     "babel-plugin-react-docgen": "^4.1.0",
     "pnp-webpack-plugin": "^1.6.4",
-    "react-docgen-typescript-loader": "^3.7.2",
+    "react-docgen-typescript-plugin": "^0.4.0",
     "semver": "^7.3.2"
   },
   "devDependencies": {
     "@types/semver": "^7.2.0",
-    "react-docgen-typescript-plugin": "^0.4.0",
     "typescript": "^3.9.3"
   },
   "peerDependencies": {
     "@babel/core": "*",
     "@storybook/react": ">=5.2",
-    "react-docgen-typescript-plugin": ">=0.4.0",
     "react-scripts": ">=3.0.0"
   },
   "publishConfig": {
