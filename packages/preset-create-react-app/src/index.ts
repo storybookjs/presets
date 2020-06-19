@@ -1,5 +1,5 @@
 import { join, relative, resolve, dirname } from 'path';
-import { Configuration, Plugin } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
+import { Configuration } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import { logger } from '@storybook/node-logger';
 import PnpWebpackPlugin from 'pnp-webpack-plugin';
 import ReactDocgenTypescriptPlugin from 'react-docgen-typescript-plugin';
@@ -143,9 +143,9 @@ export const webpack = (
       rules: [...(filteredRules || []), ...craRules],
     },
     plugins: mergePlugins(
-      webpackConfig.plugins || ([] as Plugin[]),
-      craWebpackConfig.plugins,
-      tsDocgenPlugin,
+      ...(webpackConfig.plugins || []),
+      ...craWebpackConfig.plugins,
+      ...tsDocgenPlugin,
     ),
     resolve: {
       ...webpackConfig.resolve,
