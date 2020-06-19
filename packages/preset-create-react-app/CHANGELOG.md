@@ -1,3 +1,7 @@
+## 3.1.2
+
+- Restore node@10 compatibility [#154](https://github.com/storybookjs/presets/pull/154)
+
 ## 3.1.1
 
 - Fix react-docgen-typescript-plugin deps [#151](https://github.com/storybookjs/presets/pull/151)
