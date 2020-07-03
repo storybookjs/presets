@@ -24,7 +24,6 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "@storybook/node-logger": "*",
     "@types/babel__core": "^7.1.7",
     "@types/webpack": "^4.41.13",
     "babel-plugin-react-docgen": "^4.1.0",
@@ -33,11 +32,13 @@
     "semver": "^7.3.2"
   },
   "devDependencies": {
+    "@storybook/node-logger": "^5.3.19",
     "@types/semver": "^7.2.0",
     "typescript": "^3.9.3"
   },
   "peerDependencies": {
     "@babel/core": "*",
+    "@storybook/node-logger": "*",
     "@storybook/react": ">=5.2",
     "react-scripts": ">=3.0.0"
   },
