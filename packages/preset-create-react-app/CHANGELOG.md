@@ -1,3 +1,7 @@
+## 3.1.3
+
+- Move node-logger to peer deps [#156](https://github.com/storybookjs/presets/pull/156)
+
 ## 3.1.2
 
 - Restore node@10 compatibility [#154](https://github.com/storybookjs/presets/pull/154)
