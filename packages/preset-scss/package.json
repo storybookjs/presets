@@ -31,6 +31,7 @@
   },
   "peerDependencies": {
     "css-loader": "*",
+    "node-sass": "*",
     "sass-loader": "*",
     "style-loader": "*"
   },
