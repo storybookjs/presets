@@ -1,3 +1,7 @@
+## 3.1.4
+
+- Upgrade react-docgen-typescript-plugin to 0.5.x [#158](https://github.com/storybookjs/presets/pull/158)
+
 ## 3.1.3
 
 - Move node-logger to peer deps [#156](https://github.com/storybookjs/presets/pull/156)
