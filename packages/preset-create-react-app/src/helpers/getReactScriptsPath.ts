@@ -2,18 +2,16 @@ import { readFileSync, realpathSync } from 'fs';
 import { join, dirname } from 'path';
 
 export const getReactScriptsPath = (): string => {
-  
-  
   /*
    * Try to find the `react-scripts` package by name (won't catch forked scripts packages).
    */
   try {
-    var scriptsPath = require.resolve("react-scripts/package.json");
+    const scriptsPath = require.resolve('react-scripts/package.json');
     return dirname(scriptsPath);
   } catch (e) {
     // NOOP
   }
-  
+
   const cwd = process.cwd();
   const scriptsBinPath = join(cwd, '/node_modules/.bin/react-scripts');
 
