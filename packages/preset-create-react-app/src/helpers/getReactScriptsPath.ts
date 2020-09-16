@@ -1,5 +1,4 @@
-import { readFileSync, realpathSync } from 'fs';
-import { join, dirname } from 'path';
+import { dirname } from 'path';
 
 export const getReactScriptsPath = (): string => {
   /*
@@ -11,47 +10,6 @@ export const getReactScriptsPath = (): string => {
   } catch (e) {
     // NOOP
   }
-
-  const cwd = process.cwd();
-  const scriptsBinPath = join(cwd, '/node_modules/.bin/react-scripts');
-
-  if (process.platform === 'win32') {
-    /*
-     * Try to find the scripts package on Windows by following the `react-scripts` CMD file.
-     * https://github.com/storybookjs/storybook/issues/5801
-     */
-    try {
-      const content = readFileSync(scriptsBinPath, 'utf8');
-      // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
-      const packagePathMatch = content.match(
-        /"\$basedir[\\/](\S+?)[\\/]bin[\\/]react-scripts\.js"/i,
-      );
-
-      if (packagePathMatch && packagePathMatch.length > 1) {
-        const scriptsPath = join(
-          cwd,
-          '/node_modules/.bin/',
-          packagePathMatch[1],
-        );
-        return scriptsPath;
-      }
-    } catch (e) {
-      // NOOP
-    }
-  } else {
-    /*
-     * Try to find the scripts package by following the `react-scripts` symlink.
-     * This won't work for Windows users, unless within WSL.
-     */
-    try {
-      const resolvedBinPath = realpathSync(scriptsBinPath);
-      const scriptsPath = join(resolvedBinPath, '..', '..');
-      return scriptsPath;
-    } catch (e) {
-      // NOOP
-    }
-  }
-
   return '';
 };
 
