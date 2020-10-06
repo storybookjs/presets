@@ -30,9 +30,9 @@ function webpack(webpackConfig = {}, options = {}) {
           test: /\.s[ca]ss$/,
           ...rule,
           use: [
-            ...wrapLoader('style-loader', styleLoaderOptions),
-            ...wrapLoader('css-loader', cssLoaderOptions),
-            ...wrapLoader('sass-loader', sassLoaderOptions),
+            ...wrapLoader(require.resolve('style-loader'), styleLoaderOptions),
+            ...wrapLoader(require.resolve('css-loader'), cssLoaderOptions),
+            ...wrapLoader(require.resolve('sass-loader'), sassLoaderOptions),
           ],
         },
       ],
