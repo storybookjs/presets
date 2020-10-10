@@ -9,4 +9,4 @@ you can simply use the @storybook/preset-typescript package, which does the heav
 
 This repo is the collection of presets maintained by the storybook team
 
-Check the [Preset Gallery](https://github.com/storybookjs/storybook/blob/next/docs/src/pages/presets/preset-gallery/index.md) for a list of available presets
+Check the [Preset Gallery](https://storybook.js.org/docs/react/api/presets) for a list of available presets
