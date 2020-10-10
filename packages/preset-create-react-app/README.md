@@ -6,6 +6,8 @@ This preset is designed to use alongside [`@storybook/react`](https://github.com
 
 ## Basic usage
 
+**Note: you don't need to do this manually** if you used `npx -p @storybook/cli sb init` on a create-react-app, everything should properly setup already ✅.
+
 First, install this preset to your project.
 
 ```sh
