@@ -1,3 +1,8 @@
+## 3.1.5
+
+- Fix duplicate ReactDocgenTypescriptPlugin [#173](https://github.com/storybookjs/presets/pull/173)
+- Bump react-docgen-typescript-plugin to 0.6.2 [#174](https://github.com/storybookjs/presets/pull/174)
+
 ## 3.1.4
 
 - Upgrade react-docgen-typescript-plugin to 0.5.x [#158](https://github.com/storybookjs/presets/pull/158)
