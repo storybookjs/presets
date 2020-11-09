@@ -1,5 +1,6 @@
 import { join, relative, resolve, dirname } from 'path';
 import { Configuration } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
+import semver from 'semver';
 import { logger } from '@storybook/node-logger';
 import PnpWebpackPlugin from 'pnp-webpack-plugin';
 import ReactDocgenTypescriptPlugin from 'react-docgen-typescript-plugin';
@@ -120,6 +121,7 @@ export const webpack = (
   );
 
   // NOTE: These are set by default in Storybook 6.
+  const isStorybook6 = semver.gte(options.packageJson.version || '', '6.0.0');
   const {
     typescriptOptions = {
       reactDocgen: 'react-docgen-typescript',
@@ -127,7 +129,7 @@ export const webpack = (
     },
   } = options;
   const tsDocgenPlugin =
-    typescriptOptions.reactDocgen === 'react-docgen-typescript'
+    !isStorybook6 && typescriptOptions.reactDocgen === 'react-docgen-typescript'
       ? [
           new ReactDocgenTypescriptPlugin(
             typescriptOptions.reactDocgenTypescriptOptions,
