@@ -1,0 +1,40 @@
+{
+  "name": "@storybook/preset-ie11",
+  "version": "1.0.0",
+  "description": "IE11 preset for Storybook",
+  "license": "MIT",
+  "main": "dist",
+  "types": "dist",
+  "homepage": "https://github.com/storybookjs/presets/tree/master/packages/preset-ie11",
+  "bugs": {
+    "url": "https://github.com/storybookjs/presets/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storybookjs/presets.git",
+    "directory": "packages/preset-ie11"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rm -rf dist & tsc",
+    "build-watch": "yarn build -w",
+    "build-storybook": "exit 0;",
+    "prepublishOnly": "yarn build"
+  },
+  "dependencies": {
+    "@babel/plugin-transform-classes": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
+    "@storybook/node-logger": "*",
+    "@types/babel__core": "^7.1.6",
+    "@types/webpack": "^4.41.13",
+    "babel-loader": "^8.2.1"
+  },
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
