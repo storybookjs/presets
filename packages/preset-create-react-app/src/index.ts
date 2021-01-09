@@ -5,22 +5,15 @@ import { logger } from '@storybook/node-logger';
 import PnpWebpackPlugin from 'pnp-webpack-plugin';
 import ReactDocgenTypescriptPlugin from 'react-docgen-typescript-plugin';
 import { mergePlugins } from './helpers/mergePlugins';
-import {
-  getReactScriptsPath,
-  getReactScriptsPathWithYarnPnp,
-} from './helpers/getReactScriptsPath';
+import { getReactScriptsPath } from './helpers/getReactScriptsPath';
 import { processCraConfig } from './helpers/processCraConfig';
 import { checkPresets } from './helpers/checkPresets';
 import { getModulePath } from './helpers/getModulePath';
 import { StorybookConfig } from './types';
 
 const CWD = process.cwd();
-// When operating under PnP environments, this value will be set to a number
-// indicating the version of the PnP standard, see: https://yarnpkg.com/advanced/pnpapi#processversionspnp
-const IS_USING_YARN_PNP = typeof process.versions.pnp !== 'undefined';
-const REACT_SCRIPTS_PATH = IS_USING_YARN_PNP
-  ? getReactScriptsPathWithYarnPnp()
-  : getReactScriptsPath();
+
+const REACT_SCRIPTS_PATH = getReactScriptsPath();
 const OPTION_SCRIPTS_PACKAGE = 'scriptsPackageName';
 
 // Ensures that assets are served from the correct path when Storybook is built.
@@ -66,9 +59,11 @@ export const webpack = (
   const scriptsPackageName = options[OPTION_SCRIPTS_PACKAGE];
   if (typeof scriptsPackageName === 'string') {
     try {
-      scriptsPath = IS_USING_YARN_PNP
-        ? getReactScriptsPathWithYarnPnp(scriptsPackageName)
-        : dirname(require.resolve(`${scriptsPackageName}/package.json`));
+      scriptsPath = dirname(
+        require.resolve(`${scriptsPackageName}/package.json`, {
+          paths: [options.configDir],
+        }),
+      );
     } catch (e) {
       logger.warn(
         `A \`${OPTION_SCRIPTS_PACKAGE}\` was provided, but couldn't be resolved.`,
