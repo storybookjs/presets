@@ -1,6 +1,6 @@
 {
   "name": "@storybook/preset-ie11",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "IE11 preset for Storybook",
   "license": "MIT",
   "main": "dist",
