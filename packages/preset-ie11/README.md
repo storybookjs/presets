@@ -2,13 +2,6 @@
 
 One-line IE 11 configuration for Storybook.
 
-- [Installation](#installation)
-- [Advanced usage](#advanced-usage)
-- [Options](#options)
-  - [forkTsCheckerWebpackPluginOptions](#forktscheckerwebpackpluginoptions)
-  - [include](#include)
-  - [transpileManager](#transpilemanager)
-
 ## Installation
 
 First, install this preset to your project.
