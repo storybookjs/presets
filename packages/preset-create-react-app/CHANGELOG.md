@@ -1,3 +1,7 @@
+## 3.1.6-alpha.0
+
+- Fix monorepos and PnP [#181](https://github.com/storybookjs/presets/pull/181)
+
 ## 3.1.5
 
 - Fix duplicate ReactDocgenTypescriptPlugin [#173](https://github.com/storybookjs/presets/pull/173)
