@@ -21,7 +21,7 @@
   "devDependencies": {
     "@babel/core": "^7.8.7",
     "@storybook/react": "^5.3.17",
-    "babel-loader": "^8.0.2",
+    "babel-loader": "^8.1.0",
     "css-loader": "^1.0.0",
     "node-sass": "^4.9.3",
     "react": "^16.13.0",

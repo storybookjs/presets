@@ -12,9 +12,7 @@ export interface Options {
   /**
    * Provide settings for ForkTsCheckerWebpackPlugin.
    */
-  forkTsCheckerWebpackPluginOptions?: Partial<
-    ForkTsCheckerWebpackPlugin.Options
-  >;
+  forkTsCheckerWebpackPluginOptions?: Partial<ForkTsCheckerWebpackPlugin.Options>;
 
   /**
    * Enable compilation within the manager.
