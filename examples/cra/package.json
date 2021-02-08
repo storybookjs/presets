@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@storybook/addon-docs": "5.3.19",
+    "@storybook/addon-docs": "^6.1.17",
     "@storybook/preset-create-react-app": "*",
-    "@storybook/react": "5.3.19",
+    "@storybook/react": "^6.1.17",
     "babel-loader": "8.1.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
