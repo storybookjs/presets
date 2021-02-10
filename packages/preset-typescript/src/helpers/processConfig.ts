@@ -26,7 +26,8 @@ export const processConfig = (
     if (isBabelRule) {
       return {
         ...rule,
-        include: [...(rule.include || []), ...include],
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        include: [...((rule.include as any) || []), ...include],
         test: new RegExp(
           `\\.(${['mjs', 'js', 'jsx', ...tsExtensions]
             .join('|')

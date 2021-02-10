@@ -16,7 +16,7 @@ export const getModulePath = (appDirectory: string): string[] => {
   try {
     // eslint-disable-next-line global-require, import/no-dynamic-require, @typescript-eslint/no-var-requires
     const { baseUrl } = require(join(appDirectory, configName)).compilerOptions;
-    return baseUrl ? [baseUrl] : [];
+    return (baseUrl ? [baseUrl] : []) as string[];
   } catch (e) {
     return [];
   }
