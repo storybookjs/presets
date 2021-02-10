@@ -1,4 +1,5 @@
 import { Configuration } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
+import { PluginItem } from '@babel/core';
 import { Options } from './options';
 import { processConfig } from './helpers/processConfig';
 import { isCompatible } from './helpers/isCompatible';
@@ -19,7 +20,7 @@ export const babel = (
       : babelPresetTypeScript;
   return {
     ...config,
-    presets: [...presets, preset],
+    presets: [...(presets as PluginItem[]), preset],
   };
 };
 
@@ -32,7 +33,7 @@ export const managerBabel = (
   const { presets = [] } = config;
   return {
     ...config,
-    presets: [...presets, babelPresetTypeScript],
+    presets: [...(presets as PluginItem[]), babelPresetTypeScript],
   };
 };
 

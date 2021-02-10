@@ -23,7 +23,7 @@ export const babel = (config: BabelOptions): BabelOptions => {
   const { presets = [] } = config;
   return {
     ...config,
-    presets: [...presets, ie11Preset],
+    presets: [...(presets as PluginItem[]), ie11Preset],
     plugins,
   };
 };
@@ -32,7 +32,7 @@ export const managerBabel = (config: BabelOptions): BabelOptions => {
   const { presets = [] } = config;
   return {
     ...config,
-    presets: [...presets, ie11Preset],
+    presets: [...(presets as PluginItem[]), ie11Preset],
   };
 };
 
@@ -54,15 +54,13 @@ const es6Loader = {
 
 export const managerWebpack = (
   webpackConfig: Configuration = {},
-): Configuration => {
-  return {
-    ...webpackConfig,
-    module: {
-      ...webpackConfig.module,
-      rules: [...webpackConfig.module?.rules, es6Loader],
-    },
-  };
-};
+): Configuration => ({
+  ...webpackConfig,
+  module: {
+    ...webpackConfig.module,
+    rules: [...(webpackConfig.module?.rules ?? []), es6Loader],
+  },
+});
 
 export const webpack = (webpackConfig: Configuration = {}): Configuration => {
   logger.info(`=> Using IE11 preset`);
@@ -70,7 +68,7 @@ export const webpack = (webpackConfig: Configuration = {}): Configuration => {
     ...webpackConfig,
     module: {
       ...webpackConfig.module,
-      rules: [...webpackConfig.module?.rules, es6Loader],
+      rules: [...(webpackConfig.module?.rules ?? []), es6Loader],
     },
   };
 };

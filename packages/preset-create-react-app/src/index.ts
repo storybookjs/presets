@@ -31,6 +31,7 @@ const resolveLoader = {
 // Don't use Storybook's default Babel config.
 export const babelDefault = (): Record<
   string,
+  // eslint-disable-next-line @typescript-eslint/ban-types
   (string | [string, object])[]
 > => ({
   presets: [],

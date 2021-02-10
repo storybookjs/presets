@@ -1,6 +1,7 @@
 import { resolve } from 'path';
 import { Configuration, RuleSetRule } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import semver from 'semver';
+import { PluginItem } from '@babel/core';
 import { StorybookConfig } from '../types';
 
 const isRegExp = (value: RegExp | unknown): value is RegExp =>
@@ -77,7 +78,8 @@ export const processCraConfig = (
                   );
                   return {
                     ...oneOfRule,
-                    exclude: [...oneOfRule.exclude, excludeRegex],
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    exclude: [...(oneOfRule.exclude as any), excludeRegex],
                   };
                 }
                 return {};
@@ -118,10 +120,11 @@ export const processCraConfig = (
                   ...oneOfRule,
                   include: [_include as string, configDir],
                   options: {
+                    // eslint-disable-next-line @typescript-eslint/ban-types
                     ...(ruleOptions as object),
                     extends: _extends,
-                    plugins: [...plugins, ...rulePlugins],
-                    presets: [...presets, ...rulePresets],
+                    plugins: [...(plugins as PluginItem[]), ...rulePlugins],
+                    presets: [...(presets as PluginItem[]), ...rulePresets],
                     // A temporary fix to align with Storybook 6.
                     overrides: [
                       {
