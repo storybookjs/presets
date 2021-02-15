@@ -1,4 +1,4 @@
-## 3.1.6-alpha.0
+## 3.1.6
 
 - Fix monorepos and PnP [#181](https://github.com/storybookjs/presets/pull/181)
 
