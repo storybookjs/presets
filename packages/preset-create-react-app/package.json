@@ -24,6 +24,7 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@types/babel__core": "^7.1.7",
     "@types/webpack": "^4.41.13",
     "babel-plugin-react-docgen": "^4.1.0",
