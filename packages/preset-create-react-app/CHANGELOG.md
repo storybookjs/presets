@@ -1,3 +1,7 @@
+## 3.1.7
+
+- CRA: Fix fast refresh config [#193](https://github.com/storybookjs/presets/pull/193)
+
 ## 3.1.6
 
 - Fix monorepos and PnP [#181](https://github.com/storybookjs/presets/pull/181)
