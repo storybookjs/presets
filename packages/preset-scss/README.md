@@ -5,7 +5,7 @@ One-line SCSS configuration for storybook.
 ## Basic usage
 
 ```
-yarn add -D @storybook/preset-scss css-loader sass sass-loader style-loader
+yarn add -D @storybook/preset-scss css-loader sass sass-loader@10.1.1 style-loader
 ```
 
 Then add the following to `.storybook/main.js`:
