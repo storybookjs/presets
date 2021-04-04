@@ -18,9 +18,13 @@ export const babel = (
     options.framework === 'vue'
       ? babelPresetVueTypeScript
       : babelPresetTypeScript;
+
+  const patchedPresets =
+    !presets || presets.includes(preset) ? presets : [...presets, preset];
+
   return {
     ...config,
-    presets: [...(presets as PluginItem[]), preset],
+    presets: patchedPresets as PluginItem[],
   };
 };
 
