@@ -15,6 +15,7 @@ const ie11Preset = [
       ie: '11',
     },
   },
+  'storybook-preset-ie11',
 ];
 
 const plugins = [require.resolve('@babel/plugin-transform-classes')];
@@ -36,7 +37,31 @@ export const managerBabel = (config: BabelOptions): BabelOptions => {
   };
 };
 
-const include = /[\\/]node_modules[\\/](@storybook\/node-logger|are-you-es5|better-opn|boxen|chalk|commander|find-cache-dir|find-up|fs-extra|json5|node-fetch|pkg-dir|resolve-from|semver)/;
+const nodeModulesThatNeedToBeParsedBecauseTheyExposeES6 = [
+  '@storybook/node_logger',
+  'acorn-jsx',
+  'better-opn',
+  'boxen',
+  'chalk',
+  'color-convert',
+  'commander',
+  'highlight.js',
+  'find-cache-dir',
+  'find-up',
+  'fs-extra',
+  'json5',
+  'node-fetch',
+  'pkg-dir',
+  'resolve-from',
+  'semver',
+];
+const escape = (str: string) => str.replace('/', '/');
+const include = new RegExp(
+  `[\\\\/]node_modules[\\\\/](${nodeModulesThatNeedToBeParsedBecauseTheyExposeES6
+    .map(escape)
+    .join('|')})`,
+);
+
 const es6Loader = {
   test: /\.js$/,
   use: [
