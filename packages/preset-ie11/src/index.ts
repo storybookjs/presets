@@ -54,6 +54,7 @@ const nodeModulesThatNeedToBeParsedBecauseTheyExposeES6 = [
   'pkg-dir',
   'resolve-from',
   'semver',
+  'uuid',
 ];
 const escape = (str: string) => str.replace('/', '/');
 const include = new RegExp(
