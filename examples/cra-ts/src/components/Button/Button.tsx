@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types, react/button-has-type */
-import React, { FC, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 import logo, { ReactComponent as LogoSvg } from '../../assets/logo.svg';
 import styles from './Button.module.scss';
 import { SomeProps } from './someProps';
@@ -25,7 +24,7 @@ const Button: FC<ButtonProps> = ({
   disabled,
   variant,
 }: ButtonProps) => (
-  <button disabled={disabled} className={styles.Button}>
+  <button disabled={disabled} className={styles.Button} type='button'>
     <img src={logo} alt='Logo' />
     <LogoSvg />
     {children} {variant}

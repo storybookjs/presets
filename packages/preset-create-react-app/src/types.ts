@@ -1,10 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import type { PluginItem } from '@babel/core';
-import type { PluginOptions } from 'react-docgen-typescript-plugin';
+import type { PluginOptions as RDTSPluginOptions } from 'react-docgen-typescript-plugin';
 
 export type Preset = string | { name: string };
 
-export interface StorybookConfig {
+export interface PluginOptions {
   /**
    * Optionally set the package name of a react-scripts fork.
    * In most cases, the package is located automatically by this preset.
@@ -32,6 +31,6 @@ export interface StorybookConfig {
   // This always exists from Storybook 6, but not for older versions.
   typescriptOptions?: {
     reactDocgen: 'react-docgen-typescript' | 'react-docgen' | false;
-    reactDocgenTypescriptOptions: PluginOptions;
+    reactDocgenTypescriptOptions: RDTSPluginOptions;
   };
 }

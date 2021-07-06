@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import logo from './assets/logo.svg';
 import './App.css';

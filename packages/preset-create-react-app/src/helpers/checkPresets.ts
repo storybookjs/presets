@@ -1,21 +1,21 @@
 import { join, resolve } from 'path';
 import { logger } from '@storybook/node-logger';
-import { Preset, StorybookConfig } from '../types';
+import { Preset, PluginOptions } from '../types';
 
 const incompatiblePresets = [
   '@storybook/preset-scss',
   '@storybook/preset-typescript',
 ];
 
-export const checkPresets = (options: StorybookConfig): void => {
-  let presetsList: Preset[] = options.presetsList || [];
+export const checkPresets = (options: PluginOptions): void => {
+  let presetsList: Preset[] = options.presetsList || ([] as Preset[]);
 
   // Look for a legacy presets file if one exists.
   if (!options.presetsList) {
     try {
       const configDir = resolve(options.configDir);
       // eslint-disable-next-line global-require, import/no-dynamic-require, @typescript-eslint/no-var-requires
-      presetsList = require(join(configDir, 'presets.js'));
+      presetsList = require<Preset[]>(join(configDir, 'presets.js'));
     } catch (e) {
       // NOOP
     }

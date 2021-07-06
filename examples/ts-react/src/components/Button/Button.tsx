@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types, react/button-has-type */
-import React, { FC, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 
 interface ButtonProps {
   /**
@@ -22,7 +21,7 @@ const Button: FC<ButtonProps> = ({
   disabled,
   variant,
 }: ButtonProps) => (
-  <button disabled={disabled}>
+  <button disabled={disabled} type='button'>
     {children} {variant}
   </button>
 );

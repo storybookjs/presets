@@ -1,4 +1,10 @@
-import { Configuration, RuleSetLoader, RuleSetUse } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
+// eslint-disable-next-line import/no-extraneous-dependencies
+import {
+  Configuration,
+  RuleSetCondition,
+  RuleSetLoader,
+  RuleSetUse,
+} from 'webpack';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import { Options } from '../options';
 
@@ -27,7 +33,7 @@ export const processConfig = (
       return {
         ...rule,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        include: [...((rule.include as any) || []), ...include],
+        include: [...((rule.include ?? []) as RuleSetCondition[]), ...include],
         test: new RegExp(
           `\\.(${['mjs', 'js', 'jsx', ...tsExtensions]
             .join('|')

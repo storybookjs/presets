@@ -36,7 +36,8 @@ export const managerBabel = (config: BabelOptions): BabelOptions => {
   };
 };
 
-const include = /[\\/]node_modules[\\/](@storybook\/node-logger|are-you-es5|better-opn|boxen|chalk|commander|find-cache-dir|find-up|fs-extra|json5|node-fetch|pkg-dir|resolve-from|semver)/;
+const include =
+  /[\\/]node_modules[\\/](@storybook\/node-logger|are-you-es5|better-opn|boxen|chalk|commander|find-cache-dir|find-up|fs-extra|json5|node-fetch|pkg-dir|resolve-from|semver)/;
 const es6Loader = {
   test: /\.js$/,
   use: [

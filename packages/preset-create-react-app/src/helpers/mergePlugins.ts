@@ -16,7 +16,6 @@ export const mergePlugins = (...args: Plugin[]): Plugin[] =>
       // Storybook uses webpack-hot-middleware
       // https://github.com/storybookjs/presets/issues/177
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       updatedPlugin = new ReactRefreshWebpackPlugin({
         overlay: {
           sockIntegration: 'whm',
