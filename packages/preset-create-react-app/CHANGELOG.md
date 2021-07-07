@@ -1,3 +1,7 @@
+## 3.2.0
+
+- Add disableWebpackDefaults for forward-compatibility with SB core
+
 ## 3.1.7
 
 - CRA: Fix fast refresh config [#193](https://github.com/storybookjs/presets/pull/193)
