@@ -1,6 +1,12 @@
 import { existsSync } from 'fs';
 import { join } from 'path';
 
+interface PartialTSConfig {
+  compilerOptions: {
+    baseUrl?: string;
+  };
+}
+
 const JSCONFIG = 'jsconfig.json';
 const TSCONFIG = 'tsconfig.json';
 
@@ -15,7 +21,10 @@ export const getModulePath = (appDirectory: string): string[] => {
 
   try {
     // eslint-disable-next-line global-require, import/no-dynamic-require, @typescript-eslint/no-var-requires
-    const { baseUrl } = require(join(appDirectory, configName)).compilerOptions;
+    const { baseUrl } = require<PartialTSConfig>(join(
+      appDirectory,
+      configName,
+    )).compilerOptions;
     return (baseUrl ? [baseUrl] : []) as string[];
   } catch (e) {
     return [];

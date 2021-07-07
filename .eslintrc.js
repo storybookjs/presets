@@ -10,6 +10,14 @@ module.exports = {
     node: true,
     'jest/globals': true,
   },
+  settings: {
+    'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
+  },
+  rules: {
+    'react/jsx-filename-extension': off,
+    'react/react-in-jsx-scope': off,
+    'react/require-default-props': warn,
+  },
   overrides: [
     {
       files: ['./examples/**'],
@@ -23,6 +31,7 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'prettier/@typescript-eslint',
+        'plugin:import/typescript',
       ],
       parser: '@typescript-eslint/parser',
       parserOptions: {
@@ -30,17 +39,16 @@ module.exports = {
         project: './{packages,examples}/**/tsconfig.json',
       },
       rules: {
-        'import/extensions': off, // [warn, { ts: 'never', tsx: 'never' }],
+        '@typescript-eslint/no-floating-promises': warn,
+        '@typescript-eslint/no-unsafe-assignment': warn,
+        '@typescript-eslint/no-unsafe-call': warn,
+        '@typescript-eslint/no-unsafe-member-access': warn,
+        '@typescript-eslint/prefer-regexp-exec': warn,
+        'import/extensions': off,
         'import/no-default-export': error,
         'import/prefer-default-export': off,
-        'react/jsx-filename-extension': off,
         'no-use-before-define': warn,
-        '@typescript-eslint/no-unsafe-member-access': warn,
-        '@typescript-eslint/no-unsafe-call': warn,
-        '@typescript-eslint/no-unsafe-assignment': warn,
-        '@typescript-eslint/prefer-regexp-exec': warn,
-        '@typescript-eslint/no-floating-promises': warn,
-        'react/require-default-props': warn,
+        'react/require-default-props': off,
       },
       settings: {
         'import/parsers': {

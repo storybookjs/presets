@@ -1,5 +1,5 @@
 import { join, relative, resolve, dirname } from 'path';
-import { Configuration } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
+import { Configuration, ResolveLoader, ResolvePlugin } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import semver from 'semver';
 import { logger } from '@storybook/node-logger';
 import PnpWebpackPlugin from 'pnp-webpack-plugin';
@@ -9,7 +9,7 @@ import { getReactScriptsPath } from './helpers/getReactScriptsPath';
 import { processCraConfig } from './helpers/processCraConfig';
 import { checkPresets } from './helpers/checkPresets';
 import { getModulePath } from './helpers/getModulePath';
-import { StorybookConfig } from './types';
+import { PluginOptions } from './types';
 
 const CWD = process.cwd();
 
@@ -23,10 +23,15 @@ if (!process.env.PUBLIC_URL) {
 }
 
 // This loader is shared by both the `managerWebpack` and `webpack` functions.
-const resolveLoader = {
+const resolveLoader: ResolveLoader = {
   modules: ['node_modules', join(REACT_SCRIPTS_PATH, 'node_modules')],
   plugins: [PnpWebpackPlugin.moduleLoader(module)],
 };
+
+// TODO: Replace with exported type from Storybook.
+export const core = (): { disableWebpackDefaults: boolean } => ({
+  disableWebpackDefaults: true,
+});
 
 // Don't use Storybook's default Babel config.
 export const babelDefault = (): Record<
@@ -49,7 +54,7 @@ export const managerWebpack = (
 // Update the core Webpack config.
 export const webpack = (
   webpackConfig: Configuration = {},
-  options: StorybookConfig,
+  options: PluginOptions,
 ): Configuration => {
   let scriptsPath = REACT_SCRIPTS_PATH;
 
@@ -96,8 +101,10 @@ export const webpack = (
 
   // Require the CRA config and set the appropriate mode.
   const craWebpackConfigPath = join(scriptsPath, 'config', 'webpack.config');
-  // eslint-disable-next-line global-require, import/no-dynamic-require, @typescript-eslint/no-var-requires
-  const craWebpackConfig = require(craWebpackConfigPath)(webpackConfig.mode);
+  // eslint-disable-next-line global-require, import/no-dynamic-require, @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-call
+  const craWebpackConfig = require(craWebpackConfigPath)(
+    webpackConfig.mode,
+  ) as Configuration;
 
   // Select the relevent CRA rules and add the Storybook config directory.
   logger.info(`=> Modifying Create React App rules.`);
@@ -105,16 +112,17 @@ export const webpack = (
 
   // CRA uses the `ModuleScopePlugin` to limit suppot to the `src` directory.
   // Here, we select the plugin and modify its configuration to include Storybook config directory.
-  const plugins = craWebpackConfig.resolve.plugins.map(
-    (plugin: { appSrcs: string[] }) => {
-      if (plugin.appSrcs) {
-        // Mutate the plugin directly as opposed to recreating it.
-        // eslint-disable-next-line no-param-reassign
-        plugin.appSrcs = [...plugin.appSrcs, resolve(options.configDir)];
-      }
-      return plugin;
-    },
-  );
+  const plugins =
+    craWebpackConfig.resolve?.plugins?.map(
+      (plugin: ResolvePlugin | { appSrcs: string[] }) => {
+        if ('appSrcs' in plugin) {
+          // Mutate the plugin directly as opposed to recreating it.
+          // eslint-disable-next-line no-param-reassign
+          plugin.appSrcs = [...plugin.appSrcs, resolve(options.configDir)];
+        }
+        return plugin;
+      },
+    ) ?? [];
 
   // NOTE: These are set by default in Storybook 6.
   const isStorybook6 = semver.gte(options.packageJson.version || '', '6.0.0');
@@ -144,18 +152,18 @@ export const webpack = (
     // when there are duplicates between SB and CRA
     plugins: mergePlugins(
       ...(webpackConfig.plugins || []),
-      ...craWebpackConfig.plugins,
+      ...(craWebpackConfig.plugins ?? []),
       ...tsDocgenPlugin,
     ),
     resolve: {
       ...webpackConfig.resolve,
-      extensions: craWebpackConfig.resolve.extensions,
+      extensions: craWebpackConfig.resolve?.extensions,
       modules: [
         ...((webpackConfig.resolve && webpackConfig.resolve.modules) || []),
         join(REACT_SCRIPTS_PATH, 'node_modules'),
         ...getModulePath(CWD),
       ],
-      plugins: [...plugins, PnpWebpackPlugin],
+      plugins: [...plugins, PnpWebpackPlugin] as ResolvePlugin[],
     },
     resolveLoader,
   };

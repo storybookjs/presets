@@ -1,8 +1,8 @@
 import { resolve } from 'path';
-import { Configuration, RuleSetRule } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
+import { Configuration, RuleSetConditions, RuleSetRule } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import semver from 'semver';
 import { PluginItem } from '@babel/core';
-import { StorybookConfig } from '../types';
+import { PluginOptions } from '../types';
 
 const isRegExp = (value: RegExp | unknown): value is RegExp =>
   value instanceof RegExp;
@@ -20,7 +20,7 @@ const testMatch = (rule: RuleSetRule, string: string): boolean => {
 
 export const processCraConfig = (
   craWebpackConfig: Configuration,
-  options: StorybookConfig,
+  options: PluginOptions,
 ): RuleSetRule[] => {
   const configDir = resolve(options.configDir);
 
@@ -60,109 +60,110 @@ export const processCraConfig = (
       return [
         ...rules,
         {
-          oneOf: oneOf.map(
-            (oneOfRule: RuleSetRule): RuleSetRule => {
-              if (
-                isString(oneOfRule.loader) &&
-                /[/\\]file-loader[/\\]/.test(oneOfRule.loader)
-              ) {
-                if (isStorybook530) {
-                  const excludes = [
-                    'ejs', // Used within Storybook.
-                    'md', // Used with Storybook Notes.
-                    'mdx', // Used with Storybook Docs.
-                    ...(options.craOverrides?.fileLoaderExcludes || []),
-                  ];
-                  const excludeRegex = new RegExp(
-                    `\\.(${excludes.join('|')})$`,
-                  );
-                  return {
-                    ...oneOfRule,
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    exclude: [...(oneOfRule.exclude as any), excludeRegex],
-                  };
-                }
-                return {};
-              }
-
-              // This rule causes conflicts with Storybook addons like `addon-info`.
-              if (testMatch(oneOfRule, '.css')) {
+          oneOf: oneOf.map((oneOfRule: RuleSetRule): RuleSetRule => {
+            if (
+              isString(oneOfRule.loader) &&
+              /[/\\]file-loader[/\\]/.test(oneOfRule.loader)
+            ) {
+              if (isStorybook530) {
+                const excludes = [
+                  'ejs', // Used within Storybook.
+                  'md', // Used with Storybook Notes.
+                  'mdx', // Used with Storybook Docs.
+                  ...(options.craOverrides?.fileLoaderExcludes || []),
+                ];
+                const excludeRegex = new RegExp(`\\.(${excludes.join('|')})$`);
                 return {
                   ...oneOfRule,
-                  include: isStorybook530 ? undefined : [configDir],
-                  exclude: [oneOfRule.exclude as RegExp, /@storybook/],
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  exclude: [
+                    ...(oneOfRule.exclude as RuleSetConditions),
+                    excludeRegex,
+                  ],
                 };
               }
+              return {};
+            }
 
-              // Used for the next two rules modifications.
-              const isBabelLoader =
-                isString(oneOfRule.loader) &&
-                /[/\\]babel-loader[/\\]/.test(oneOfRule.loader);
+            // This rule causes conflicts with Storybook addons like `addon-info`.
+            if (testMatch(oneOfRule, '.css')) {
+              return {
+                ...oneOfRule,
+                include: isStorybook530 ? undefined : [configDir],
+                exclude: [oneOfRule.exclude as RegExp, /@storybook/],
+              };
+            }
 
-              // Target `babel-loader` and add user's Babel config.
-              if (
-                isBabelLoader &&
-                isRegExp(oneOfRule.test) &&
-                oneOfRule.test.test('.jsx')
-              ) {
-                const { include: _include, options: ruleOptions } = oneOfRule;
+            // Used for the next two rules modifications.
+            const isBabelLoader =
+              isString(oneOfRule.loader) &&
+              /[/\\]babel-loader[/\\]/.test(oneOfRule.loader);
 
-                const { plugins: rulePlugins = [], presets: rulePresets = [] } =
-                  typeof ruleOptions === 'object' ? ruleOptions : {};
+            // Target `babel-loader` and add user's Babel config.
+            if (
+              isBabelLoader &&
+              isRegExp(oneOfRule.test) &&
+              oneOfRule.test.test('.jsx')
+            ) {
+              const { include: _include, options: ruleOptions } = oneOfRule;
 
-                const {
+              const { plugins: rulePlugins, presets: rulePresets } = (
+                typeof ruleOptions === 'object' ? ruleOptions : {}
+              ) as {
+                plugins: PluginItem[] | null;
+                presets: PluginItem[] | null;
+              };
+
+              const {
+                extends: _extends,
+                plugins,
+                presets,
+              } = options.babelOptions;
+
+              return {
+                ...oneOfRule,
+                include: [_include as string, configDir],
+                options: {
+                  ...(ruleOptions as Record<string, unknown>),
                   extends: _extends,
-                  plugins = [],
-                  presets = [],
-                } = options.babelOptions;
-
-                return {
-                  ...oneOfRule,
-                  include: [_include as string, configDir],
-                  options: {
-                    // eslint-disable-next-line @typescript-eslint/ban-types
-                    ...(ruleOptions as object),
-                    extends: _extends,
-                    plugins: [...(plugins as PluginItem[]), ...rulePlugins],
-                    presets: [...(presets as PluginItem[]), ...rulePresets],
-                    // A temporary fix to align with Storybook 6.
-                    overrides: [
-                      {
-                        test:
-                          options.typescriptOptions?.reactDocgen ===
-                          'react-docgen'
-                            ? /\.(mjs|tsx?|jsx?)$/
-                            : /\.(mjs|jsx?)$/,
-                        plugins: [
-                          [
-                            require.resolve('babel-plugin-react-docgen'),
-                            {
-                              DOC_GEN_COLLECTION_NAME:
-                                'STORYBOOK_REACT_CLASSES',
-                            },
-                          ],
+                  plugins: [...(plugins ?? []), ...(rulePlugins ?? [])],
+                  presets: [...(presets ?? []), ...(rulePresets ?? [])],
+                  // A temporary fix to align with Storybook 6.
+                  overrides: [
+                    {
+                      test:
+                        options.typescriptOptions?.reactDocgen ===
+                        'react-docgen'
+                          ? /\.(mjs|tsx?|jsx?)$/
+                          : /\.(mjs|jsx?)$/,
+                      plugins: [
+                        [
+                          require.resolve('babel-plugin-react-docgen'),
+                          {
+                            DOC_GEN_COLLECTION_NAME: 'STORYBOOK_REACT_CLASSES',
+                          },
                         ],
-                      },
-                    ],
-                  },
-                };
-              }
+                      ],
+                    },
+                  ],
+                },
+              };
+            }
 
-              // Target `babel-loader` that processes `node_modules`, and add Storybook config dir.
-              if (
-                isBabelLoader &&
-                isRegExp(oneOfRule.test) &&
-                oneOfRule.test.test('.js')
-              ) {
-                return {
-                  ...oneOfRule,
-                  include: [configDir],
-                };
-              }
+            // Target `babel-loader` that processes `node_modules`, and add Storybook config dir.
+            if (
+              isBabelLoader &&
+              isRegExp(oneOfRule.test) &&
+              oneOfRule.test.test('.js')
+            ) {
+              return {
+                ...oneOfRule,
+                include: [configDir],
+              };
+            }
 
-              return oneOfRule;
-            },
-          ),
+            return oneOfRule;
+          }),
         },
       ];
     }
