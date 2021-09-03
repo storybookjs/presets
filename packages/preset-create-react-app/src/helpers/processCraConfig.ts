@@ -45,7 +45,7 @@ export const processCraConfig = (
     if (testMatch(rule, '.jsx')) {
       const newRule = {
         ...rule,
-        include: [include as string, configDir],
+        include: [include as string, configDir].filter(Boolean),
       };
       return [...rules, newRule];
     }
@@ -79,7 +79,7 @@ export const processCraConfig = (
                   exclude: [
                     ...(oneOfRule.exclude as RuleSetConditions),
                     excludeRegex,
-                  ],
+                  ].filter(Boolean),
                 };
               }
               return {};
@@ -90,7 +90,9 @@ export const processCraConfig = (
               return {
                 ...oneOfRule,
                 include: isStorybook530 ? undefined : [configDir],
-                exclude: [oneOfRule.exclude as RegExp, /@storybook/],
+                exclude: [oneOfRule.exclude as RegExp, /@storybook/].filter(
+                  Boolean,
+                ),
               };
             }
 
@@ -122,7 +124,7 @@ export const processCraConfig = (
 
               return {
                 ...oneOfRule,
-                include: [_include as string, configDir],
+                include: [_include as string, configDir].filter(Boolean),
                 options: {
                   ...(ruleOptions as Record<string, unknown>),
                   extends: _extends,
