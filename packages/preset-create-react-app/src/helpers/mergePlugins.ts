@@ -11,16 +11,16 @@ export const mergePlugins = (...args: Plugin[]): Plugin[] =>
     ) {
       return plugins;
     }
-    let updatedPlugin = plugin;
-    if (plugin.constructor.name === 'ReactRefreshPlugin') {
-      // Storybook uses webpack-hot-middleware
-      // https://github.com/storybookjs/presets/issues/177
+    const updatedPlugin = plugin;
+    // if (plugin.constructor.name === 'ReactRefreshPlugin') {
+    //   // Storybook uses webpack-hot-middleware
+    //   // https://github.com/storybookjs/presets/issues/177
 
-      updatedPlugin = new ReactRefreshWebpackPlugin({
-        overlay: {
-          sockIntegration: 'whm',
-        },
-      });
-    }
+    //   updatedPlugin = new ReactRefreshWebpackPlugin({
+    //     overlay: {
+    //       sockIntegration: 'whm',
+    //     },
+    //   });
+    // }
     return [...plugins, updatedPlugin];
   }, [] as Plugin[]);

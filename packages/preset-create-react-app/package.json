@@ -29,7 +29,7 @@
     "@types/webpack": "^4.41.13",
     "babel-plugin-react-docgen": "^4.1.0",
     "pnp-webpack-plugin": "^1.6.4",
-    "react-docgen-typescript-plugin": "^1.0.0",
+    "@storybook/react-docgen-typescript-plugin": "canary",
     "semver": "^7.3.5"
   },
   "devDependencies": {
