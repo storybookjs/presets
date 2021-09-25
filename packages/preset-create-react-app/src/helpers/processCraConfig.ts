@@ -61,10 +61,8 @@ export const processCraConfig = (
         ...rules,
         {
           oneOf: oneOf.map((oneOfRule: RuleSetRule): RuleSetRule => {
-            if (
-              isString(oneOfRule.loader) &&
-              /[/\\]file-loader[/\\]/.test(oneOfRule.loader)
-            ) {
+            // @ts-expect-error - This is a conflict with types bundled in Storybook.
+            if (oneOfRule.type === 'asset/resource') {
               if (isStorybook530) {
                 const excludes = [
                   'ejs', // Used within Storybook.

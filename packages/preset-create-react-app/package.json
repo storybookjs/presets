@@ -26,9 +26,8 @@
   "dependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@types/babel__core": "^7.1.7",
-    "@types/webpack": "^4.41.13",
     "babel-plugin-react-docgen": "^4.1.0",
-    "pnp-webpack-plugin": "^1.6.4",
+    "pnp-webpack-plugin": "^1.7.0",
     "@storybook/react-docgen-typescript-plugin": "canary",
     "semver": "^7.3.5"
   },
