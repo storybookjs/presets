@@ -7,7 +7,8 @@ export const mergePlugins = (...args: Plugin[]): Plugin[] =>
       plugins.some(
         (includedPlugin) =>
           includedPlugin.constructor.name === plugin.constructor.name,
-      )
+      ) ||
+      plugin.constructor.name === 'WebpackManifestPlugin'
     ) {
       return plugins;
     }
