@@ -24,12 +24,11 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.1",
     "@types/babel__core": "^7.1.7",
-    "@types/webpack": "^4.41.13",
     "babel-plugin-react-docgen": "^4.1.0",
-    "pnp-webpack-plugin": "^1.6.4",
-    "react-docgen-typescript-plugin": "^1.0.0",
+    "pnp-webpack-plugin": "^1.7.0",
+    "@storybook/react-docgen-typescript-plugin": "canary",
     "semver": "^7.3.5"
   },
   "devDependencies": {

@@ -45,7 +45,7 @@ export const processCraConfig = (
     if (testMatch(rule, '.jsx')) {
       const newRule = {
         ...rule,
-        include: [include as string, configDir],
+        include: [include as string, configDir].filter(Boolean),
       };
       return [...rules, newRule];
     }
@@ -61,10 +61,8 @@ export const processCraConfig = (
         ...rules,
         {
           oneOf: oneOf.map((oneOfRule: RuleSetRule): RuleSetRule => {
-            if (
-              isString(oneOfRule.loader) &&
-              /[/\\]file-loader[/\\]/.test(oneOfRule.loader)
-            ) {
+            // @ts-expect-error - This is a conflict with types bundled in Storybook.
+            if (oneOfRule.type === 'asset/resource') {
               if (isStorybook530) {
                 const excludes = [
                   'ejs', // Used within Storybook.
@@ -122,7 +120,7 @@ export const processCraConfig = (
 
               return {
                 ...oneOfRule,
-                include: [_include as string, configDir],
+                include: [_include as string, configDir].filter(Boolean),
                 options: {
                   ...(ruleOptions as Record<string, unknown>),
                   extends: _extends,

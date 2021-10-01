@@ -1,5 +1,5 @@
 import type { PluginItem } from '@babel/core';
-import type { PluginOptions as RDTSPluginOptions } from 'react-docgen-typescript-plugin';
+import type { PluginOptions as RDTSPluginOptions } from '@storybook/react-docgen-typescript-plugin';
 
 export type Preset = string | { name: string };
 
