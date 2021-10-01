@@ -1,3 +1,7 @@
+## 4.0.0
+
+- CRA: Add compatibility for CRA v5 [#214](https://github.com/storybookjs/presets/pull/214)
+
 ## 3.2.0
 
 - Add disableWebpackDefaults for forward-compatibility with SB core
