@@ -18,7 +18,7 @@ module.exports = {
 
 ## Advanced usage
 
-You can pass configurations by using Object addon declaration for `@storybook/preset-scss` and adding the configurations under the `option` key. You can pass configurations into the preset's webpack loaders using `styleLoaderOptions`, `cssLoaderOptions`, and `sassLoaderOptions` keys. See documentation for each respective loader to learn about valid options. You can register other addons through the string declaration as normal.
+You can pass configurations by using Object addon declaration for `@storybook/preset-scss` and adding the configurations under the `options` key. You can pass configurations into the preset's webpack loaders using `styleLoaderOptions`, `cssLoaderOptions`, and `sassLoaderOptions` keys. See documentation for each respective loader to learn about valid options. You can register other addons through the string declaration as normal.
 
 ```
 module.exports = {
