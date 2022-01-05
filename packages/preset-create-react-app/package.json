@@ -39,7 +39,7 @@
   "peerDependencies": {
     "@babel/core": "*",
     "@storybook/node-logger": "*",
-    "@storybook/react": ">=5.2",
+    "@storybook/react": ">=5.2 - 6",
     "react-scripts": ">=3.0.0"
   },
   "publishConfig": {
