@@ -68,6 +68,7 @@ export const processCraConfig = (
                   'ejs', // Used within Storybook.
                   'md', // Used with Storybook Notes.
                   'mdx', // Used with Storybook Docs.
+                  'cjs', // Used for CommonJS modules.
                   ...(options.craOverrides?.fileLoaderExcludes || []),
                 ];
                 const excludeRegex = new RegExp(`\\.(${excludes.join('|')})$`);
