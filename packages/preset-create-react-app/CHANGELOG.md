@@ -1,3 +1,7 @@
+## 4.0.1
+
+- Support CJS files using Storybook's config [#229](https://github.com/storybookjs/presets/pull/229)
+
 ## 4.0.0
 
 - CRA: Add compatibility for CRA v5 [#214](https://github.com/storybookjs/presets/pull/214)
