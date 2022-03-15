@@ -33,12 +33,14 @@
   },
   "devDependencies": {
     "@storybook/node-logger": "^6.3.2",
+    "@storybook/core-common": "^6.3.2",
     "@types/semver": "^7.3.6",
     "typescript": "^4.1.3"
   },
   "peerDependencies": {
     "@babel/core": "*",
     "@storybook/node-logger": "*",
+    "@storybook/core-common": "*",
     "@storybook/react": ">=5.2",
     "react-scripts": ">=3.0.0"
   },
