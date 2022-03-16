@@ -4,7 +4,6 @@ import semver from 'semver';
 import { logger } from '@storybook/node-logger';
 import PnpWebpackPlugin from 'pnp-webpack-plugin';
 import ReactDocgenTypescriptPlugin from '@storybook/react-docgen-typescript-plugin';
-import type { CoreConfig } from '@storybook/core-common';
 import { mergePlugins } from './helpers/mergePlugins';
 import { getReactScriptsPath } from './helpers/getReactScriptsPath';
 import { processCraConfig } from './helpers/processCraConfig';
@@ -29,7 +28,9 @@ const resolveLoader: ResolveLoader = {
   plugins: [PnpWebpackPlugin.moduleLoader(module)],
 };
 
-export const core = (existing: CoreConfig): CoreConfig => ({
+// TODO: Replace with exported type from Storybook.
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const core = (existing: { disableWebpackDefaults: boolean }) => ({
   ...existing,
   disableWebpackDefaults: true,
 });
