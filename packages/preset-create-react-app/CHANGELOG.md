@@ -1,3 +1,7 @@
+## 4.0.2
+
+- Fix bug merging core presets [#238](https://github.com/storybookjs/presets/pull/238) [#239](https://github.com/storybookjs/presets/pull/239)
+
 ## 4.0.1
 
 - Support CJS files using Storybook's config [#229](https://github.com/storybookjs/presets/pull/229)
