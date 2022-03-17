@@ -136,7 +136,7 @@ export const webpack = async (
   // these options need to be in a separate preset.
   const isProd = webpackConfig.mode !== 'development';
   const coreOptions = await options.presets.apply<CoreConfig>('core');
-  const builderOptions = coreOptions.builder.options;
+  const builderOptions = coreOptions?.builder?.options;
   const cacheConfig = builderOptions?.fsCache
     ? { cache: { type: 'filesystem' } }
     : {};
