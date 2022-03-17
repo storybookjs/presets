@@ -33,4 +33,17 @@ export interface PluginOptions {
     reactDocgen: 'react-docgen-typescript' | 'react-docgen' | false;
     reactDocgenTypescriptOptions: RDTSPluginOptions;
   };
+
+  presets: {
+    apply<T>(preset: Preset): Promise<T>;
+  };
+}
+
+export interface CoreConfig {
+  builder: {
+    options?: {
+      fsCache?: boolean;
+      lazyCompilation?: boolean;
+    };
+  };
 }

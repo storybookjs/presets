@@ -9,7 +9,7 @@ import { getReactScriptsPath } from './helpers/getReactScriptsPath';
 import { processCraConfig } from './helpers/processCraConfig';
 import { checkPresets } from './helpers/checkPresets';
 import { getModulePath } from './helpers/getModulePath';
-import { PluginOptions } from './types';
+import { PluginOptions, CoreConfig } from './types';
 
 const CWD = process.cwd();
 
@@ -54,10 +54,10 @@ export const managerWebpack = (
 });
 
 // Update the core Webpack config.
-export const webpack = (
+export const webpack = async (
   webpackConfig: Configuration = {},
   options: PluginOptions,
-): Configuration => {
+): Promise<Configuration> => {
   let scriptsPath = REACT_SCRIPTS_PATH;
 
   // Flag any potentially conflicting presets.
@@ -129,9 +129,27 @@ export const webpack = (
         ]
       : [];
 
+  // NOTE: This is code replicated from
+  //   https://github.com/storybookjs/storybook/blob/89830ad76384faeaeb0c19df3cb44232cdde261b/lib/builder-webpack5/src/preview/base-webpack.config.ts#L45-L53
+  // as we are not applying SB's default webpack config here.
+  // We need to figure out a better way to apply various layers of webpack config; perhaps
+  // these options need to be in a separate preset.
+  const isProd = webpackConfig.mode !== 'development';
+  const coreOptions = await options.presets.apply<CoreConfig>('core');
+  const builderOptions = coreOptions?.builder?.options;
+  const cacheConfig = builderOptions?.fsCache
+    ? { cache: { type: 'filesystem' } }
+    : {};
+  const lazyCompilationConfig =
+    builderOptions?.lazyCompilation && !isProd
+      ? { experiments: { lazyCompilation: { entries: false } } }
+      : {};
+
   // Return the new config.
   return {
     ...webpackConfig,
+    ...cacheConfig,
+    ...lazyCompilationConfig,
     module: {
       ...webpackConfig.module,
       rules: [...(filteredRules || []), ...craRules],
