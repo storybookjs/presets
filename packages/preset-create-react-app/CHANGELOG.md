@@ -1,3 +1,7 @@
+## 4.1.0
+
+- Add support for builder.core options to CRA preset [#240](https://github.com/storybookjs/presets/pull/240)
+
 ## 4.0.2
 
 - Fix bug merging core presets [#238](https://github.com/storybookjs/presets/pull/238) [#239](https://github.com/storybookjs/presets/pull/239)
