@@ -40,7 +40,7 @@
     "@babel/core": "*",
     "@storybook/node-logger": "*",
     "@storybook/react": ">=5.2",
-    "react-scripts": ">=3.0.0"
+    "react-scripts": ">=5.0.0"
   },
   "publishConfig": {
     "access": "public"
