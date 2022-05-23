@@ -1,3 +1,7 @@
+## 4.1.1
+
+- Update peer dependencies and add a note about versions [#252](https://github.com/storybookjs/presets/pull/252)
+
 ## 4.1.0
 
 - Add support for builder.core options to CRA preset [#240](https://github.com/storybookjs/presets/pull/240)
