@@ -1,4 +1,4 @@
-import type { PluginItem } from '@babel/core';
+import type { PluginItem, TransformOptions } from '@babel/core';
 import type { PluginOptions as RDTSPluginOptions } from '@storybook/react-docgen-typescript-plugin';
 
 export type Preset = string | { name: string };
@@ -23,6 +23,7 @@ export interface PluginOptions {
     extends: string | null;
     plugins: PluginItem[] | null;
     presets: PluginItem[] | null;
+    overrides: TransformOptions[] | null;
   };
   presetsList: Preset[];
   packageJson: {
