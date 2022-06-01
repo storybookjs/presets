@@ -1,7 +1,7 @@
 import { resolve } from 'path';
 import { Configuration, RuleSetConditions, RuleSetRule } from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import semver from 'semver';
-import { PluginItem } from '@babel/core';
+import { PluginItem, TransformOptions } from '@babel/core';
 import { PluginOptions } from '../types';
 
 const isRegExp = (value: RegExp | unknown): value is RegExp =>
@@ -106,17 +106,21 @@ export const processCraConfig = (
             ) {
               const { include: _include, options: ruleOptions } = oneOfRule;
 
-              const { plugins: rulePlugins, presets: rulePresets } = (
-                typeof ruleOptions === 'object' ? ruleOptions : {}
-              ) as {
+              const {
+                plugins: rulePlugins,
+                presets: rulePresets,
+                overrides: ruleOverrides,
+              } = (typeof ruleOptions === 'object' ? ruleOptions : {}) as {
                 plugins: PluginItem[] | null;
                 presets: PluginItem[] | null;
+                overrides: TransformOptions[] | null;
               };
 
               const {
                 extends: _extends,
                 plugins,
                 presets,
+                overrides,
               } = options.babelOptions;
 
               return {
@@ -127,24 +131,7 @@ export const processCraConfig = (
                   extends: _extends,
                   plugins: [...(plugins ?? []), ...(rulePlugins ?? [])],
                   presets: [...(presets ?? []), ...(rulePresets ?? [])],
-                  // A temporary fix to align with Storybook 6.
-                  overrides: [
-                    {
-                      test:
-                        options.typescriptOptions?.reactDocgen ===
-                        'react-docgen'
-                          ? /\.(mjs|tsx?|jsx?)$/
-                          : /\.(mjs|jsx?)$/,
-                      plugins: [
-                        [
-                          require.resolve('babel-plugin-react-docgen'),
-                          {
-                            DOC_GEN_COLLECTION_NAME: 'STORYBOOK_REACT_CLASSES',
-                          },
-                        ],
-                      ],
-                    },
-                  ],
+                  overrides: [...(overrides ?? []), ...(ruleOverrides ?? [])],
                 },
               };
             }
