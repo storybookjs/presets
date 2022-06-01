@@ -1,3 +1,7 @@
+## 4.1.2
+
+- Use overrides from SB rather than defining ourselves [#254](https://github.com/storybookjs/presets/pull/254)
+
 ## 4.1.1
 
 - Update peer dependencies and add a note about versions [#252](https://github.com/storybookjs/presets/pull/252)
