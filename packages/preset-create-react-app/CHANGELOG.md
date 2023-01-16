@@ -1,3 +1,23 @@
+## 4.1.2
+
+- Use overrides from SB rather than defining ourselves [#254](https://github.com/storybookjs/presets/pull/254)
+
+## 4.1.1
+
+- Update peer dependencies and add a note about versions [#252](https://github.com/storybookjs/presets/pull/252)
+
+## 4.1.0
+
+- Add support for builder.core options to CRA preset [#240](https://github.com/storybookjs/presets/pull/240)
+
+## 4.0.2
+
+- Fix bug merging core presets [#238](https://github.com/storybookjs/presets/pull/238) [#239](https://github.com/storybookjs/presets/pull/239)
+
+## 4.0.1
+
+- Support CJS files using Storybook's config [#229](https://github.com/storybookjs/presets/pull/229)
+
 ## 4.0.0
 
 - CRA: Add compatibility for CRA v5 [#214](https://github.com/storybookjs/presets/pull/214)

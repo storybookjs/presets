@@ -4,6 +4,10 @@ One-line [Create React App](https://github.com/facebook/create-react-app) config
 
 This preset is designed to use alongside [`@storybook/react`](https://github.com/storybookjs/storybook/tree/master/app/react).
 
+## Compatibility
+
+This version (4.x) of `@storybook/preset-create-react-app` is compatibly with Create React App version 5 and above. Earlier versions are compatible with earlier version of the preset.
+
 ## Basic usage
 
 **Note: you don't need to do this manually** if you used `npx -p @storybook/cli sb init` on a create-react-app, everything should properly setup already ✅.
