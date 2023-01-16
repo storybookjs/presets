@@ -5,7 +5,7 @@ One-line SCSS configuration for storybook.
 ## Basic usage
 
 ```
-yarn add -D @storybook/preset-scss css-loader sass sass-loader style-loader
+yarn add -D @storybook/preset-scss css-loader@5.2.6 sass sass-loader@10.1.1 style-loader@2.0.0
 ```
 
 Then add the following to `.storybook/main.js`:
@@ -20,7 +20,7 @@ module.exports = {
 
 You can pass configurations by using Object addon declaration for `@storybook/preset-scss` and adding the configurations under the `options` key. You can pass configurations into the preset's webpack loaders using `styleLoaderOptions`, `cssLoaderOptions`, and `sassLoaderOptions` keys. See documentation for each respective loader to learn about valid options. You can register other addons through the string declaration as normal.
 
-```
+```js
 module.exports = {
   addons: [
     {
