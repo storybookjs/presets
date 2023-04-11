@@ -1,3 +1,5 @@
+🚨 DEPRECATED: This package in unmaintained and deprecated in favor of [`@storybook/addon-styling`](https://github.com/storybookjs/addon-styling/tree/main)
+
 # SCSS preset for Storybook
 
 One-line SCSS configuration for storybook.
