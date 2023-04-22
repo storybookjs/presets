@@ -1,4 +1,4 @@
-import { readFileSync, realpathSync } from 'fs';
+import { readFileSync, realpathSync, lstatSync } from 'fs';
 import { join, dirname } from 'path';
 
 export const getReactScriptsPath = (): string => {
@@ -34,9 +34,15 @@ export const getReactScriptsPath = (): string => {
      * This won't work for Windows users, unless within WSL.
      */
     try {
-      const resolvedBinPath = realpathSync(scriptsBinPath);
-      const scriptsPath = join(resolvedBinPath, '..', '..');
-      return scriptsPath;
+      const scriptsBinPathStat = lstatSync(scriptsBinPath);
+      if (scriptsBinPathStat.isSymbolicLink() === true) {
+        const resolvedBinPath = realpathSync(scriptsBinPath);
+        const scriptsPath = join(resolvedBinPath, '..', '..');
+        return scriptsPath;
+      } else if (scriptsBinPathStat.isFile() === true) {
+        const scriptsPath = join(cwd, '/node_modules/react-scripts');
+        return scriptsPath;
+      }
     } catch (e) {
       // NOOP
     }
